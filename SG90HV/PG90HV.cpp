@@ -1,3 +1,8 @@
+//PWM frequency must be around 50HZ，so that servo get wave of 20ms
+//Clockwise, 2%-6%High, 6%-7%Mid, 7%-8%Low
+//Anticlockwise, 10%-14%High, 9%-10%Mid, 8%-9%Low
+
+
 #include <iostream>
 #include <pigpio.h>
 
