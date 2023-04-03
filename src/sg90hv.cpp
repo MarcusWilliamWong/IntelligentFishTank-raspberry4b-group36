@@ -1,9 +1,8 @@
 #include "./include/sg90hv.h"
 
-Motor::Motor() {}
+Motor::Motor() : Motor(12u, 50u) {}
 
 Motor::Motor(unsigned int pin) : Motor(pin, 50u) {}
-
 
 Motor::Motor(unsigned int pin, unsigned int freq) : kPin_(pin), freq_(freq) {
   // initiation, set pin, freq and range(precision)
@@ -24,9 +23,6 @@ void Motor::start() {
 }
 
 void Motor::stop() {
-  if (t_.joinable()) {
-    t_.join();
-  }
 }
 
 Motor::~Motor() {
