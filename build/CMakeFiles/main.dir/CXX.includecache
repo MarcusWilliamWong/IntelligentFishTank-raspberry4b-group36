@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/ds18b20_.h
+string
+-
+thread
+-
+
+/home/group36/Project/IntelligentFishTank-raspberry4b-group36/src/ds18b20.cpp
+ds18b20_.h
+/home/group36/Project/IntelligentFishTank-raspberry4b-group36/src/ds18b20_.h
+dirent.h
+-
+sys/types.h
+-
+regex
+-
+string
+-
+iostream
+-
+fstream
+-
+

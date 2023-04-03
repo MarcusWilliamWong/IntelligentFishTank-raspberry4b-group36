@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/main.dir/samples/Test_DS18B20.cpp.o CMakeFiles/main.dir/src/ds18b20.cpp.o -o main  -Wl,-rpath,/usr/local/lib /usr/local/lib/libpigpio.so 
