@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/main.dir/src/app.cpp.o CMakeFiles/main.dir/src/airpump.cpp.o CMakeFiles/main.dir/src/pwmctrl.cpp.o CMakeFiles/main.dir/samples/Test_airpump.cpp.o -o main  -Wl,-rpath,/usr/local/lib -lpthread /usr/local/lib/libpigpio.so 
