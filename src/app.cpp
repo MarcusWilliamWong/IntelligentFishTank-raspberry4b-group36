@@ -10,6 +10,12 @@ App::App() {
   }
 }
 
+
+
+bool isRun() const{
+	return this.running;
+}
+
 App::~App() {
   // terminate pigpio
   gpioTerminate();

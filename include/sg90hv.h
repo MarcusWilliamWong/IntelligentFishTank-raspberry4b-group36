@@ -4,7 +4,6 @@
 #include <thread>
 #include <vector>
 #include <pigpio.h>
-#include "myds18b20.h"
 
 
 class Motor {

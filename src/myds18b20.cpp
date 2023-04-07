@@ -1,4 +1,5 @@
 #include "myds18b20.h"
+#include "heater.h"
 // opendir
 #include <dirent.h>
 #include <sys/types.h>
@@ -10,21 +11,13 @@
 #include <thread>
 
 Thermometer::Thermometer() {
-	this->tc = nullptr;
+	this->heater_ = nullptr;
 	this->FindTempDevices();
 }
 
-void Thermometer::registerCallback(ThermoCallback *tc) {
-	this->tc = tc;
+void Thermometer::registerHeater(Heater *heater) {
+	this->heater_ = heater_;
 }
-
-// const std::vector<double> &Thermometer::get_temp() const{
-//   return this->tempers_;
-// }
-
-// const std::vector<std::string> &Thermometer::get_dev() const{
-	// return this->device_files;
-// } 
 
 void Thermometer::ReadAllTemp() {
 	if (this->device_files.empty()) {
@@ -57,7 +50,7 @@ void Thermometer::ReadAllTemp() {
 			finput.close();
 		}
 		// get temperatures
-		tc->hasTemperature(this->tempers_);
+		this->heater_->hasTemperature(this->tempers_);
 	}
 }
 
@@ -108,3 +101,10 @@ void Thermometer::stop() {
 	}
 }
 
+// const std::vector<double> &Thermometer::get_temp() const{
+//   return this->tempers_;
+// }
+
+// const std::vector<std::string> &Thermometer::get_dev() const{
+	// return this->device_files;
+// } 

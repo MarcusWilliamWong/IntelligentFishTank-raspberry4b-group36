@@ -24,7 +24,7 @@ link_directories(${PIGPIO_INCLUDE_DIRS})
 
 #find_library(pthread_lib)
 
-include_directories(include) #包含头文件目录
+include_directories(${PROJECT_SOURCE_DIR}/include) #包含头文件目录
 
 # file(GLOB SOURCE "src/*.cpp" "main.cpp")# 源文件下所有的 cpp文件 和主程序
 

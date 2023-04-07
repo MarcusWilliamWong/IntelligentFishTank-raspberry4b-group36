@@ -10,3 +10,7 @@ PwmController::PwmController(unsigned int pin, unsigned int freq) : kPin_(pin), 
   gpioSetPWMfrequency(this->kPin_, this->freq_);
   gpioSetPWMrange(this->kPin_, this->kRange_);
 }
+
+void PwmController::setDutycycle(unsigned int dutycycle) {
+	this->dutycycle_ = dutycycle;
+}

@@ -1,4 +1,4 @@
-#include "./include/sg90hv.h"
+#include "sg90hv.h"
 
 Motor::Motor() : Motor(12u, 50u) {}
 

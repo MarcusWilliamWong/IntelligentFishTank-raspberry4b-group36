@@ -15,6 +15,7 @@ public:
   PwmController(PwmController&) = delete;
   PwmController(unsigned int pin);
   PwmController(unsigned int pin, unsigned int freq);
+	void setDutycycle(unsigned int dutycycle);
   virtual void start() = 0;
   virtual void stop() = 0;
 };
