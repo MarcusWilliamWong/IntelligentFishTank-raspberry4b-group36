@@ -1,6 +1,6 @@
-#include "app.h"
 #include <iostream>
 #include <pigpio.h>
+#include "app.h"
 
 App::App() {
   if (gpioInitialise() < 0) {
@@ -12,7 +12,7 @@ App::App() {
 
 
 
-bool isRun() const{
+bool isRunning() const{
 	return this.running;
 }
 

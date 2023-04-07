@@ -4,21 +4,11 @@
 #include <iostream>
 #include <vector>
 #include <thread>
+#include <memory>
 #include "heater.h"
 
-// we use four thermometers connecting with GPIO 23 24 25 12 using wire-1
+// we use four thermometers connecting with GPIO 5, 6, 13, 19 using wire-1
 class Thermometer {
-private:
-  // save device file path
-	std::vector<std::string> device_files_;
-  // save temperatures
-  std::vector<double> tempers_;
-  Heater *heater_;
-  std::thread t_;
-	bool running_;
-  void ReadAllTemp();
-  const std::vector<std::string> &FindTempDevices ();
-	
 public:
   Thermometer();
   void registerHeater(Heater *heater);
@@ -28,6 +18,17 @@ public:
 	// Test use
   // const std::vector<std::string> &get_dev() const;
   // const std::vector<double> &get_temp() const;
+	
+private:
+  // save device file path
+	std::vector<std::string> device_files_;
+  // save temperatures
+  std::vector<double> tempers_;
+  Heater* heater_ptr_;
+  std::unique_ptr<std::thread> thread_ptr_;
+	bool running_;
+  void ReadAllTemp();
+  const std::vector<std::string> &FindTempDevices ();
 };
 
 #endif

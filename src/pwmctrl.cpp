@@ -1,6 +1,6 @@
-#include "pwmctrl.h"
 #include <pigpio.h>
 #include <iostream>
+#include "pwmctrl.h"
 
 PwmController::PwmController(unsigned int pin) : PwmController(pin, 50u) {}
 

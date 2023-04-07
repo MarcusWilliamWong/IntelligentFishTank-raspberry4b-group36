@@ -11,23 +11,23 @@
 #include <thread>
 
 Thermometer::Thermometer() {
-	this->heater_ = nullptr;
+	this->heater_ptr_ = nullptr;
 	this->FindTempDevices();
 }
 
-void Thermometer::registerHeater(Heater *heater) {
-	this->heater_ = heater_;
+void Thermometer::registerHeater(Heater *heater_ptr) {
+	this->heater_ptr_ = heater_ptr;
 }
 
 void Thermometer::ReadAllTemp() {
-	if (this->device_files.empty()) {
+	if (this->device_files_.empty()) {
 		std::cerr << "Can't find any DS18B20 device directory!\n";
 	}
 	
 	this->running_ = true;
 	while (this->running_) {
 		int index = 0;
-		for (const auto &fileName : this->device_files) {
+		for (const auto &fileName : this->device_files_) {
 			std::ifstream finput(fileName, std::ifstream::in);
 			// open fail
 			if (!finput.is_open()) {
@@ -39,8 +39,10 @@ void Thermometer::ReadAllTemp() {
 			if (getline(finput, tmp_temp)) {
 				// cast type from string to double
 				double t = std::stod(tmp_temp) * 1.0 / 1000;
-				if (this->tempers_.size() == this->device_files.size()) {
+				if (this->tempers_.size() == this->device_files_.size()) {
 					(this->tempers_)[index] = t;
+					// get 4 temperatures
+					this->heater_ptr_->processTempersCallback(this->tempers_);
 				} else {
 					this->tempers_.push_back(t);
 				}
@@ -49,8 +51,6 @@ void Thermometer::ReadAllTemp() {
 			// close temperature file
 			finput.close();
 		}
-		// get temperatures
-		this->heater_->hasTemperature(this->tempers_);
 	}
 }
 
@@ -76,26 +76,26 @@ const std::vector<std::string> &Thermometer::FindTempDevices() {
 							+ '/' + static_cast<const std::string>(subpath->d_name)
 							+ "/temperature";
 			// std::cout << filename << std::endl;
-			this->device_files.push_back(filename);
+			this->device_files_.push_back(filename);
 		}
 	}
 	closedir(dir);
 
 	// Return the whole device directories
-  return this->device_files;
+  return this->device_files_;
 }
 
 void Thermometer::start() {
 	// std::cout << "start\n";
 	// std::cout << std::thread::hardware_concurrency() << std::endl;
-	t_ = std::thread(&Thermometer::ReadAllTemp, this);
+	this->thread_ptr_ = std::make_unique<std::thread>(&Thermometer::ReadAllTemp, this);
 	// this->ReadTemp();
 }
 
 void Thermometer::stop() {
 	this->running_ = false;
-	if (t_.joinable()) {
-		t_.join();
+	if (this->thread_ptr_->joinable()) {
+		this->thread_ptr_->join();
 	} else {
 		std::cerr << "Can't joint thread!\n";
 	}

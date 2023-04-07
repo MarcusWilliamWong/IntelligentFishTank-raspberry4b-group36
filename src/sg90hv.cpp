@@ -1,4 +1,5 @@
 #include "sg90hv.h"
+#include <pigpio.h>
 
 Motor::Motor() : Motor(12u, 50u) {}
 

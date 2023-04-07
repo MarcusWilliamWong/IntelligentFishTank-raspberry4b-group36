@@ -2,12 +2,12 @@
 #define APP_H_
 
 class App {
-private:
-	bool running_;
 public:
   App();
-	bool isRun const();
+	bool isRunning const();
   ~App();
+private:
+	bool running_;
 };
 
 #endif
