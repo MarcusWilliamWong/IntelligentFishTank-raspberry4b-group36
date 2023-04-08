@@ -4,7 +4,7 @@ It mainly includes the following six module functions: temperature detection, ox
 # 智能鱼缸-树莓派4b-36组
 该项目旨在设计一个由树莓派4b实时控制的**智能鱼缸**。
 它主要包括以下六个模块功能：水温控制、含氧量控制、定量投喂、水质维持、水流速调节、灯光效果。
-
+1111
 ## 1，水温控制
 元件：温度传感器，带有驱动的加热器
 逻辑：io口采集温度传感器数据，与设定值比较，使用差值进行PWM调控，控制加热器
