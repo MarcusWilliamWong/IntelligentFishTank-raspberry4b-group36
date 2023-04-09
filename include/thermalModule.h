@@ -5,6 +5,7 @@
 class ThermalModule {
 public:
 	ThermalModule();
+	void execute();
 
 private:
 	Thermometer thermometer_;

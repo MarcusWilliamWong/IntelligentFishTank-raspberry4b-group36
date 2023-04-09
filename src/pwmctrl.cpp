@@ -1,16 +1,23 @@
 #include <pigpio.h>
-#include <iostream>
+#include <memory>
 #include "pwmctrl.h"
 
 PwmController::PwmController(unsigned int pin) : PwmController(pin, 50u) {}
 
 PwmController::PwmController(unsigned int pin, unsigned int freq) : kPin_(pin), freq_(freq) {
   // initiation, set pin, freq and range(precision)
-  gpioSetMode(this->kPin_, PI_OUTPUT);
-  gpioSetPWMfrequency(this->kPin_, this->freq_);
-  gpioSetPWMrange(this->kPin_, this->kRange_);
+  gpioSetMode(kPin_, PI_OUTPUT);
+  gpioSetPWMfrequency(kPin_, freq_);
+  gpioSetPWMrange(kPin_, kRange_);
 }
 
-void PwmController::setDutycycle(unsigned int dutycycle) {
-	this->dutycycle_ = dutycycle;
+void PwmController::setPwmLevel(unsigned int level) {
+	switch (level) {
+		case 0u: dutycycle_ = static_cast<unsigned int>(PwmLevel::ZeroLevel);
+		case 1u: dutycycle_ = static_cast<unsigned int>(PwmLevel::LowLevel);
+		case 2u: dutycycle_ = static_cast<unsigned int>(PwmLevel::MediumLevel);
+		case 3u: dutycycle_ = static_cast<unsigned int>(PwmLevel::HighLevel);
+		case 4u: dutycycle_ = static_cast<unsigned int>(PwmLevel::FullLevel);
+		default: dutycycle_ = static_cast<unsigned int>(PwmLevel::ZeroLevel);
+	}
 }

@@ -24,10 +24,12 @@ private:
 	std::vector<std::string> device_files_;
   // save temperatures
   std::vector<double> tempers_;
-  Heater* heater_ptr_;
+	// bind heater object to listen temperatures
+  std::shared_ptr<Heater> heater_ptr_;
   std::unique_ptr<std::thread> thread_ptr_;
 	bool running_;
   void ReadAllTemp();
+	// find and record thermometer files
   const std::vector<std::string> &FindTempDevices ();
 };
 

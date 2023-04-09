@@ -4,6 +4,7 @@
 class App {
 public:
   App();
+	void run();
 	bool isRunning const();
   ~App();
 private:

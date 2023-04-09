@@ -1,3 +1,7 @@
 #include "thermalModule.h"
 
-ThermalModule::ThermalModule() : heater_(16u) {}
+ThermalModule::ThermalModule() : thermometer_(), heater_(16u) {}
+
+void ThermalModule::execute() {
+	thermometer_
+}

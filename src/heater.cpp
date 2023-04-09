@@ -9,12 +9,12 @@ Heater::Heater(unsigned int pin) : PwmController(pin) {}
 Heater::Heater(unsigned int pin, unsigned int freq) : PwmController(pin, freq) {}
 
 void Heater::start() {
-  gpioPWM(this->kPin_, 500);
-  gpioSleep(PI_TIME_RELATIVE, 6, 0);
+  gpioPWM(kPin_, 10);
+  //gpioSleep(PI_TIME_RELATIVE, 6, 0);
 }
 
 void Heater::stop() {
-  gpioPWM(this->kPin_, 0);
+  gpioPWM(kPin_, 0);
 }
 
 // compute 4 temperatures return tuple including the average, minimum, maximum
