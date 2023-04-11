@@ -1,4 +1,4 @@
-# Install script for directory: /home/group36/Project/IntelligentFishTank-raspberry4b-group36
+# Install script for directory: /home/group36/Project/Haoshi
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/group36/Project/IntelligentFishTank-raspberry4b-group36/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/group36/Project/Haoshi/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

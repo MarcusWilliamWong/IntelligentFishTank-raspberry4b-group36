@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/main.dir/samples/Test_airpump.cpp.o"
-  "CMakeFiles/main.dir/src/airpump.cpp.o"
-  "CMakeFiles/main.dir/src/app.cpp.o"
-  "CMakeFiles/main.dir/src/pwmctrl.cpp.o"
+  "CMakeFiles/main.dir/samples/Test_threadPool.cpp.o"
+  "CMakeFiles/main.dir/src/taskQueue.cpp.o"
+  "CMakeFiles/main.dir/src/threadPool.cpp.o"
   "main"
   "main.pdb"
 )

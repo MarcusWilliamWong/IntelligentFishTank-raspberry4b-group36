@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/group36/Project/IntelligentFishTank-raspberry4b-group36/include
+CXX_INCLUDES = -I/home/group36/Project/Haoshi/include
 
 CXX_FLAGS = -std=gnu++11
 
