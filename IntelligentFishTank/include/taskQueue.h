@@ -2,15 +2,18 @@
 #define TASKQUEQUE_H_
 
 #include <queue>
+#include <list>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
+#include <iostream>
+#include <utility>
 
 // Implementing a simple sync queue to save tasks as a task buffer in a threadPool ---- producer and comsuer design mode
 template <typename T>
 class TaskQueue {
 public:
-	TaskQueue(unsigned  int maxTaskSize);
+	TaskQueue(unsigned int maxTaskSize);
 	~TaskQueue() = default;
 	void stop(); // stop taskqueue to use
 	void EnTask(const T &task); // para is lvalue-ref, use function "add" to add a task to TaskQueue
@@ -23,15 +26,15 @@ public:
 
 private:
 	// the max number of taskqueue can contain
-	const unsinged int kMaxTaskSize_;
+	const unsigned int kMaxTaskSize_;
 	// when constructing queue runs; when need stop queue, running false
 	bool running_;
 	std::queue<T> queue_;
 	std::mutex mtx_;
 	std::condition_variable notEmpty_cv_; // conditionally control consumer thread
 	std::condition_variable notFull_cv_;  // conditionally control producer thread
-	void NotFull() const; // after cv get lock to judge queue is not full
-	void NotEmpty() const; // after cv get lock to judge queue is not empty
+	bool NotFull() const; // after cv get lock to judge queue is not full
+	bool NotEmpty() const; // after cv get lock to judge queue is not empty
 	template <typename F>
 	void add(F &&f); // add a task to queue
 };

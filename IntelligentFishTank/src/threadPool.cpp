@@ -1,9 +1,9 @@
 #include <list>
+#include "taskQueue.hpp"
 #include "threadPool.h"
-#include "taskQueue.h"
 
 // construct taskQueue_ object
-ThreadPool::ThreadPool(int numThreads = std::thread::hardware_concurrency()) : taskQueue_(ThreadPool::kMaxTaskSize_) {
+ThreadPool::ThreadPool(int numThreads) : taskQueue_(kMaxTaskSize_) {
   start(numThreads);  // manually start
 }
 
@@ -17,7 +17,6 @@ void ThreadPool::start(int numThreads) {
   for (int i = 0; i < numThreads; ++i) {
     threads_.push_back(std::make_shared<std::thread>(&ThreadPool::RunTask, this));
   }
-
 }
 
 void ThreadPool::stop() {
@@ -35,16 +34,14 @@ void ThreadPool::AddTask(Task &&task) {
 void ThreadPool::RunTask() {
   while (running_) {
     // get task from taskqueue
-    std::list<Task> tmp_list;
-    taskQueue_.DeTask(tmp_list);
-
-    for (auto &task : tmp_list) {
-      if (!running_) {
-        return; // if stop thread pool, directly return
-      }
-      // operate task
-      task();
+    Task task;
+    taskQueue_.DeTask(task);
+    // if stop thread pool, directly return
+    if (!running_) {
+      return; 
     }
+    // operate task
+    task();
   }
 }
 
