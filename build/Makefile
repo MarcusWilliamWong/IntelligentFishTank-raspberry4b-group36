@@ -169,33 +169,6 @@ samples/Test_threadPool.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_threadPool.cpp.s
 .PHONY : samples/Test_threadPool.cpp.s
 
-src/taskQueue.o: src/taskQueue.cpp.o
-
-.PHONY : src/taskQueue.o
-
-# target to build an object file
-src/taskQueue.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/taskQueue.cpp.o
-.PHONY : src/taskQueue.cpp.o
-
-src/taskQueue.i: src/taskQueue.cpp.i
-
-.PHONY : src/taskQueue.i
-
-# target to preprocess a source file
-src/taskQueue.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/taskQueue.cpp.i
-.PHONY : src/taskQueue.cpp.i
-
-src/taskQueue.s: src/taskQueue.cpp.s
-
-.PHONY : src/taskQueue.s
-
-# target to generate assembly for a file
-src/taskQueue.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/taskQueue.cpp.s
-.PHONY : src/taskQueue.cpp.s
-
 src/threadPool.o: src/threadPool.cpp.o
 
 .PHONY : src/threadPool.o
@@ -235,9 +208,6 @@ help:
 	@echo "... samples/Test_threadPool.o"
 	@echo "... samples/Test_threadPool.i"
 	@echo "... samples/Test_threadPool.s"
-	@echo "... src/taskQueue.o"
-	@echo "... src/taskQueue.i"
-	@echo "... src/taskQueue.s"
 	@echo "... src/threadPool.o"
 	@echo "... src/threadPool.i"
 	@echo "... src/threadPool.s"

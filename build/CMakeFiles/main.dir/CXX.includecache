@@ -17,6 +17,10 @@ mutex
 -
 condition_variable
 -
+iostream
+-
+utility
+-
 
 ../include/threadPool.h
 vector
@@ -32,11 +36,15 @@ atomic
 taskQueue.h
 ../include/taskQueue.h
 
-/home/group36/Project/Haoshi/src/threadPool.cpp
-list
+/home/group36/Project/Haoshi/samples/Test_threadPool.cpp
+thread
 -
-taskQueue.h
-/home/group36/Project/Haoshi/src/taskQueue.h
+mutex
+-
+iostream
+-
+chrono
+-
 threadPool.h
-/home/group36/Project/Haoshi/src/threadPool.h
+/home/group36/Project/Haoshi/samples/threadPool.h
 

@@ -5,10 +5,8 @@ CMakeFiles/main.dir/samples/Test_threadPool.cpp.o
  ../include/taskQueue.h
  ../include/threadPool.h
  /home/group36/Project/Haoshi/samples/Test_threadPool.cpp
-CMakeFiles/main.dir/src/taskQueue.cpp.o
- ../include/taskQueue.h
- /home/group36/Project/Haoshi/src/taskQueue.cpp
 CMakeFiles/main.dir/src/threadPool.cpp.o
  ../include/taskQueue.h
+ ../include/taskQueue.hpp
  ../include/threadPool.h
  /home/group36/Project/Haoshi/src/threadPool.cpp

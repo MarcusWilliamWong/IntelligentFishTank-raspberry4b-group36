@@ -5,10 +5,8 @@ CMakeFiles/main.dir/samples/Test_threadPool.cpp.o: ../include/taskQueue.h
 CMakeFiles/main.dir/samples/Test_threadPool.cpp.o: ../include/threadPool.h
 CMakeFiles/main.dir/samples/Test_threadPool.cpp.o: ../samples/Test_threadPool.cpp
 
-CMakeFiles/main.dir/src/taskQueue.cpp.o: ../include/taskQueue.h
-CMakeFiles/main.dir/src/taskQueue.cpp.o: ../src/taskQueue.cpp
-
 CMakeFiles/main.dir/src/threadPool.cpp.o: ../include/taskQueue.h
+CMakeFiles/main.dir/src/threadPool.cpp.o: ../include/taskQueue.hpp
 CMakeFiles/main.dir/src/threadPool.cpp.o: ../include/threadPool.h
 CMakeFiles/main.dir/src/threadPool.cpp.o: ../src/threadPool.cpp
 
