@@ -88,7 +88,7 @@ const std::vector<std::string> &Thermometer::FindTempDevices() {
 void Thermometer::start() {
 	// std::cout << "start\n";
 	// std::cout << std::thread::hardware_concurrency() << std::endl;
-	this->thread_ptr_ = std::make_unique<std::thread>(&Thermometer::ReadAllTemp, this);
+	this->thread_ptr_ = make_unique<std::thread>(&Thermometer::ReadAllTemp, this);
 	// this->ReadTemp();
 }
 
