@@ -1,3 +1,0 @@
-/home/group36/Project/IntelligentFishTank-raspberry4b-group36/build/CMakeFiles/rebuild_cache.dir
-/home/group36/Project/IntelligentFishTank-raspberry4b-group36/build/CMakeFiles/edit_cache.dir
-/home/group36/Project/IntelligentFishTank-raspberry4b-group36/build/CMakeFiles/main.dir
