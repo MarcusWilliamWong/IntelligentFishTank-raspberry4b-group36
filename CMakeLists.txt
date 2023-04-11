@@ -32,7 +32,13 @@ set(CMAKE_CXX_STANDARD 11) # use c++11 standard
 
 #add_executable(main ${PROJECT_SOURCE_DIR}/src/myds18b20.cpp ${PROJECT_SOURCE_DIR}/samples/Test_DS18B20.cpp) # ${CMAKE_THREAD_LIBS_INIT}
 
+# Test_airpump
 add_executable(main ${PROJECT_SOURCE_DIR}/src/app.cpp ${PROJECT_SOURCE_DIR}/src/airpump.cpp ${PROJECT_SOURCE_DIR}/src/pwmctrl.cpp ${PROJECT_SOURCE_DIR}/samples/Test_airpump.cpp) # ${CMAKE_THREAD_LIBS_INIT}
+
+# Test_threadPool
+add_executable(main ${PROJECT_SOURCE_DIR}/src/threadPool.cpp \
+                    ${PROJECT_SOURCE_DIR}/src/taskQueue.cpp \
+                    ${PROJECT_SOURCE_DIR}/samples/Test_threadPool.cpp)
 
 # target_link_libraries(main ${WIRINGPI_LIBRARIES})
 
