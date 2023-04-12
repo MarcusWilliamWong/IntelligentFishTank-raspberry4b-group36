@@ -142,32 +142,167 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-samples/Test_threadPool.o: samples/Test_threadPool.cpp.o
+samples/Test_thermalModule.o: samples/Test_thermalModule.cpp.o
 
-.PHONY : samples/Test_threadPool.o
+.PHONY : samples/Test_thermalModule.o
 
 # target to build an object file
-samples/Test_threadPool.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_threadPool.cpp.o
-.PHONY : samples/Test_threadPool.cpp.o
+samples/Test_thermalModule.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_thermalModule.cpp.o
+.PHONY : samples/Test_thermalModule.cpp.o
 
-samples/Test_threadPool.i: samples/Test_threadPool.cpp.i
+samples/Test_thermalModule.i: samples/Test_thermalModule.cpp.i
 
-.PHONY : samples/Test_threadPool.i
+.PHONY : samples/Test_thermalModule.i
 
 # target to preprocess a source file
-samples/Test_threadPool.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_threadPool.cpp.i
-.PHONY : samples/Test_threadPool.cpp.i
+samples/Test_thermalModule.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_thermalModule.cpp.i
+.PHONY : samples/Test_thermalModule.cpp.i
 
-samples/Test_threadPool.s: samples/Test_threadPool.cpp.s
+samples/Test_thermalModule.s: samples/Test_thermalModule.cpp.s
 
-.PHONY : samples/Test_threadPool.s
+.PHONY : samples/Test_thermalModule.s
 
 # target to generate assembly for a file
-samples/Test_threadPool.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_threadPool.cpp.s
-.PHONY : samples/Test_threadPool.cpp.s
+samples/Test_thermalModule.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_thermalModule.cpp.s
+.PHONY : samples/Test_thermalModule.cpp.s
+
+src/app.o: src/app.cpp.o
+
+.PHONY : src/app.o
+
+# target to build an object file
+src/app.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/app.cpp.o
+.PHONY : src/app.cpp.o
+
+src/app.i: src/app.cpp.i
+
+.PHONY : src/app.i
+
+# target to preprocess a source file
+src/app.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/app.cpp.i
+.PHONY : src/app.cpp.i
+
+src/app.s: src/app.cpp.s
+
+.PHONY : src/app.s
+
+# target to generate assembly for a file
+src/app.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/app.cpp.s
+.PHONY : src/app.cpp.s
+
+src/heater.o: src/heater.cpp.o
+
+.PHONY : src/heater.o
+
+# target to build an object file
+src/heater.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/heater.cpp.o
+.PHONY : src/heater.cpp.o
+
+src/heater.i: src/heater.cpp.i
+
+.PHONY : src/heater.i
+
+# target to preprocess a source file
+src/heater.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/heater.cpp.i
+.PHONY : src/heater.cpp.i
+
+src/heater.s: src/heater.cpp.s
+
+.PHONY : src/heater.s
+
+# target to generate assembly for a file
+src/heater.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/heater.cpp.s
+.PHONY : src/heater.cpp.s
+
+src/myds18b20.o: src/myds18b20.cpp.o
+
+.PHONY : src/myds18b20.o
+
+# target to build an object file
+src/myds18b20.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/myds18b20.cpp.o
+.PHONY : src/myds18b20.cpp.o
+
+src/myds18b20.i: src/myds18b20.cpp.i
+
+.PHONY : src/myds18b20.i
+
+# target to preprocess a source file
+src/myds18b20.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/myds18b20.cpp.i
+.PHONY : src/myds18b20.cpp.i
+
+src/myds18b20.s: src/myds18b20.cpp.s
+
+.PHONY : src/myds18b20.s
+
+# target to generate assembly for a file
+src/myds18b20.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/myds18b20.cpp.s
+.PHONY : src/myds18b20.cpp.s
+
+src/pwmctrl.o: src/pwmctrl.cpp.o
+
+.PHONY : src/pwmctrl.o
+
+# target to build an object file
+src/pwmctrl.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/pwmctrl.cpp.o
+.PHONY : src/pwmctrl.cpp.o
+
+src/pwmctrl.i: src/pwmctrl.cpp.i
+
+.PHONY : src/pwmctrl.i
+
+# target to preprocess a source file
+src/pwmctrl.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/pwmctrl.cpp.i
+.PHONY : src/pwmctrl.cpp.i
+
+src/pwmctrl.s: src/pwmctrl.cpp.s
+
+.PHONY : src/pwmctrl.s
+
+# target to generate assembly for a file
+src/pwmctrl.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/pwmctrl.cpp.s
+.PHONY : src/pwmctrl.cpp.s
+
+src/thermalModule.o: src/thermalModule.cpp.o
+
+.PHONY : src/thermalModule.o
+
+# target to build an object file
+src/thermalModule.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalModule.cpp.o
+.PHONY : src/thermalModule.cpp.o
+
+src/thermalModule.i: src/thermalModule.cpp.i
+
+.PHONY : src/thermalModule.i
+
+# target to preprocess a source file
+src/thermalModule.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalModule.cpp.i
+.PHONY : src/thermalModule.cpp.i
+
+src/thermalModule.s: src/thermalModule.cpp.s
+
+.PHONY : src/thermalModule.s
+
+# target to generate assembly for a file
+src/thermalModule.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalModule.cpp.s
+.PHONY : src/thermalModule.cpp.s
 
 src/threadPool.o: src/threadPool.cpp.o
 
@@ -205,9 +340,24 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
-	@echo "... samples/Test_threadPool.o"
-	@echo "... samples/Test_threadPool.i"
-	@echo "... samples/Test_threadPool.s"
+	@echo "... samples/Test_thermalModule.o"
+	@echo "... samples/Test_thermalModule.i"
+	@echo "... samples/Test_thermalModule.s"
+	@echo "... src/app.o"
+	@echo "... src/app.i"
+	@echo "... src/app.s"
+	@echo "... src/heater.o"
+	@echo "... src/heater.i"
+	@echo "... src/heater.s"
+	@echo "... src/myds18b20.o"
+	@echo "... src/myds18b20.i"
+	@echo "... src/myds18b20.s"
+	@echo "... src/pwmctrl.o"
+	@echo "... src/pwmctrl.i"
+	@echo "... src/pwmctrl.s"
+	@echo "... src/thermalModule.o"
+	@echo "... src/thermalModule.i"
+	@echo "... src/thermalModule.s"
 	@echo "... src/threadPool.o"
 	@echo "... src/threadPool.i"
 	@echo "... src/threadPool.s"
