@@ -83,8 +83,6 @@ void TaskQueue<T>::DeTask(T &task) {
   notFull_cv_.notify_one();
 }
 
-
-
 template <typename T>
 bool TaskQueue<T>::empty() {
   std::lock_guard<std::mutex> lock(mtx_);
