@@ -1,7 +1,6 @@
 #ifndef TASKQUEQUE_H_
 #define TASKQUEQUE_H_
 
-#include <queue>
 #include <list>
 #include <thread>
 #include <mutex>
@@ -18,8 +17,8 @@ public:
 	void stop(); // stop taskqueue to use
 	void EnTask(const T &task); // para is lvalue-ref, use function "add" to add a task to TaskQueue
 	void EnTask(T &&task); // para is rvalue-ref, use function "add" to add a task to TaskQueue
-	void DeTask(T &task);  // remove a task from TaskQueue
 	void DeTask(std::list<T> &list); // remove all task to a list
+  void DeTask(T &task);  // remove a task from TaskQueue
 	bool empty(); // check queue is empty
 	bool full(); // check queue is full
 	size_t size(); // get current number of tasks
@@ -29,7 +28,7 @@ private:
 	const unsigned int kMaxTaskSize_;
 	// when constructing queue runs; when need stop queue, running false
 	bool running_;
-	std::queue<T> queue_;
+	std::list<T> queue_;
 	std::mutex mtx_;
 	std::condition_variable notEmpty_cv_; // conditionally control consumer thread
 	std::condition_variable notFull_cv_;  // conditionally control producer thread
@@ -53,6 +52,20 @@ void TaskQueue<T>::EnTask(T &&task) {
 }
 
 template <typename T>
+void TaskQueue<T>::DeTask(std::list<T> &list) {
+  std::unique_lock<std::mutex> lock(mtx_);
+  // if queue is empty, consumer thread will wait
+  notEmpty_cv_.wait(lock, [this]{ return !running_ || NotEmpty(); });
+  // queue is stopped, directly return, even if thread is woked up; avoid later action
+  if (!running_) {
+    return;
+  }
+  // move all tasks into outer list
+  list = std::move(queue_);
+  notFull_cv_.notify_one();
+}
+
+template <typename T>
 void TaskQueue<T>::DeTask(T &task) {
   std::unique_lock<std::mutex> lock(mtx_);
   // if queue need run and not empty, thread will take a task to operate and queue remove the task
@@ -63,24 +76,14 @@ void TaskQueue<T>::DeTask(T &task) {
     return;
   }
   // assign ref of front task to "task"
-  task = std::move(queue_.front());
+  task = queue_.front();
   // remove front task
-  queue_.pop();
+  queue_.pop_front();
   // awake one onwaiting thread which cannot operate because queue is full
   notFull_cv_.notify_one();
 }
 
-// template <typename T>
-// void TaskQueue<T>::DeTask(std::list<T> &list) {
-//   std::unique_lock<std::mutex> lock(mtx_);
-//   notEmpty_cv_.wait(lock, [this]{ return !running_ || NotEmpty(); });
-//   if (!running_) {
-//     return;
-//   }
-//   // move all tasks into list
-//   list.push_back() = std::move(queue_);
-//   notFull_cv_.notify_one();
-// }
+
 
 template <typename T>
 bool TaskQueue<T>::empty() {
@@ -141,7 +144,7 @@ void TaskQueue<T>::add(F &&f) {
     return;
   }
   // add a task
-  queue_.push(std::forward<F>(f));
+  queue_.push_back(std::forward<F>(f));
   // release one onwaiting thread which is stopped because of queue empty
   notEmpty_cv_.notify_one();
 }

@@ -6,7 +6,7 @@
 #include <memory>
 #include <functional>
 #include <atomic>
-#include "taskQueue.h"
+#include "taskQueue.hpp"
 
 // implement a class to manage a group of threads
 class ThreadPool {

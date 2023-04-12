@@ -33,15 +33,19 @@ void ThreadPool::AddTask(Task &&task) {
 
 void ThreadPool::RunTask() {
   while (running_) {
+    std::list<Task> tmp_list;
     // get task from taskqueue
-    Task task;
-    taskQueue_.DeTask(task);
-    // if stop thread pool, directly return
-    if (!running_) {
-      return; 
+    taskQueue_.DeTask(tmp_list);
+    // sequential execution
+    for (auto &task : tmp_list) {
+      // if stop thread pool, directly return
+      if (!running_) {
+        return; 
+      }
+      // operate task
+      task();
     }
-    // operate task
-    task();
+    
   }
 }
 

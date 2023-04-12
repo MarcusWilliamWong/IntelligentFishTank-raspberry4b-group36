@@ -59,6 +59,8 @@
     "sstream": "cpp",
     "condition_variable": "cpp",
     "mutex": "cpp",
-    "queue": "cpp"
+    "queue": "cpp",
+    "list": "cpp",
+    "future": "cpp"
   }
 }

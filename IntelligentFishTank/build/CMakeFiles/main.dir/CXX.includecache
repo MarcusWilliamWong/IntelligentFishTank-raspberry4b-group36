@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../include/taskQueue.h
-queue
--
-list
--
-thread
--
-mutex
--
-condition_variable
--
-iostream
--
-utility
--
-
 ../include/taskQueue.hpp
 list
 -
@@ -47,14 +31,22 @@ functional
 -
 atomic
 -
-taskQueue.h
-../include/taskQueue.h
-
-/home/group36/Project/Haoshi/IntelligentFishTank/src/threadPool.cpp
-list
--
 taskQueue.hpp
-/home/group36/Project/Haoshi/IntelligentFishTank/src/taskQueue.hpp
+../include/taskQueue.hpp
+
+/home/group36/Project/Haoshi/IntelligentFishTank/samples/Test_threadPool.cpp
+thread
+-
+mutex
+-
+iostream
+-
+chrono
+-
+functional
+-
+future
+-
 threadPool.h
-/home/group36/Project/Haoshi/IntelligentFishTank/src/threadPool.h
+/home/group36/Project/Haoshi/IntelligentFishTank/samples/threadPool.h
 
