@@ -22,6 +22,20 @@ iostream
 utility
 -
 
+../include/taskQueue.hpp
+list
+-
+thread
+-
+mutex
+-
+condition_variable
+-
+iostream
+-
+utility
+-
+
 ../include/threadPool.h
 vector
 -
@@ -36,15 +50,11 @@ atomic
 taskQueue.h
 ../include/taskQueue.h
 
-/home/group36/Project/Haoshi/samples/Test_threadPool.cpp
-thread
+/home/group36/Project/Haoshi/IntelligentFishTank/src/threadPool.cpp
+list
 -
-mutex
--
-iostream
--
-chrono
--
+taskQueue.hpp
+/home/group36/Project/Haoshi/IntelligentFishTank/src/taskQueue.hpp
 threadPool.h
-/home/group36/Project/Haoshi/samples/threadPool.h
+/home/group36/Project/Haoshi/IntelligentFishTank/src/threadPool.h
 
