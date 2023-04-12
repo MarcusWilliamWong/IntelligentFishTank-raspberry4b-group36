@@ -7,8 +7,8 @@ class Airpump : public PwmController {
 public:
   Airpump(unsigned int pin);
   Airpump(unsigned int pin, unsigned int freq);
-  void start();
-  void stop();
+  void turnOn() override;
+  void turnOff() override;
 };
 
 #endif

@@ -6,8 +6,8 @@ public:
   Motor();
   Motor(unsigned int pin);
   Motor(unsigned int pin, unsigned int freq);
-  void start();
-  void stop();
+  void turnOn();
+  void turnOff();
   ~Motor();
   // motor rotate heater button by sleep seconds
   void rotate(unsigned int dutycycle, unsigned int keep_usec);

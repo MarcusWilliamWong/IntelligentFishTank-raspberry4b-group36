@@ -19,11 +19,11 @@ void Motor::rotate(unsigned int dutycycle, unsigned int keep_sec = 0) {
   gpioPWM(kPin_, 0);
 }
 
-void Motor::start() {
+void Motor::turnOn() {
 
 }
 
-void Motor::stop() {
+void Motor::turnOff() {
 }
 
 Motor::~Motor() {

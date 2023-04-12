@@ -10,24 +10,22 @@
 #include <fstream>
 #include <thread>
 
-Thermometer::Thermometer() {
-	this->heater_ptr_ = nullptr;
-	this->FindTempDevices();
+Thermometer::Thermometer() : running_(true), heater_ptr_(nullptr) {
+	FindTempDevices();
 }
 
 void Thermometer::registerHeater(Heater *heater_ptr) {
-	this->heater_ptr_ = heater_ptr;
+	heater_ptr_ = heater_ptr;
 }
 
 void Thermometer::ReadAllTemp() {
-	if (this->device_files_.empty()) {
+	if (device_files_.empty()) {
 		std::cerr << "Can't find any DS18B20 device directory!\n";
 	}
 	
-	this->running_ = true;
-	while (this->running_) {
+	while (running_) {
 		int index = 0;
-		for (const auto &fileName : this->device_files_) {
+		for (const auto &fileName : device_files_) {
 			std::ifstream finput(fileName, std::ifstream::in);
 			// open fail
 			if (!finput.is_open()) {
@@ -39,12 +37,12 @@ void Thermometer::ReadAllTemp() {
 			if (getline(finput, tmp_temp)) {
 				// cast type from string to double
 				double t = std::stod(tmp_temp) * 1.0 / 1000;
-				if (this->tempers_.size() == this->device_files_.size()) {
-					(this->tempers_)[index] = t;
-					// get 4 temperatures
-					this->heater_ptr_->processTempersCallback(this->tempers_);
+				if (tempers_.size() == device_files_.size()) {
+					tempers_[index] = t;
+					// return 4 temperatures
+					heater_ptr_->ProcessTempers(tempers_);
 				} else {
-					this->tempers_.push_back(t);
+					tempers_.push_back(t);
 				}
 				++index;
 			}
@@ -76,35 +74,28 @@ const std::vector<std::string> &Thermometer::FindTempDevices() {
 							+ '/' + static_cast<const std::string>(subpath->d_name)
 							+ "/temperature";
 			// std::cout << filename << std::endl;
-			this->device_files_.push_back(filename);
+			device_files_.push_back(filename);
 		}
 	}
 	closedir(dir);
 
 	// Return the whole device directories
-  return this->device_files_;
+  return device_files_;
 }
 
-void Thermometer::start() {
-	// std::cout << "start\n";
-	// std::cout << std::thread::hardware_concurrency() << std::endl;
-	this->thread_ptr_ = make_unique<std::thread>(&Thermometer::ReadAllTemp, this);
-	// this->ReadTemp();
+void Thermometer::turnOn() {
+	running_ = true;
+	ReadAllTemp();
 }
 
-void Thermometer::stop() {
-	this->running_ = false;
-	if (this->thread_ptr_->joinable()) {
-		this->thread_ptr_->join();
-	} else {
-		std::cerr << "Can't joint thread!\n";
-	}
+void Thermometer::turnOff() {
+	running_ = false;
 }
 
 // const std::vector<double> &Thermometer::get_temp() const{
-//   return this->tempers_;
+//   return tempers_;
 // }
 
 // const std::vector<std::string> &Thermometer::get_dev() const{
-	// return this->device_files;
+	// return device_files;
 // } 

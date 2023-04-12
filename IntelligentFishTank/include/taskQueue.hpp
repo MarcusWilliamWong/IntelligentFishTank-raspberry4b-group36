@@ -79,7 +79,7 @@ void TaskQueue<T>::DeTask(T &task) {
   task = queue_.front();
   // remove front task
   queue_.pop_front();
-  // awake one onwaiting thread which cannot operate because queue is full
+  // awake one awaiting thread which cannot operate because queue is full
   notFull_cv_.notify_one();
 }
 
@@ -115,6 +115,7 @@ bool TaskQueue<T>::NotEmpty() const {
   bool empty = queue_.empty();
   if (empty) {
     std::cerr << "TaskQueue is empty!\n";
+    std::cerr << "Current thread " << std::this_thread::get_id() << " is awaiting!\n";
   }
   return !empty;
 }
@@ -126,7 +127,7 @@ void TaskQueue<T>::stop() {
     std::lock_guard<std::mutex> lock(mtx_);
     running_ = false; // stop queue
   }
-  // release all onwaiting thread
+  // release all awaiting thread
   notEmpty_cv_.notify_all();
   notFull_cv_.notify_all();
 }
@@ -143,7 +144,7 @@ void TaskQueue<T>::add(F &&f) {
   }
   // add a task
   queue_.push_back(std::forward<F>(f));
-  // release one onwaiting thread which is stopped because of queue empty
+  // release one awaiting thread which is stopped because of queue empty
   notEmpty_cv_.notify_one();
 }
 #endif

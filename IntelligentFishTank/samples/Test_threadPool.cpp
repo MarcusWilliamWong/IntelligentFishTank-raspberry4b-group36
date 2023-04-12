@@ -37,15 +37,18 @@ int main() {
     pool.AddTask(task1);
     pool.AddTask(task1);
     pool.AddTask(task1);
+    pool.AddTask(task1);
+    pool.AddTask(task1);
+    pool.AddTask(task1);
 
-    auto id = std::this_thread::get_id();
-    pool.AddTask([id]{
-      {
-        std::mutex mtx;
-        std::lock_guard<std::mutex> lock(mtx);
-        std::cout << id << std::endl;
-      }
-    });
+    // auto id = std::this_thread::get_id();
+    // pool.AddTask([id]{
+    //   {
+    //     std::mutex mtx;
+    //     std::lock_guard<std::mutex> lock(mtx);
+    //     std::cout << id << std::endl;
+    //   }
+    // });
 
   }
   // std::this_thread::sleep_for(std::chrono::seconds(2));

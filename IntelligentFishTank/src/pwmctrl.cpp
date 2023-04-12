@@ -4,7 +4,7 @@
 
 PwmController::PwmController(unsigned int pin) : PwmController(pin, 50u) {}
 
-PwmController::PwmController(unsigned int pin, unsigned int freq) : kPin_(pin), freq_(freq) {
+PwmController::PwmController(unsigned int pin, unsigned int freq) : kPin_(pin), freq_(freq), kRange_(1000u), dutycycle_(static_cast<unsigned int>(PwmLevel::ZeroLevel))  {
   // initiation, set pin, freq and range(precision)
   gpioSetMode(kPin_, PI_OUTPUT);
   gpioSetPWMfrequency(kPin_, freq_);

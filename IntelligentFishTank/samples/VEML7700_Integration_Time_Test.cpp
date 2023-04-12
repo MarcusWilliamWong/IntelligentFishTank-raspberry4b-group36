@@ -1,6 +1,6 @@
 // 导入 Wire 库，用于与 I2C 设备通信
-#include <Wire.h>
-// #include <wiringPiI2C.h>
+// #include <Wire.h>
+#include <wiringPiI2C.h>
 // 导入 VEML7700 库，用于操作 VEML7700 光传感器
 #include <VEML7700.h>
 

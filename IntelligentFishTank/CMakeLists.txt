@@ -10,11 +10,11 @@ find_package(Threads REQUIRED) # find thread lib # dynamic lib from /usr/lib/arm
 
 # find_package(WiringPi REQUIRED)  #find wiringpi
 
-include_directories(${WIRINGPI_INCLUDE_DIRS}) # include wiringpi header
+# include_directories(${WIRINGPI_INCLUDE_DIRS}) # include wiringpi header
 
 #### include(${PROJECT_SOURCE_DIR}/pigpio/util/Findpigpio.cmake) # include Findpigpio.cmake to find pigpio library
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} /home/group36/pigpio-master/util)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} /home/group36/pigpio-master/util) # help 'find_package' to find lib
 
 find_package(pigpio REQUIRED)
 
@@ -40,10 +40,22 @@ set(CMAKE_CXX_STANDARD 11) # use c++11 standard
 #add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/src/app.cpp ${PROJECT_SOURCE_DIR}/src/airpump.cpp ${PROJECT_SOURCE_DIR}/src/pwmctrl.cpp ${PROJECT_SOURCE_DIR}/samples/Test_airpump.cpp) # ${CMAKE_THREAD_LIBS_INIT}
 
 # Test_threadPool
-add_executable(${PROJECT_NAME} 
+# add_executable(${PROJECT_NAME} 
+#               ${PROJECT_SOURCE_DIR}/include/taskQueue.hpp
+#               ${PROJECT_SOURCE_DIR}/src/threadPool.cpp
+#               ${PROJECT_SOURCE_DIR}/samples/Test_threadPool.cpp
+#               )
+
+# Test thermalModule
+add_executable(${PROJECT_NAME}
               ${PROJECT_SOURCE_DIR}/include/taskQueue.hpp
+              ${PROJECT_SOURCE_DIR}/src/app.cpp
               ${PROJECT_SOURCE_DIR}/src/threadPool.cpp
-              ${PROJECT_SOURCE_DIR}/samples/Test_threadPool.cpp
+              ${PROJECT_SOURCE_DIR}/src/pwmctrl.cpp
+              ${PROJECT_SOURCE_DIR}/src/heater.cpp
+              ${PROJECT_SOURCE_DIR}/src/myds18b20.cpp
+              ${PROJECT_SOURCE_DIR}/src/thermalModule.cpp
+              ${PROJECT_SOURCE_DIR}/samples/Test_thermalModule.cpp
               )
 
 # VEML7700_Gain
