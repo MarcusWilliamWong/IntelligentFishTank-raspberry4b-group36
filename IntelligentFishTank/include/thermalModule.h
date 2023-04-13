@@ -9,17 +9,18 @@
 
 class ThermalModule {
 public:
-	ThermalModule(ThreadPool *pool);
-	~ThermalModule() = default;
+	ThermalModule(std::shared_ptr<ThreadPool> &pool_ptr);
+	~ThermalModule();
 	void start();  // instantiation heater and thermometer, and register heater into thermometer
 	void stop();   // stop module and release space
-	void controlHeater(); // according to real-time temperature to control heater open and close
+	// void controlHeater(); // according to real-time temperature to control heater open and close
 	void execute(); // produce tasks and add tasks into thread pool
 
 private:
 	Thermometer thermometer_;
 	Heater heater_;
-	ThreadPool *pool_ptr_;
+	std::shared_ptr<ThreadPool> pool_ptr_;
+	bool running_;
 	std::tuple<double, double> tempRange_;
 };
 

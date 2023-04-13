@@ -1,6 +1,8 @@
 #ifndef PWMCTRL_H_
 #define PWMCTRL_H_
 
+#include <atomic>
+
 class PwmController {
 public:
   PwmController() = delete;
@@ -12,10 +14,11 @@ public:
   // manually on and off equipment
   virtual void turnOn() = 0;
   virtual void turnOff() = 0;
+	bool isRunning(); // check equipment running status
 
 protected:
 	// predefine 5 pwm levels
-	enum class PwmLevel :unsigned int {
+	enum class PwmLevel : unsigned int {
 		ZeroLevel = 0u,
 		LowLevel = 333u,
 		MediumLevel = 500u,
@@ -27,6 +30,8 @@ protected:
   const unsigned int kRange_; // control precision of dutycycle
   unsigned int freq_; // default device freq needs 50Hz = 20ms a period
   unsigned int dutycycle_; // default pwm level is ZeroLevel(0u)
+  std::atomic_bool running_;  // equipment running status
+  
 };
 
 #endif

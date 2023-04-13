@@ -47,15 +47,25 @@ set(CMAKE_CXX_STANDARD 11) # use c++11 standard
 #               )
 
 # Test thermalModule
-add_executable(${PROJECT_NAME}
-              ${PROJECT_SOURCE_DIR}/include/taskQueue.hpp
-              ${PROJECT_SOURCE_DIR}/src/app.cpp
-              ${PROJECT_SOURCE_DIR}/src/threadPool.cpp
-              ${PROJECT_SOURCE_DIR}/src/pwmctrl.cpp
+# add_executable(${PROJECT_NAME}
+#               ${PROJECT_SOURCE_DIR}/include/taskQueue.hpp
+#               ${PROJECT_SOURCE_DIR}/src/app.cpp
+#               ${PROJECT_SOURCE_DIR}/src/threadPool.cpp
+#               ${PROJECT_SOURCE_DIR}/src/pwmctrl.cpp
+#               ${PROJECT_SOURCE_DIR}/src/heater.cpp
+#               ${PROJECT_SOURCE_DIR}/src/myds18b20.cpp
+#               ${PROJECT_SOURCE_DIR}/src/thermalModule.cpp
+#               ${PROJECT_SOURCE_DIR}/samples/Test_thermalModule.cpp
+#               )
+
+# message(${PROJECT_SOURCE_DIR})
+# add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/samples/Test_pigpio.cpp)
+
+# Test_heater.cpp
+add_executable(${PROJECT_NAME} 
+              ${PROJECT_SOURCE_DIR}/samples/Test_heater.cpp 
               ${PROJECT_SOURCE_DIR}/src/heater.cpp
-              ${PROJECT_SOURCE_DIR}/src/myds18b20.cpp
-              ${PROJECT_SOURCE_DIR}/src/thermalModule.cpp
-              ${PROJECT_SOURCE_DIR}/samples/Test_thermalModule.cpp
+              ${PROJECT_SOURCE_DIR}/src/pwmctrl.cpp
               )
 
 # VEML7700_Gain
@@ -69,7 +79,9 @@ add_executable(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME} pthread)
 
-target_link_libraries(${PROJECT_NAME} ${PIGPIO_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} pigpio)
+
+# message(STATUS ${PIGPIO_LIBRARIES})
 
 # target_link_libraries(${PROJECT_NAME} ${WIRINGPI_LIBRARIES})
 

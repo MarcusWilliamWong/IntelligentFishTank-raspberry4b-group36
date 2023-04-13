@@ -30,7 +30,8 @@ void Thermometer::ReadAllTemp() {
 			// open fail
 			if (!finput.is_open()) {
 				std::cerr << "Can't open temperatur file!\n";
-				return;
+				tempers_.clear();
+				break;
 			}
 			// read temperature file and record
 			std::string tmp_temp;
@@ -39,7 +40,8 @@ void Thermometer::ReadAllTemp() {
 				double t = std::stod(tmp_temp) * 1.0 / 1000;
 				if (tempers_.size() == device_files_.size()) {
 					tempers_[index] = t;
-					// return 4 temperatures
+					// call callback function to control heater
+					// std::cout << t << "`C\n"; // here is ok
 					heater_ptr_->ProcessTempers(tempers_);
 				} else {
 					tempers_.push_back(t);

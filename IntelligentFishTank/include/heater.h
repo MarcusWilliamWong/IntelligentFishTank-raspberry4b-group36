@@ -2,6 +2,8 @@
 #define HEATER_H_
 
 #include <tuple>
+#include <mutex>
+#include <vector>
 #include "pwmctrl.h"
 
 // we use GPIO 26 to connect heater pwm
@@ -13,14 +15,25 @@ public:
 
 	void turnOn() override;
 	void turnOff() override;
-	// compute 4 temperatures return tuple including the average, minimum, maximum
+	// callback function, compute the average, minimum, maximum for 4 temperatures 
 	void ProcessTempers(const std::vector<double> &tempers);
-	// average, minimum, maximum
-	const std::tuple<double, double, double> &getTempsInfo();
+	// callback function, control heater on and off
+	void ControlHeater();
+
+	// Test
+	// const unsigned int getPin() {
+	// 	return kPin_;
+	// }
+
+	// unsigned int getDutycycle() {
+	// 	return dutycycle_;
+	// }
 
 private:
+	std::mutex mtx_;
 	// average, minimum, maximum
 	std::tuple<double, double, double> tempsInfo_;
+	std::tuple<double, double> tempRange_ = std::make_tuple<double, double>(28.0, 40.0);
 };
 
 #endif
