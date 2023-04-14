@@ -33,7 +33,7 @@ private:
 	std::mutex mtx_;
 	// average, minimum, maximum
 	std::tuple<double, double, double> tempsInfo_;
-	std::tuple<double, double> tempRange_ = std::make_tuple<double, double>(28.0, 40.0);
+	std::tuple<double, double> tempRange_ = std::make_tuple<double, double>(24.0, 25.0);
 };
 
 #endif

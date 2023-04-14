@@ -22,6 +22,9 @@ private:
 	std::shared_ptr<ThreadPool> pool_ptr_;
 	bool running_;
 	std::tuple<double, double> tempRange_;
+
+	std::thread t1_;
+	std::thread t2_;
 };
 
 #endif

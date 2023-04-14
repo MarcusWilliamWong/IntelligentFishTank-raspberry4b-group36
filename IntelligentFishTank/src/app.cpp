@@ -18,7 +18,7 @@ void App::init() {
     std::cout << "PIGPIO is ready\n";
   }
   // pool_ptr_.use_count() -> 0;
-  pool_ptr_ = std::make_shared<ThreadPool>();
+  pool_ptr_ = std::make_shared<ThreadPool>(1);
   // pool_ptr_.use_count() -> 1;
   thermalModule_ptr_ = std::make_shared<ThermalModule>(pool_ptr_);
   // std::cout << "pool_ptr " <<pool_ptr_.use_count() << std::endl;

@@ -31,7 +31,9 @@ protected:
   unsigned int freq_; // default device freq needs 50Hz = 20ms a period
   unsigned int dutycycle_; // default pwm level is ZeroLevel(0u)
   std::atomic_bool running_;  // equipment running status
-  
+  std::atomic_bool needOn_flag_;  // if need close
+  std::atomic_bool needOff_flag_;  // if need close
+  // std::atomic_bool needStop;
 };
 
 #endif

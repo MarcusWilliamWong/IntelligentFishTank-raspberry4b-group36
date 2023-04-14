@@ -16,8 +16,8 @@ public:
   void turnOff();
 
 	// Test use
-  // const std::vector<std::string> &get_dev() const;
-  // const std::vector<double> &get_temp() const;
+  const std::vector<std::string> &get_dev() const;
+  const std::vector<double> &get_temp() const;
 	
 private:
   bool running_;

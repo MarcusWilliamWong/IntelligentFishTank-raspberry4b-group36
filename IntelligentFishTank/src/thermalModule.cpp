@@ -28,14 +28,23 @@ void ThermalModule::stop() {
 
 void ThermalModule::execute() {
 	std::cout << "----- ThermalModule execute -----\n";
-	auto task1 = std::bind(&Thermometer::turnOn, std::ref(thermometer_));
+	// while (true) {
+		// auto task1 = std::bind(&Thermometer::turnOn, std::ref(thermometer_));
+
 	// std::packaged_task<void()> f(task);
 	// pool_ptr_->AddTask(std::move(f));
-	pool_ptr_->AddTask(task1);
+	// pool_ptr_->AddTask(task1);
+
+	t1_ = std::thread(&Thermometer::turnOn, &thermometer_);
 
 	// std::tuple<double, double> tempRange_ = std::make_tuple<double, double>(24.0, 40.0);
-	auto task2 = std::bind(&Heater::ControlHeater, std::ref(heater_));
-	pool_ptr_->AddTask(task2);
+	// auto task2 = std::bind(&Heater::ControlHeater, std::ref(heater_));
+	// pool_ptr_->AddTask(task2);
+	t2_ = std::thread(&Heater::ControlHeater, &heater_);
+	// }
+	
+	t1_.detach();
+	t2_.detach();
 }
 
 // void ThermalModule::controlHeater() {

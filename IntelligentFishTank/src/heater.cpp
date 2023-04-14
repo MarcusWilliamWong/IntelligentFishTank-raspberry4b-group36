@@ -14,34 +14,46 @@ Heater::Heater(unsigned int pin) : PwmController(pin) {}
 Heater::Heater(unsigned int pin, unsigned int freq) : PwmController(pin, freq) {}
 
 void Heater::turnOn() {
-	running_ = true;
+	std::cout << "Task2 is ok!" << std::get<0>(tempsInfo_) << std::endl;
 	std::cout << "heater turn on" << std::endl;
-	std::cout << "gpioGetPWM : " << kPin_ << "; before set dutycycle : " << dutycycle_ << std::endl;
-	// gpioSetMode(kPin_, PI_ALT5);
-  // gpioSetPWMfrequency(kPin_, freq_);
-  // gpioSetPWMrange(kPin_, kRange_);
-	std::cout << "gpioGetPWM : " << kPin_ << "; after set dutycycle : " << dutycycle_ << std::endl;
+	setPwmLevel(3);
   gpioPWM(kPin_, dutycycle_);
-	for (int i = 0; i < 5; ++i ) {
-		setPwmLevel(static_cast<unsigned int>(i));
-		gpioPWM(kPin_, dutycycle_);
-		sleep(5);
+	// std::cout << "gpioGetPWM : " << gpioGetPWMdutycycle(kPin_) << "; dutycycle : " << dutycycle_ << std::endl;
+	// while (true);
+	// need while(true) to start heater
+	std::cout << "needOn_flag_ is" << needOn_flag_ << std::endl;
+	while (needOn_flag_) {
+		// if current water temperature is  higher than max threshold
+		if (std::get<0>(tempsInfo_) > std::get<1>(tempRange_)) {
+			std::cout << "current temp detected :" << std::get<0>(tempsInfo_) << std::endl;
+			// change flags and exit loop
+			needOn_flag_ = false;
+			needOff_flag_ = true;
+			break;
+		}
 	}
-	// turnOff();
-	// while(true) {
-		
-	// };
+	// reset needOn_flag_
+	needOn_flag_ = true;
 	// std::cout << "gpioGetPWM : " << gpioGetPWMdutycycle(kPin_) << "; dutycycle : " << dutycycle_ << std::endl;
 }
 
 void Heater::turnOff() {
-	running_ = false;
 	std::cout << "heater turn off" << std::endl;
-	setPwmLevel(0);
   gpioPWM(kPin_, 0);
+	while (needOff_flag_) {
+		// if current water temperatur is higher than max threshold
+		if (std::get<0>(tempsInfo_) < std::get<0>(tempRange_)) {
+			// change flags and exit loop
+			needOn_flag_ = true;
+			needOff_flag_ = false;
+			break;
+		}
+	}
+	// reset needOff_flag_
+	needOff_flag_ = true;
 }
 
-// compute 4 temperatures return tuple including the average, minimum, maximum
+// 1st Callback func, compute 4 temperatures return tuple including the average, minimum, maximum
 void Heater::ProcessTempers(const std::vector<double> &tempers) {
 	auto minmax = std::minmax_element(tempers.cbegin(), tempers.cend());
 	double average = 0.0;
@@ -56,28 +68,25 @@ void Heater::ProcessTempers(const std::vector<double> &tempers) {
 	
 }
 
-// conditional n off heater
+// 2nd Callback func, conditional n off heater
 void Heater::ControlHeater() {
-	bool turnOn_flag = true;
-	bool turnOff_flag = true;
+	// std::cout << "Task2 is ok!" << std::get<0>(tempsInfo_) << std::endl;
+	// initialise two flags
+	needOn_flag_ = true;
+	needOff_flag_ = true;
 	while (running_) {
-		std::lock_guard<std::mutex> lock(mtx_);
-		// std::cout << std::get<0>(tempsInfo_) << "`C\n" << std::endl;
+		if (!std::get<0>(tempsInfo_)) {
+			continue;
+		}
+		std::cout << std::get<0>(tempsInfo_) << "`C\n" << std::endl;
+
 		// if current average temp lower than min threshold
 		if (std::get<0>(tempsInfo_) < std::get<0>(tempRange_)) {
 			std::cout << "current average t = " << std::get<0>(tempsInfo_) << ", lower than min" << std::endl;
-			if (turnOn_flag) {
-				turnOn();
-				~turnOn_flag;
-				turnOff_flag = true;
-			}
+			turnOn();
 		} else if (std::get<0>(tempsInfo_) > std::get<1>(tempRange_)) {
 			std::cout << "current average t = " << std::get<0>(tempsInfo_) << ", higher than max" << std::endl;
-			if (turnOff_flag) {
-				turnOff();
-				~turnOff_flag;
-				turnOn_flag = true;
-			}
+			turnOff();
 		}
 	}
 }

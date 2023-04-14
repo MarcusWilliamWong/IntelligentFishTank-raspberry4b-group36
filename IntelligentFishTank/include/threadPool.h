@@ -14,7 +14,7 @@ public:
 	// define "Task" as a functor without parameters and return nothing
 	using Task = std::function<void()>;
 	// default get CPU number of cores  -> 4
-	ThreadPool(int numThreads = std::thread::hardware_concurrency() - 1);
+	ThreadPool(int numThreads = std::thread::hardware_concurrency());
 	~ThreadPool();
 	void start(int numThreads); // start specific number thread pool manually
 	void stop();  // stop thread pool manually, call once function "stopThreads"

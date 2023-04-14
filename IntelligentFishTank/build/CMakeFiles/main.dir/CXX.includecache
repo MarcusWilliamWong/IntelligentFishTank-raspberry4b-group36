@@ -17,6 +17,8 @@ pwmctrl.h
 ../include/pwmctrl.h
 
 ../include/pwmctrl.h
+atomic
+-
 
 /home/group36/Project/Haoshi/IntelligentFishTank/src/heater.cpp
 vector

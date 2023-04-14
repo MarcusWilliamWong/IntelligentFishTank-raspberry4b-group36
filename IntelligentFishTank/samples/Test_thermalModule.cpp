@@ -8,6 +8,6 @@ int main() {
 	App app;
 	app.run();
 	app.isRunning();
-	getchar();
+	while(true);
 	return 0;
 }
