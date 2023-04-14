@@ -47,19 +47,22 @@ set(CMAKE_CXX_STANDARD 11) # use c++11 standard
 #               )
 
 # Test thermalModule
-add_executable(${PROJECT_NAME}
-              ${PROJECT_SOURCE_DIR}/include/taskQueue.hpp
-              ${PROJECT_SOURCE_DIR}/src/app.cpp
-              ${PROJECT_SOURCE_DIR}/src/threadPool.cpp
-              ${PROJECT_SOURCE_DIR}/src/pwmctrl.cpp
-              ${PROJECT_SOURCE_DIR}/src/heater.cpp
-              ${PROJECT_SOURCE_DIR}/src/myds18b20.cpp
-              ${PROJECT_SOURCE_DIR}/src/thermalModule.cpp
-              ${PROJECT_SOURCE_DIR}/samples/Test_thermalModule.cpp
-              )
+# add_executable(${PROJECT_NAME}
+#               ${PROJECT_SOURCE_DIR}/include/taskQueue.hpp
+#               ${PROJECT_SOURCE_DIR}/src/app.cpp
+#               ${PROJECT_SOURCE_DIR}/src/threadPool.cpp
+#               ${PROJECT_SOURCE_DIR}/src/pwmctrl.cpp
+#               ${PROJECT_SOURCE_DIR}/src/heater.cpp
+#               ${PROJECT_SOURCE_DIR}/src/myds18b20.cpp
+#               ${PROJECT_SOURCE_DIR}/src/thermalModule.cpp
+#               ${PROJECT_SOURCE_DIR}/samples/Test_thermalModule.cpp
+#               )
 
 # message(${PROJECT_SOURCE_DIR})
 # add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/samples/Test_pigpio.cpp)
+
+# Test_waterpump
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/samples/Test_waterpump.cpp)
 
 # Test_myds18b20
 # add_executable(${PROJECT_NAME} 

@@ -78,7 +78,7 @@ void Heater::ControlHeater() {
 		if (!std::get<0>(tempsInfo_)) {
 			continue;
 		}
-		std::cout << std::get<0>(tempsInfo_) << "`C\n" << std::endl;
+		// std::cout << std::get<0>(tempsInfo_) << "`C\n" << std::endl;
 
 		// if current average temp lower than min threshold
 		if (std::get<0>(tempsInfo_) < std::get<0>(tempRange_)) {
@@ -87,6 +87,8 @@ void Heater::ControlHeater() {
 		} else if (std::get<0>(tempsInfo_) > std::get<1>(tempRange_)) {
 			std::cout << "current average t = " << std::get<0>(tempsInfo_) << ", higher than max" << std::endl;
 			turnOff();
+		} else {
+			std::cout << "current average t = " << std::get<0>(tempsInfo_) << " is between the range" << std::endl;
 		}
 	}
 }

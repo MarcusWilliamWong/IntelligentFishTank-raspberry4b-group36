@@ -7,7 +7,14 @@
 
 #include "unistd.h"
 
-ThermalModule::ThermalModule(std::shared_ptr<ThreadPool> &pool_ptr) : thermometer_(), heater_(app_config::HEATER_PIN), pool_ptr_(pool_ptr), running_(true), tempRange_(24.0, 40.0) {
+ThermalModule::ThermalModule(std::shared_ptr<ThreadPool> &pool_ptr) : 
+	thermometer_(), 
+	heater_(app_config::HEATER_PIN), 
+	pool_ptr_(pool_ptr), 
+	running_(true), 
+	tempRange_(24.0, 40.0),
+	thermo_thread_ptr_(nullptr),
+	heater_thread_ptr_(nullptr) {
 	// pool_ptr_.use_count() -> 2;
 	start();
 }
@@ -35,16 +42,16 @@ void ThermalModule::execute() {
 	// pool_ptr_->AddTask(std::move(f));
 	// pool_ptr_->AddTask(task1);
 
-	t1_ = std::thread(&Thermometer::turnOn, &thermometer_);
+	thermo_thread_ptr_ = std::make_shared<std::thread>(&Thermometer::turnOn, &thermometer_);
 
 	// std::tuple<double, double> tempRange_ = std::make_tuple<double, double>(24.0, 40.0);
 	// auto task2 = std::bind(&Heater::ControlHeater, std::ref(heater_));
 	// pool_ptr_->AddTask(task2);
-	t2_ = std::thread(&Heater::ControlHeater, &heater_);
+	heater_thread_ptr_ = std::make_shared<std::thread>(&Heater::ControlHeater, &heater_);
 	// }
 	
-	t1_.detach();
-	t2_.detach();
+	thermo_thread_ptr_->detach();
+	heater_thread_ptr_->detach();
 }
 
 // void ThermalModule::controlHeater() {

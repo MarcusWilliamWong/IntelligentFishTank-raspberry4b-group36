@@ -23,8 +23,8 @@ private:
 	bool running_;
 	std::tuple<double, double> tempRange_;
 
-	std::thread t1_;
-	std::thread t2_;
+	std::shared_ptr<std::thread> thermo_thread_ptr_;
+	std::shared_ptr<std::thread> heater_thread_ptr_;
 };
 
 #endif

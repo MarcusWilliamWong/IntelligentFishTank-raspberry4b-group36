@@ -6,35 +6,9 @@
 
 #IncludeRegexTransform: 
 
-../include/heater.h
-tuple
--
-mutex
--
-vector
--
-pwmctrl.h
-../include/pwmctrl.h
-
-../include/pwmctrl.h
-atomic
--
-
-/home/group36/Project/Haoshi/IntelligentFishTank/src/heater.cpp
-vector
--
-algorithm
--
-numeric
--
-tuple
--
-mutex
--
+/home/group36/Project/Haoshi/IntelligentFishTank/samples/Test_waterpump.cpp
 pigpio.h
 -
-heater.h
-/home/group36/Project/Haoshi/IntelligentFishTank/src/heater.h
 iostream
 -
 unistd.h
