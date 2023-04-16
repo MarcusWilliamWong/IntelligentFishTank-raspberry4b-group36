@@ -1,6 +1,10 @@
 #ifndef PWMCTRL_H_
 #define PWMCTRL_H_
 
+#define TAG_PWMCTRL "pwmctrl : "
+// Test only
+// #define DEBUG_PWMCTRL
+
 #include <atomic>
 
 class PwmController {
@@ -9,31 +13,44 @@ public:
   PwmController(PwmController&) = delete;
   PwmController(unsigned int pin);
   PwmController(unsigned int pin, unsigned int freq);
-	// cmd control pwm level
-	void setPwmLevel(unsigned int level);
-  // manually on and off equipment
-  virtual void turnOn() = 0;
-  virtual void turnOff() = 0;
-	bool isRunning(); // check equipment running status
-
+  ~PwmController();
+  bool isRunning() const; // check equipment running status
+  // set and start PWM on gpio
+  virtual void set(char lvl) = 0;
+  // proactively close equipment
+  virtual void stop() = 0;
+	
 protected:
-	// predefine 5 pwm levels
-	enum class PwmLevel : unsigned int {
-		ZeroLevel = 0u,
-		LowLevel = 333u,
-		MediumLevel = 500u,
-		HighLevel = 666u,
-		FullLevel = 1000u,
-	};
-
   const unsigned int kPin_; // output gpio pin
   const unsigned int kRange_; // control precision of dutycycle
   unsigned int freq_; // default device freq needs 50Hz = 20ms a period
-  unsigned int dutycycle_; // default pwm level is ZeroLevel(0u)
+  // because Raspberry 4B is a 64bis machine, we use u_int64_t type
+  std::atomic<u_int64_t> dutycycle_; // default pwm level is ZeroLevel(0u)
   std::atomic_bool running_;  // equipment running status
-  std::atomic_bool needOn_flag_;  // if need close
-  std::atomic_bool needOff_flag_;  // if need close
-  // std::atomic_bool needStop;
+
+  // just set dutycycle value, but not start PWM on the GPIO
+	void setPwmLvl(char level);
+
+  #ifdef DEBUG_PWMCTRL
+  inline unsigned int getPin() const {
+		return kPin_;
+	}
+
+	inline unsigned int getDutycycle() const {
+		return dutycycle_;
+	}
+  #endif
+
+private:
+	// predefine 5 pwm levels
+	enum class PwmLevel : u_int64_t {
+		PwmLvl0 = 0u,
+		PwmLvl1 = 333u,
+		PwmLvl2 = 500u,
+		PwmLvl3 = 666u,
+		PwmLvl4 = 1000u,
+	};
+
 };
 
 #endif

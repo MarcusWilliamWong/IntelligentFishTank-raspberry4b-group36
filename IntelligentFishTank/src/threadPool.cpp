@@ -28,6 +28,9 @@ void ThreadPool::AddTask(const Task &task) {
 }
 
 void ThreadPool::AddTask(Task &&task) {
+  #ifdef DEBUG_THREADPOOL
+  std::cout << TAG_THREADPOOL << "AddTask here" << std::endl;
+  #endif
   taskQueue_.EnTask(std::forward<Task>(task));
 }
 

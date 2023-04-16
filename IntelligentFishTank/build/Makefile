@@ -142,32 +142,329 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-samples/Test_waterpump.o: samples/Test_waterpump.cpp.o
+samples/Test_app.o: samples/Test_app.cpp.o
 
-.PHONY : samples/Test_waterpump.o
+.PHONY : samples/Test_app.o
 
 # target to build an object file
-samples/Test_waterpump.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_waterpump.cpp.o
-.PHONY : samples/Test_waterpump.cpp.o
+samples/Test_app.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_app.cpp.o
+.PHONY : samples/Test_app.cpp.o
 
-samples/Test_waterpump.i: samples/Test_waterpump.cpp.i
+samples/Test_app.i: samples/Test_app.cpp.i
 
-.PHONY : samples/Test_waterpump.i
+.PHONY : samples/Test_app.i
 
 # target to preprocess a source file
-samples/Test_waterpump.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_waterpump.cpp.i
-.PHONY : samples/Test_waterpump.cpp.i
+samples/Test_app.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_app.cpp.i
+.PHONY : samples/Test_app.cpp.i
 
-samples/Test_waterpump.s: samples/Test_waterpump.cpp.s
+samples/Test_app.s: samples/Test_app.cpp.s
 
-.PHONY : samples/Test_waterpump.s
+.PHONY : samples/Test_app.s
 
 # target to generate assembly for a file
-samples/Test_waterpump.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_waterpump.cpp.s
-.PHONY : samples/Test_waterpump.cpp.s
+samples/Test_app.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_app.cpp.s
+.PHONY : samples/Test_app.cpp.s
+
+src/airpump.o: src/airpump.cpp.o
+
+.PHONY : src/airpump.o
+
+# target to build an object file
+src/airpump.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/airpump.cpp.o
+.PHONY : src/airpump.cpp.o
+
+src/airpump.i: src/airpump.cpp.i
+
+.PHONY : src/airpump.i
+
+# target to preprocess a source file
+src/airpump.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/airpump.cpp.i
+.PHONY : src/airpump.cpp.i
+
+src/airpump.s: src/airpump.cpp.s
+
+.PHONY : src/airpump.s
+
+# target to generate assembly for a file
+src/airpump.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/airpump.cpp.s
+.PHONY : src/airpump.cpp.s
+
+src/app.o: src/app.cpp.o
+
+.PHONY : src/app.o
+
+# target to build an object file
+src/app.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/app.cpp.o
+.PHONY : src/app.cpp.o
+
+src/app.i: src/app.cpp.i
+
+.PHONY : src/app.i
+
+# target to preprocess a source file
+src/app.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/app.cpp.i
+.PHONY : src/app.cpp.i
+
+src/app.s: src/app.cpp.s
+
+.PHONY : src/app.s
+
+# target to generate assembly for a file
+src/app.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/app.cpp.s
+.PHONY : src/app.cpp.s
+
+src/bluetooth.o: src/bluetooth.cpp.o
+
+.PHONY : src/bluetooth.o
+
+# target to build an object file
+src/bluetooth.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/bluetooth.cpp.o
+.PHONY : src/bluetooth.cpp.o
+
+src/bluetooth.i: src/bluetooth.cpp.i
+
+.PHONY : src/bluetooth.i
+
+# target to preprocess a source file
+src/bluetooth.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/bluetooth.cpp.i
+.PHONY : src/bluetooth.cpp.i
+
+src/bluetooth.s: src/bluetooth.cpp.s
+
+.PHONY : src/bluetooth.s
+
+# target to generate assembly for a file
+src/bluetooth.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/bluetooth.cpp.s
+.PHONY : src/bluetooth.cpp.s
+
+src/heater.o: src/heater.cpp.o
+
+.PHONY : src/heater.o
+
+# target to build an object file
+src/heater.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/heater.cpp.o
+.PHONY : src/heater.cpp.o
+
+src/heater.i: src/heater.cpp.i
+
+.PHONY : src/heater.i
+
+# target to preprocess a source file
+src/heater.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/heater.cpp.i
+.PHONY : src/heater.cpp.i
+
+src/heater.s: src/heater.cpp.s
+
+.PHONY : src/heater.s
+
+# target to generate assembly for a file
+src/heater.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/heater.cpp.s
+.PHONY : src/heater.cpp.s
+
+src/module.o: src/module.cpp.o
+
+.PHONY : src/module.o
+
+# target to build an object file
+src/module.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/module.cpp.o
+.PHONY : src/module.cpp.o
+
+src/module.i: src/module.cpp.i
+
+.PHONY : src/module.i
+
+# target to preprocess a source file
+src/module.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/module.cpp.i
+.PHONY : src/module.cpp.i
+
+src/module.s: src/module.cpp.s
+
+.PHONY : src/module.s
+
+# target to generate assembly for a file
+src/module.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/module.cpp.s
+.PHONY : src/module.cpp.s
+
+src/pumpModule.o: src/pumpModule.cpp.o
+
+.PHONY : src/pumpModule.o
+
+# target to build an object file
+src/pumpModule.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/pumpModule.cpp.o
+.PHONY : src/pumpModule.cpp.o
+
+src/pumpModule.i: src/pumpModule.cpp.i
+
+.PHONY : src/pumpModule.i
+
+# target to preprocess a source file
+src/pumpModule.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/pumpModule.cpp.i
+.PHONY : src/pumpModule.cpp.i
+
+src/pumpModule.s: src/pumpModule.cpp.s
+
+.PHONY : src/pumpModule.s
+
+# target to generate assembly for a file
+src/pumpModule.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/pumpModule.cpp.s
+.PHONY : src/pumpModule.cpp.s
+
+src/pwmctrl.o: src/pwmctrl.cpp.o
+
+.PHONY : src/pwmctrl.o
+
+# target to build an object file
+src/pwmctrl.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/pwmctrl.cpp.o
+.PHONY : src/pwmctrl.cpp.o
+
+src/pwmctrl.i: src/pwmctrl.cpp.i
+
+.PHONY : src/pwmctrl.i
+
+# target to preprocess a source file
+src/pwmctrl.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/pwmctrl.cpp.i
+.PHONY : src/pwmctrl.cpp.i
+
+src/pwmctrl.s: src/pwmctrl.cpp.s
+
+.PHONY : src/pwmctrl.s
+
+# target to generate assembly for a file
+src/pwmctrl.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/pwmctrl.cpp.s
+.PHONY : src/pwmctrl.cpp.s
+
+src/thermalModule.o: src/thermalModule.cpp.o
+
+.PHONY : src/thermalModule.o
+
+# target to build an object file
+src/thermalModule.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalModule.cpp.o
+.PHONY : src/thermalModule.cpp.o
+
+src/thermalModule.i: src/thermalModule.cpp.i
+
+.PHONY : src/thermalModule.i
+
+# target to preprocess a source file
+src/thermalModule.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalModule.cpp.i
+.PHONY : src/thermalModule.cpp.i
+
+src/thermalModule.s: src/thermalModule.cpp.s
+
+.PHONY : src/thermalModule.s
+
+# target to generate assembly for a file
+src/thermalModule.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalModule.cpp.s
+.PHONY : src/thermalModule.cpp.s
+
+src/thermometer.o: src/thermometer.cpp.o
+
+.PHONY : src/thermometer.o
+
+# target to build an object file
+src/thermometer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermometer.cpp.o
+.PHONY : src/thermometer.cpp.o
+
+src/thermometer.i: src/thermometer.cpp.i
+
+.PHONY : src/thermometer.i
+
+# target to preprocess a source file
+src/thermometer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermometer.cpp.i
+.PHONY : src/thermometer.cpp.i
+
+src/thermometer.s: src/thermometer.cpp.s
+
+.PHONY : src/thermometer.s
+
+# target to generate assembly for a file
+src/thermometer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermometer.cpp.s
+.PHONY : src/thermometer.cpp.s
+
+src/threadPool.o: src/threadPool.cpp.o
+
+.PHONY : src/threadPool.o
+
+# target to build an object file
+src/threadPool.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/threadPool.cpp.o
+.PHONY : src/threadPool.cpp.o
+
+src/threadPool.i: src/threadPool.cpp.i
+
+.PHONY : src/threadPool.i
+
+# target to preprocess a source file
+src/threadPool.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/threadPool.cpp.i
+.PHONY : src/threadPool.cpp.i
+
+src/threadPool.s: src/threadPool.cpp.s
+
+.PHONY : src/threadPool.s
+
+# target to generate assembly for a file
+src/threadPool.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/threadPool.cpp.s
+.PHONY : src/threadPool.cpp.s
+
+src/waterpump.o: src/waterpump.cpp.o
+
+.PHONY : src/waterpump.o
+
+# target to build an object file
+src/waterpump.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/waterpump.cpp.o
+.PHONY : src/waterpump.cpp.o
+
+src/waterpump.i: src/waterpump.cpp.i
+
+.PHONY : src/waterpump.i
+
+# target to preprocess a source file
+src/waterpump.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/waterpump.cpp.i
+.PHONY : src/waterpump.cpp.i
+
+src/waterpump.s: src/waterpump.cpp.s
+
+.PHONY : src/waterpump.s
+
+# target to generate assembly for a file
+src/waterpump.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/waterpump.cpp.s
+.PHONY : src/waterpump.cpp.s
 
 # Help Target
 help:
@@ -178,9 +475,42 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
-	@echo "... samples/Test_waterpump.o"
-	@echo "... samples/Test_waterpump.i"
-	@echo "... samples/Test_waterpump.s"
+	@echo "... samples/Test_app.o"
+	@echo "... samples/Test_app.i"
+	@echo "... samples/Test_app.s"
+	@echo "... src/airpump.o"
+	@echo "... src/airpump.i"
+	@echo "... src/airpump.s"
+	@echo "... src/app.o"
+	@echo "... src/app.i"
+	@echo "... src/app.s"
+	@echo "... src/bluetooth.o"
+	@echo "... src/bluetooth.i"
+	@echo "... src/bluetooth.s"
+	@echo "... src/heater.o"
+	@echo "... src/heater.i"
+	@echo "... src/heater.s"
+	@echo "... src/module.o"
+	@echo "... src/module.i"
+	@echo "... src/module.s"
+	@echo "... src/pumpModule.o"
+	@echo "... src/pumpModule.i"
+	@echo "... src/pumpModule.s"
+	@echo "... src/pwmctrl.o"
+	@echo "... src/pwmctrl.i"
+	@echo "... src/pwmctrl.s"
+	@echo "... src/thermalModule.o"
+	@echo "... src/thermalModule.i"
+	@echo "... src/thermalModule.s"
+	@echo "... src/thermometer.o"
+	@echo "... src/thermometer.i"
+	@echo "... src/thermometer.s"
+	@echo "... src/threadPool.o"
+	@echo "... src/threadPool.i"
+	@echo "... src/threadPool.s"
+	@echo "... src/waterpump.o"
+	@echo "... src/waterpump.i"
+	@echo "... src/waterpump.s"
 .PHONY : help
 
 

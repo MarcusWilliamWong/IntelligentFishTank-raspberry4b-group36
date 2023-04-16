@@ -1,6 +1,8 @@
 #include <pigpio.h>
 #include <iostream>
-#include <unistd.h>
+#include <thread>
+#include <chrono>
+#include <memory>
 #include "heater.h"
 #include "config.h"
 
@@ -10,6 +12,17 @@ int main() {
   } else {
     std::cout << "PIGPIO is ready" << std::endl;
   }
+
+  std::unique_ptr<char[]> pwmLvl(new char[8]{'0', '1', '2', '3', '4', '5', '2', '0'});
+  {
+    Heater heater(app_config::HEATER_PIN);
+    for (int i = 0; i < 8; ++i) {
+      heater.set(pwmLvl[i]);
+      std::this_thread::sleep_for(std::chrono::seconds(5));
+    }
+  }
+
+  #ifdef DEBUG_OUTDATE
   const unsigned int pin = 24u;
   unsigned int dutycycle = 500;
   dutycycle = 0;
@@ -24,7 +37,6 @@ int main() {
     sleep(3);
   }
   gpioPWM(pin, 0);
-  gpioTerminate();
   
   // Heater heater(23u);
   // heater.turnOn();
@@ -39,5 +51,6 @@ int main() {
   // };
   // sleep(5);
   // while (true);3
-  // gpioTerminate();
+  #endif
+  gpioTerminate();
 }

@@ -2,94 +2,147 @@
 #include <algorithm>
 #include <numeric>
 #include <tuple>
+#include <iostream>
 #include <mutex>
+#include <thread>
+#include <chrono>
 #include <pigpio.h>
 #include "heater.h"
 
-#include <iostream>
-#include <unistd.h>
+// Test only
+#define DEBUG_THREADTASK
 
-Heater::Heater(unsigned int pin) : PwmController(pin) {}
 
-Heater::Heater(unsigned int pin, unsigned int freq) : PwmController(pin, freq) {}
+Heater::Heater(unsigned int pin) : PwmController(pin), average_(new double{0.0}) {}
 
-void Heater::turnOn() {
-	std::cout << "Task2 is ok!" << std::get<0>(tempsInfo_) << std::endl;
-	std::cout << "heater turn on" << std::endl;
-	setPwmLevel(3);
-  gpioPWM(kPin_, dutycycle_);
-	// std::cout << "gpioGetPWM : " << gpioGetPWMdutycycle(kPin_) << "; dutycycle : " << dutycycle_ << std::endl;
-	// while (true);
-	// need while(true) to start heater
-	std::cout << "needOn_flag_ is" << needOn_flag_ << std::endl;
-	while (needOn_flag_) {
-		// if current water temperature is  higher than max threshold
-		if (std::get<0>(tempsInfo_) > std::get<1>(tempRange_)) {
-			std::cout << "current temp detected :" << std::get<0>(tempsInfo_) << std::endl;
-			// change flags and exit loop
-			needOn_flag_ = false;
-			needOff_flag_ = true;
-			break;
-		}
+Heater::Heater(unsigned int pin, unsigned int freq) 
+	: PwmController(pin, freq) {}
+
+Heater::~Heater() {
+	if (running_) {
+		this->stop(); 
 	}
-	// reset needOn_flag_
-	needOn_flag_ = true;
-	// std::cout << "gpioGetPWM : " << gpioGetPWMdutycycle(kPin_) << "; dutycycle : " << dutycycle_ << std::endl;
 }
 
-void Heater::turnOff() {
-	std::cout << "heater turn off" << std::endl;
-  gpioPWM(kPin_, 0);
-	while (needOff_flag_) {
-		// if current water temperatur is higher than max threshold
-		if (std::get<0>(tempsInfo_) < std::get<0>(tempRange_)) {
-			// change flags and exit loop
-			needOn_flag_ = true;
-			needOff_flag_ = false;
-			break;
-		}
-	}
-	// reset needOff_flag_
-	needOff_flag_ = true;
-}
-
-// 1st Callback func, compute 4 temperatures return tuple including the average, minimum, maximum
+// bottom task, compute 4 temperatures return tuple including the average, minimum, maximum
 void Heater::ProcessTempers(const std::vector<double> &tempers) {
-	auto minmax = std::minmax_element(tempers.cbegin(), tempers.cend());
-	double average = 0.0;
-	if (!tempers.empty()) {
-		average = std::accumulate(tempers.cbegin(), tempers.cend(), 0.0) / tempers.size();
+	std::cout << "ProcessTempers() " << TAG_HEATER << " Average T(°C): " 
+						<< *average_ << std::endl;
+	
+	double sum = 0.0;
+	for (auto t : tempers) {
+		sum += t;
 	}
 	{
 		std::lock_guard<std::mutex> lock(mtx_);
-		tempsInfo_ = std::move(std::make_tuple(average, *minmax.first, *minmax.second));
-		std::cout << "Task1 is ok! Average : " << std::get<0>(tempsInfo_) << std::endl;
+		if (!tempers.empty()) {
+			*(average_.get()) = sum / tempers.size();
+		}
 	}
-	
+	std::cout << "new average " << *average_ << std::endl;
+
+	#ifdef DEBUG_THREADTASK
+	std::cout << TAG_HEATER << "ProcessTempers here" << std::endl;
+	#endif
 }
 
-// 2nd Callback func, conditional n off heater
-void Heater::ControlHeater() {
-	// std::cout << "Task2 is ok!" << std::get<0>(tempsInfo_) << std::endl;
-	// initialise two flags
-	needOn_flag_ = true;
-	needOff_flag_ = true;
+// bottom task, automatically control heater on and off
+void Heater::AutoControlHeater() {
+	std::cout << "AutoControlHeater() " << TAG_HEATER
+						<< "average(°C) = " << *average_
+						<< std::endl;
+
 	while (running_) {
-		if (!std::get<0>(tempsInfo_)) {
+		std::cout << "In AutoControlHeater while" << std::endl;
+
+		// if tempsInfo is still not write by `ProcessTemps`
+		// just sleep and wait for thermometer catch the first temperature
+		if (!average_) {
+			#ifdef DEBUG_THREADTASK
+			std::cout << TAG_HEATER << "wait for thermo init" << std::endl;
+			#endif
 			continue;
 		}
-		// std::cout << std::get<0>(tempsInfo_) << "`C\n" << std::endl;
-
 		// if current average temp lower than min threshold
-		if (std::get<0>(tempsInfo_) < std::get<0>(tempRange_)) {
-			std::cout << "current average t = " << std::get<0>(tempsInfo_) << ", lower than min" << std::endl;
+		if (*average_ < std::get<0>(tempRange_)) {
 			turnOn();
-		} else if (std::get<0>(tempsInfo_) > std::get<1>(tempRange_)) {
-			std::cout << "current average t = " << std::get<0>(tempsInfo_) << ", higher than max" << std::endl;
+			std::cout << TAG_HEATER << " lower than min " << std::get<0>(tempRange_) 
+								<< " open heater" << std::endl;
+		} else if (*average_ > std::get<1>(tempRange_)) {
 			turnOff();
+			std::cout << " higher than max " << std::get<1>(tempRange_)
+								<< " close heater" << std::endl;
 		} else {
-			std::cout << "current average t = " << std::get<0>(tempsInfo_) << " is between the range" << std::endl;
+			#ifdef DEBUG_HEATER
+			std::cout << "is between the range" << std::endl;
+			#endif
 		}
 	}
 }
+
+// automatically turnOn
+void Heater::turnOn() {
+	#ifdef DEBUG_HEATER
+	// setPwmLvl('3');
+	#endif
+	// start configed PWM level on GPIO, if configured as lvl0, automatically set lvl2
+	if (0u == dutycycle_) {
+		setPwmLvl('3');
+	}
+  gpioPWM(kPin_, dutycycle_);
+	// heat until higher than max range
+	while (*average_ < std::get<1>(tempRange_)) {
+		if (!dutycycle_) {
+			set('3');
+		}
+		#ifdef DEBUG_HEATER
+		std::cout << TAG_HEATER << "Average T(°C): " << *average_
+							<< " need heat to max threshold" << std::endl;
+		#endif
+	}
+}
+
+// automatically turnOff
+void Heater::turnOff() {
+  gpioPWM(kPin_, 0);
+	// wait temper cool until lower than mmin range
+	while (*average_ > std::get<1>(tempRange_)) {
+		if (dutycycle_) {
+			gpioPWM(kPin_, 0);
+		}
+		#ifdef DEBUG_HEATER
+		std::cout << TAG_HEATER << "Average T(°C): " << *average_
+							<< " need cool to than min threshold" << std::endl;
+		#endif
+	}
+}
+
+void Heater::set(char lvl) {
+  // set pwm level
+  setPwmLvl(lvl);
+  // Starts PWM on the GPIO
+  int ret = gpioPWM(kPin_, dutycycle_);
+  if (ret != 0) {
+    std::cerr << TAG_HEATER
+              << "failed to set dutycycle: " << dutycycle_
+              << " on gpio: " << kPin_ << " with err code: " << ret
+              << std::endl;
+  }
+}
+
+void Heater::stop() {
+	running_ = false;
+  // set pwm level
+  setPwmLvl('0');
+  int ret = gpioPWM(kPin_, 0);
+  if (ret != 0) {
+    std::cerr << TAG_HEATER
+              << "failed to set dutycycle: " << dutycycle_
+              << " on gpio: " << kPin_ << " with err code: " << ret
+              << std::endl;
+  }
+}
+
+
+
 

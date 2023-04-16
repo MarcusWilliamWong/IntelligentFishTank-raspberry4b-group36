@@ -1,6 +1,12 @@
 #ifndef TASKQUEQUE_H_
 #define TASKQUEQUE_H_
 
+#define TAG_TASKQUEUE "taskqueue : "
+
+// Test only
+// #define DEBUG
+#define DEBUG_TASKQUEUE
+
 #include <list>
 #include <thread>
 #include <mutex>
@@ -12,7 +18,7 @@
 template <typename T>
 class TaskQueue {
 public:
-	TaskQueue(unsigned int maxTaskSize);
+	TaskQueue(unsigned int maxTaskSize = 80);
 	~TaskQueue() = default;
 	void stop(); // stop taskqueue to use
 	void EnTask(const T &task); // para is lvalue-ref, use function "add" to add a task to TaskQueue
@@ -47,7 +53,10 @@ void TaskQueue<T>::EnTask(const T &task) {
 }
 
 template <typename T>
-void TaskQueue<T>::EnTask(T &&task) {    
+void TaskQueue<T>::EnTask(T &&task) {
+  #ifdef DEBUG_TASKQUEUE
+  std::cout << TAG_TASKQUEUE << "EnTask here" << std::endl;
+  #endif
   add(std::forward<T>(task)); //universal ref
 }
 
@@ -105,7 +114,9 @@ template <typename T>
 bool TaskQueue<T>::NotFull() const {
   bool full = (queue_.size() >= kMaxTaskSize_);
   if (full) {
-    std::cerr << "TaskQueue is full!\n";
+    #ifdef DEBUG
+    std::cerr << TAG_TASKQUEUE << "TaskQueue is full!\n";
+    #endif
   }
   return !full;
 }
@@ -114,8 +125,10 @@ template <typename T>
 bool TaskQueue<T>::NotEmpty() const {
   bool empty = queue_.empty();
   if (empty) {
+    #ifdef DEBUG
     std::cerr << "TaskQueue is empty!\n";
     std::cerr << "Current thread " << std::this_thread::get_id() << " is awaiting!\n";
+    #endif
   }
   return !empty;
 }

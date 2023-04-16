@@ -1,6 +1,10 @@
 #ifndef THREADPOOL_H_
 #define THREADPOOL_H_
 
+#define TAG_THREADPOOL "threadpool : "
+// Test only
+#define DEBUG_THREADPOOL
+
 #include <vector>
 #include <thread>
 #include <memory>
@@ -11,11 +15,11 @@
 // implement a class to manage a group of threads
 class ThreadPool {
 public:
-	// define "Task" as a functor without parameters and return nothing
-	using Task = std::function<void()>;
 	// default get CPU number of cores  -> 4
 	ThreadPool(int numThreads = std::thread::hardware_concurrency());
 	~ThreadPool();
+	// define "Task" as a functor without parameters and return nothing
+	using Task = std::function<void()>;
 	void start(int numThreads); // start specific number thread pool manually
 	void stop();  // stop thread pool manually, call once function "stopThreads"
 	void AddTask(const Task &task);  // lv-ref add task to taskqueue of thread pool

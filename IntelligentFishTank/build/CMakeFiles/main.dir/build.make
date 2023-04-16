@@ -76,30 +76,195 @@ include CMakeFiles/main.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/main.dir/flags.make
 
-CMakeFiles/main.dir/samples/Test_waterpump.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/samples/Test_waterpump.cpp.o: ../samples/Test_waterpump.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/samples/Test_waterpump.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/samples/Test_waterpump.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/samples/Test_waterpump.cpp
+CMakeFiles/main.dir/samples/Test_app.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/samples/Test_app.cpp.o: ../samples/Test_app.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/samples/Test_app.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/samples/Test_app.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/samples/Test_app.cpp
 
-CMakeFiles/main.dir/samples/Test_waterpump.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/samples/Test_waterpump.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/samples/Test_waterpump.cpp > CMakeFiles/main.dir/samples/Test_waterpump.cpp.i
+CMakeFiles/main.dir/samples/Test_app.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/samples/Test_app.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/samples/Test_app.cpp > CMakeFiles/main.dir/samples/Test_app.cpp.i
 
-CMakeFiles/main.dir/samples/Test_waterpump.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/samples/Test_waterpump.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/samples/Test_waterpump.cpp -o CMakeFiles/main.dir/samples/Test_waterpump.cpp.s
+CMakeFiles/main.dir/samples/Test_app.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/samples/Test_app.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/samples/Test_app.cpp -o CMakeFiles/main.dir/samples/Test_app.cpp.s
+
+CMakeFiles/main.dir/src/app.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/app.cpp.o: ../src/app.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/src/app.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/app.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/src/app.cpp
+
+CMakeFiles/main.dir/src/app.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/app.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/src/app.cpp > CMakeFiles/main.dir/src/app.cpp.i
+
+CMakeFiles/main.dir/src/app.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/app.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/src/app.cpp -o CMakeFiles/main.dir/src/app.cpp.s
+
+CMakeFiles/main.dir/src/threadPool.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/threadPool.cpp.o: ../src/threadPool.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/src/threadPool.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/threadPool.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/src/threadPool.cpp
+
+CMakeFiles/main.dir/src/threadPool.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/threadPool.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/src/threadPool.cpp > CMakeFiles/main.dir/src/threadPool.cpp.i
+
+CMakeFiles/main.dir/src/threadPool.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/threadPool.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/src/threadPool.cpp -o CMakeFiles/main.dir/src/threadPool.cpp.s
+
+CMakeFiles/main.dir/src/bluetooth.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/bluetooth.cpp.o: ../src/bluetooth.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/src/bluetooth.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/bluetooth.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/src/bluetooth.cpp
+
+CMakeFiles/main.dir/src/bluetooth.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/bluetooth.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/src/bluetooth.cpp > CMakeFiles/main.dir/src/bluetooth.cpp.i
+
+CMakeFiles/main.dir/src/bluetooth.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/bluetooth.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/src/bluetooth.cpp -o CMakeFiles/main.dir/src/bluetooth.cpp.s
+
+CMakeFiles/main.dir/src/pwmctrl.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/pwmctrl.cpp.o: ../src/pwmctrl.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/src/pwmctrl.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/pwmctrl.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/src/pwmctrl.cpp
+
+CMakeFiles/main.dir/src/pwmctrl.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/pwmctrl.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/src/pwmctrl.cpp > CMakeFiles/main.dir/src/pwmctrl.cpp.i
+
+CMakeFiles/main.dir/src/pwmctrl.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/pwmctrl.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/src/pwmctrl.cpp -o CMakeFiles/main.dir/src/pwmctrl.cpp.s
+
+CMakeFiles/main.dir/src/heater.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/heater.cpp.o: ../src/heater.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main.dir/src/heater.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/heater.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/src/heater.cpp
+
+CMakeFiles/main.dir/src/heater.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/heater.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/src/heater.cpp > CMakeFiles/main.dir/src/heater.cpp.i
+
+CMakeFiles/main.dir/src/heater.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/heater.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/src/heater.cpp -o CMakeFiles/main.dir/src/heater.cpp.s
+
+CMakeFiles/main.dir/src/airpump.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/airpump.cpp.o: ../src/airpump.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/main.dir/src/airpump.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/airpump.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/src/airpump.cpp
+
+CMakeFiles/main.dir/src/airpump.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/airpump.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/src/airpump.cpp > CMakeFiles/main.dir/src/airpump.cpp.i
+
+CMakeFiles/main.dir/src/airpump.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/airpump.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/src/airpump.cpp -o CMakeFiles/main.dir/src/airpump.cpp.s
+
+CMakeFiles/main.dir/src/waterpump.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/waterpump.cpp.o: ../src/waterpump.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/main.dir/src/waterpump.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/waterpump.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/src/waterpump.cpp
+
+CMakeFiles/main.dir/src/waterpump.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/waterpump.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/src/waterpump.cpp > CMakeFiles/main.dir/src/waterpump.cpp.i
+
+CMakeFiles/main.dir/src/waterpump.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/waterpump.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/src/waterpump.cpp -o CMakeFiles/main.dir/src/waterpump.cpp.s
+
+CMakeFiles/main.dir/src/thermometer.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/thermometer.cpp.o: ../src/thermometer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/main.dir/src/thermometer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/thermometer.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/src/thermometer.cpp
+
+CMakeFiles/main.dir/src/thermometer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/thermometer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/src/thermometer.cpp > CMakeFiles/main.dir/src/thermometer.cpp.i
+
+CMakeFiles/main.dir/src/thermometer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/thermometer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/src/thermometer.cpp -o CMakeFiles/main.dir/src/thermometer.cpp.s
+
+CMakeFiles/main.dir/src/module.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/module.cpp.o: ../src/module.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/main.dir/src/module.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/module.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/src/module.cpp
+
+CMakeFiles/main.dir/src/module.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/module.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/src/module.cpp > CMakeFiles/main.dir/src/module.cpp.i
+
+CMakeFiles/main.dir/src/module.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/module.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/src/module.cpp -o CMakeFiles/main.dir/src/module.cpp.s
+
+CMakeFiles/main.dir/src/thermalModule.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/thermalModule.cpp.o: ../src/thermalModule.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/main.dir/src/thermalModule.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/thermalModule.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/src/thermalModule.cpp
+
+CMakeFiles/main.dir/src/thermalModule.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/thermalModule.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/src/thermalModule.cpp > CMakeFiles/main.dir/src/thermalModule.cpp.i
+
+CMakeFiles/main.dir/src/thermalModule.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/thermalModule.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/src/thermalModule.cpp -o CMakeFiles/main.dir/src/thermalModule.cpp.s
+
+CMakeFiles/main.dir/src/pumpModule.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/pumpModule.cpp.o: ../src/pumpModule.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/main.dir/src/pumpModule.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/pumpModule.cpp.o -c /home/group36/Project/Haoshi/IntelligentFishTank/src/pumpModule.cpp
+
+CMakeFiles/main.dir/src/pumpModule.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/pumpModule.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/group36/Project/Haoshi/IntelligentFishTank/src/pumpModule.cpp > CMakeFiles/main.dir/src/pumpModule.cpp.i
+
+CMakeFiles/main.dir/src/pumpModule.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/pumpModule.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/group36/Project/Haoshi/IntelligentFishTank/src/pumpModule.cpp -o CMakeFiles/main.dir/src/pumpModule.cpp.s
 
 # Object files for target main
 main_OBJECTS = \
-"CMakeFiles/main.dir/samples/Test_waterpump.cpp.o"
+"CMakeFiles/main.dir/samples/Test_app.cpp.o" \
+"CMakeFiles/main.dir/src/app.cpp.o" \
+"CMakeFiles/main.dir/src/threadPool.cpp.o" \
+"CMakeFiles/main.dir/src/bluetooth.cpp.o" \
+"CMakeFiles/main.dir/src/pwmctrl.cpp.o" \
+"CMakeFiles/main.dir/src/heater.cpp.o" \
+"CMakeFiles/main.dir/src/airpump.cpp.o" \
+"CMakeFiles/main.dir/src/waterpump.cpp.o" \
+"CMakeFiles/main.dir/src/thermometer.cpp.o" \
+"CMakeFiles/main.dir/src/module.cpp.o" \
+"CMakeFiles/main.dir/src/thermalModule.cpp.o" \
+"CMakeFiles/main.dir/src/pumpModule.cpp.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
-main: CMakeFiles/main.dir/samples/Test_waterpump.cpp.o
+main: CMakeFiles/main.dir/samples/Test_app.cpp.o
+main: CMakeFiles/main.dir/src/app.cpp.o
+main: CMakeFiles/main.dir/src/threadPool.cpp.o
+main: CMakeFiles/main.dir/src/bluetooth.cpp.o
+main: CMakeFiles/main.dir/src/pwmctrl.cpp.o
+main: CMakeFiles/main.dir/src/heater.cpp.o
+main: CMakeFiles/main.dir/src/airpump.cpp.o
+main: CMakeFiles/main.dir/src/waterpump.cpp.o
+main: CMakeFiles/main.dir/src/thermometer.cpp.o
+main: CMakeFiles/main.dir/src/module.cpp.o
+main: CMakeFiles/main.dir/src/thermalModule.cpp.o
+main: CMakeFiles/main.dir/src/pumpModule.cpp.o
 main: CMakeFiles/main.dir/build.make
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/group36/Project/Haoshi/IntelligentFishTank/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

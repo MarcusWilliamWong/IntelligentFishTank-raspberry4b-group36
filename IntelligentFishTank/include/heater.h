@@ -1,39 +1,36 @@
 #ifndef HEATER_H_
 #define HEATER_H_
 
+#define TAG_HEATER "heater : "
+// Test only
+#define DEBUG_HEATER
+
 #include <tuple>
 #include <mutex>
 #include <vector>
 #include "pwmctrl.h"
 
 // we use GPIO 26 to connect heater pwm
-// see Heater as callback class
 class Heater : public PwmController {
 public:
 	Heater(unsigned int pin);
 	Heater(unsigned int pin, unsigned int freq);
-
-	void turnOn() override;
-	void turnOff() override;
-	// callback function, compute the average, minimum, maximum for 4 temperatures 
+	~Heater();
+	// bottom task, automatically control heater on and off
+	void AutoControlHeater();
+	// bottom task, compute the average, minimum, maximum for 4 temperatures 
 	void ProcessTempers(const std::vector<double> &tempers);
-	// callback function, control heater on and off
-	void ControlHeater();
-
-	// Test
-	// const unsigned int getPin() {
-	// 	return kPin_;
-	// }
-
-	// unsigned int getDutycycle() {
-	// 	return dutycycle_;
-	// }
+	// set gpiopwm, cmd control pwm level, call setPwmLvl()
+  void set(char lvl) override;
+  void stop() override;
 
 private:
 	std::mutex mtx_;
-	// average, minimum, maximum
-	std::tuple<double, double, double> tempsInfo_;
-	std::tuple<double, double> tempRange_ = std::make_tuple<double, double>(24.0, 25.0);
+	std::unique_ptr<double> average_;
+	std::tuple<double, double> tempRange_ = std::make_tuple<double, double>(26.0, 26.5);
+
+	void turnOn(); // automatically turnOn
+	void turnOff(); // automatically turnOff
 };
 
 #endif

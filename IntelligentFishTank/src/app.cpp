@@ -1,45 +1,61 @@
-#include <iostream>
 #include <pigpio.h>
-#include <memory>
+#include <cstring>
+#include <stdexcept>
 #include "app.h"
-#include "threadPool.h"
-#include "thermalModule.h"
+#include "config.h"
 
-#include <unistd.h>
-
-App::App() : pool_ptr_(nullptr), running_(true) {
-  init();
-}
-
-void App::init() {
+// initialise threadpool, modules and bluetooth
+App::App() : pool_ptr_(new ThreadPool()) {
   if (gpioInitialise() < 0) {
-    std::cout << "Init PIGPIO failed\n";
-  } else {
-    std::cout << "PIGPIO is ready\n";
+    throw std::runtime_error("failed to init PIGPIO!");
   }
-  // pool_ptr_.use_count() -> 0;
-  pool_ptr_ = std::make_shared<ThreadPool>(1);
-  // pool_ptr_.use_count() -> 1;
-  thermalModule_ptr_ = std::make_shared<ThermalModule>(pool_ptr_);
-  // std::cout << "pool_ptr " <<pool_ptr_.use_count() << std::endl;
-  // pool_ptr_.use_count() -> 2 (include this.pool_ptr_ and thermalModule.pool_ptr_)
+  bluetooth_ptr_.reset(new Bluetooth(app_config::BLUETOOTH_DEV_PATH));
+  thermalModule_ptr_.reset(new ThermalModule());
+  pumpModule_ptr_.reset(new PumpModule());
 
-  sleep(9); // wait for pigpio initialising
-  std::cout << "initialisation completes" <<std::endl;
+  pumpModule_ptr_->registerBluetooth(bluetooth_ptr_);
 }
 
 void App::run() {
-  // pool_ptr_.use_count() -> 2
-  // thermalModule starts working
-	thermalModule_ptr_->execute();
-  std::cout << "modules have run" << std::endl;
+  if (!running_) {
+    running_ = true;
+    std::cout << TAG_APP << "running..." << std::endl;
+    // add module tasks into thraed pool
+    AddModuleTasks();
+    // main thread do nothing just sleep
+    while(true) {
+      std::this_thread::sleep_for(std::chrono::seconds(2));
+    }
+  } else {
+    std::cerr << TAG_APP << "already running!" << std::endl;
+  }
 }
 
-bool App::isRunning() const{
-	return running_;
-}
+// check app running status
+bool App::isRunning() const { return running_; }
 
+// stop all equipment and terminate pigpio lib
 App::~App() {
-  // terminate pigpio
+  thermalModule_ptr_->stop();
+  pumpModule_ptr_->stop();
+  bluetooth_ptr_->stop();
   gpioTerminate();
 }
+
+// add module tasks into thraed pool
+void App::AddModuleTasks() {
+  // task from 
+  pool_ptr_->AddTask([this]{ this->bluetooth_ptr_->executeRecvCmd(); });
+
+  // task from thermalModule
+  pool_ptr_->AddTask([this]{ this->thermalModule_ptr_->executeReadAllTemperature(); });
+
+  // std::this_thread::sleep_for(std::chrono::seconds(1));
+
+  // task from thermalModule
+  // pool_ptr_->AddTask([this]{ this->thermalModule_ptr_->executeAutoControlHeater(); });
+
+  // task from pumpModule
+  pool_ptr_->AddTask([this]{ this->pumpModule_ptr_->executeCmdControl(); });
+}
+
