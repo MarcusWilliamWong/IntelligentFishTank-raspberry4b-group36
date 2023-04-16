@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/main.dir/samples/Test_waterpump.cpp.o CMakeFiles/main.dir/src/pwmctrl.cpp.o CMakeFiles/main.dir/src/waterpump.cpp.o -o main  -lpthread -lpigpio 

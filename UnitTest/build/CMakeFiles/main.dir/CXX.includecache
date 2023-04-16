@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/config.h
+string
+-
+
+../include/pwmctrl.h
+atomic
+-
+
+../include/waterpump.h
+pwmctrl.h
+../include/pwmctrl.h
+
+/home/group36/Project/Haoshi/IntelligentFishTank/samples/Test_waterpump.cpp
+pigpio.h
+-
+iostream
+-
+chrono
+-
+memory
+-
+thread
+-
+waterpump.h
+/home/group36/Project/Haoshi/IntelligentFishTank/samples/waterpump.h
+config.h
+/home/group36/Project/Haoshi/IntelligentFishTank/samples/config.h
+
+/home/group36/Project/Haoshi/IntelligentFishTank/src/waterpump.cpp
+pigpio.h
+-
+iostream
+-
+waterpump.h
+/home/group36/Project/Haoshi/IntelligentFishTank/src/waterpump.h
+
