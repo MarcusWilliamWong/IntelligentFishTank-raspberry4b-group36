@@ -1,15 +1,15 @@
+/*
+ * This file is part of OurProject.
+ * See LICENSE file in the project root for full license information.
+ */
 #ifndef HEATER_H_
 #define HEATER_H_
 
 #define TAG_HEATER "heater : "
 // Test only
-#define DEBUG_HEATER
+// #define DEBUG_HEATER
 
-#include <tuple>
-#include <mutex>
 #include <vector>
-#include <atomic>
-#include <string>
 #include "pwmctrl.h"
 
 // we use GPIO 26 to connect heater pwm

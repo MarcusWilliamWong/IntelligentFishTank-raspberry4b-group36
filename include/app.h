@@ -1,15 +1,17 @@
+/*
+ * This file is part of OurProject.
+ * See LICENSE file in the project root for full license information.
+ */
 #ifndef APP_H_
 #define APP_H_
 
 #define TAG_APP "app : "
 // Test only
-#define DEBUG_APP
+// #define DEBUG_APP
 
-#include <queue>
 #include "threadPool.h"
 #include "bluetooth.h"
 #include "taskQueue.hpp"
-#include "waterpump.h"
 #include "thermalModule.h"
 #include "pumpModule.h"
 

@@ -1,3 +1,7 @@
+/*
+ * This file is part of OurProject.
+ * See LICENSE file in the project root for full license information.
+ */
 #ifndef THERMOMETER_H_
 #define THERMOMETER_H_
 // Device type : DS18B20
