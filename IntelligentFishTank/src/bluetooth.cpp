@@ -215,14 +215,20 @@ void Bluetooth::executeRecvCmd() {
       // CMD format: single CMD includes 9 ASCII char
       // you can personalised your private Bluetooth CMD
       // head bit[0] & tail bit[8] are check bits
-      // instruction bit [1] -> 
+      // instruction bit is at [1] ->
       // when [1] = '1', means set Heater PWM as (0-4 level);
       // when [1] = '2', means set Airpump PWM as (0-4 level);
       // when [1] = '3', means set Waterpump PWM as (0-4 level);
-      // when [1] = {1, 2, 3}
-      // when []
+      // when [1] belongs to {1, 2, 3}, bit [2] means PWM level from '0'-'4', 
+      //          if more than '4' means unvalid cmd
+      // In `Class PwmController`, there is `enum class PwmLevel`
 
+      // when [1] = '4', bits [2],[3],[4], means a two-digits in decimal with one decimal digit
+      // bits [5], [6], [7], as well.
 
+      // CMD e.g. 012000000 -> set heater PWM as level2
+      // CMD e.g. 024000000 -> set airpump PWM as level4
+      // CMD e.g. 042642750 -> set temperature range from 26.4 °C to 27.5 °C
 
       // judge cmd type
       Bluetooth::CmdType cmdType(Bluetooth::CmdType::Unknown);
