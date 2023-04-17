@@ -23,7 +23,7 @@ void App::run() {
     // add module tasks into thraed pool
     AddModuleTasks();
     // main thread do nothing just sleep
-    while(true) {
+    while(running_) {
       std::this_thread::sleep_for(std::chrono::seconds(2));
     }
   } else {

@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/main.dir/samples/Test_app.cpp.o"
+  "CMakeFiles/main.dir/main.cpp.o"
   "CMakeFiles/main.dir/src/airpump.cpp.o"
   "CMakeFiles/main.dir/src/app.cpp.o"
   "CMakeFiles/main.dir/src/bluetooth.cpp.o"

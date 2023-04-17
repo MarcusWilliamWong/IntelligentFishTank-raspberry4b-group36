@@ -142,32 +142,32 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-samples/Test_app.o: samples/Test_app.cpp.o
+main.o: main.cpp.o
 
-.PHONY : samples/Test_app.o
+.PHONY : main.o
 
 # target to build an object file
-samples/Test_app.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_app.cpp.o
-.PHONY : samples/Test_app.cpp.o
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-samples/Test_app.i: samples/Test_app.cpp.i
+main.i: main.cpp.i
 
-.PHONY : samples/Test_app.i
+.PHONY : main.i
 
 # target to preprocess a source file
-samples/Test_app.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_app.cpp.i
-.PHONY : samples/Test_app.cpp.i
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-samples/Test_app.s: samples/Test_app.cpp.s
+main.s: main.cpp.s
 
-.PHONY : samples/Test_app.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-samples/Test_app.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/samples/Test_app.cpp.s
-.PHONY : samples/Test_app.cpp.s
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 src/airpump.o: src/airpump.cpp.o
 
@@ -475,9 +475,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
-	@echo "... samples/Test_app.o"
-	@echo "... samples/Test_app.i"
-	@echo "... samples/Test_app.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... src/airpump.o"
 	@echo "... src/airpump.i"
 	@echo "... src/airpump.s"

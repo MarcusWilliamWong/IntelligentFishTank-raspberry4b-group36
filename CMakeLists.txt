@@ -36,9 +36,8 @@ set(CMAKE_CXX_STANDARD 11) # use c++11 standard
 
 #add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/src/myds18b20.cpp ${PROJECT_SOURCE_DIR}/samples/Test_DS18B20.cpp) # ${CMAKE_THREAD_LIBS_INIT}
 
-# Test_app
 add_executable(${PROJECT_NAME}
-              ${PROJECT_SOURCE_DIR}/samples/Test_app.cpp
+              ${PROJECT_SOURCE_DIR}/main.cpp
               ${PROJECT_SOURCE_DIR}/src/app.cpp
               ${PROJECT_SOURCE_DIR}/include/taskQueue.hpp
               ${PROJECT_SOURCE_DIR}/src/threadPool.cpp
@@ -52,6 +51,23 @@ add_executable(${PROJECT_NAME}
               ${PROJECT_SOURCE_DIR}/src/module.cpp
               ${PROJECT_SOURCE_DIR}/src/thermalModule.cpp
               )
+
+# Test_app
+# add_executable(${PROJECT_NAME}
+#               ${PROJECT_SOURCE_DIR}/samples/Test_app.cpp
+#               ${PROJECT_SOURCE_DIR}/src/app.cpp
+#               ${PROJECT_SOURCE_DIR}/include/taskQueue.hpp
+#               ${PROJECT_SOURCE_DIR}/src/threadPool.cpp
+#               ${PROJECT_SOURCE_DIR}/src/bluetooth.cpp
+#               ${PROJECT_SOURCE_DIR}/src/pwmctrl.cpp
+#               ${PROJECT_SOURCE_DIR}/src/heater.cpp
+#               ${PROJECT_SOURCE_DIR}/src/airpump.cpp
+#               ${PROJECT_SOURCE_DIR}/src/waterpump.cpp
+#               ${PROJECT_SOURCE_DIR}/src/pumpModule.cpp
+#               ${PROJECT_SOURCE_DIR}/src/thermometer.cpp
+#               ${PROJECT_SOURCE_DIR}/src/module.cpp
+#               ${PROJECT_SOURCE_DIR}/src/thermalModule.cpp
+#               )
 
 # Test_threadPool
 # add_executable(${PROJECT_NAME} 

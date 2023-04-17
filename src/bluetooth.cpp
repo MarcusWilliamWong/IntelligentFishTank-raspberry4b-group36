@@ -8,6 +8,8 @@
 #include "bluetooth.h"
 #include "config.h"
 
+// #include <stdlib.h>
+
 // Test only
 #define DEBUG_THREADTASK
 
@@ -49,7 +51,7 @@ void Bluetooth::registerWaterpump(std::shared_ptr<Waterpump> &waterpump_ptr) {
 void Bluetooth::executeCmdQueue() {
   std::cout << TAG_BLUETOOTH << "running `CmdQueue` task..." << std::endl;
 
-  while (true) {
+  while (running_) {
     // get one task from cmd queue
     Bluetooth::CmdType cmd{Bluetooth::CmdType::Unknown};
     cmd_queue_.DeTask(cmd);
@@ -189,7 +191,7 @@ void Bluetooth::executeRecvCmd() {
   std::unique_ptr<char[]> data(new char[app_config::CMD_LEN]);
   // default cmd
   std::memcpy(data.get(), app_config::CMD_DEFUALT.c_str(), app_config::CMD_LEN);
-  while (true) {
+  while (running_) {
     // default cmd
     std::memcpy(data.get(), app_config::CMD_DEFUALT.c_str(), app_config::CMD_LEN);
     int len = recvData(data.get(), app_config::CMD_LEN);
@@ -200,18 +202,6 @@ void Bluetooth::executeRecvCmd() {
       for (int i = 0; i < app_config::CMD_LEN; ++i) { std::cout << data[i]; }
       std::cout << std::endl;
 
-      // parse cmd
-      char head = data[0];
-      char instr = data[1];
-      char lvl = data[2];
-      char tail = data[8];
-      // check received cmd head and tail flag is ok, if not, drop cmd and wait next valid cmd
-      if (head != '0' || tail != '0') {
-        #ifdef DEBUG_BLUETOOTH
-        std::cerr << TAG_BLUETOOTH << "invalid cmd!" << std::endl;
-        #endif
-        continue;
-      }
       // CMD format: single CMD includes 9 ASCII char
       // you can personalised your private Bluetooth CMD
       // head bit[0] & tail bit[8] are check bits
@@ -229,6 +219,21 @@ void Bluetooth::executeRecvCmd() {
       // CMD e.g. 012000000 -> set heater PWM as level2
       // CMD e.g. 024000000 -> set airpump PWM as level4
       // CMD e.g. 042642750 -> set temperature range from 26.4 °C to 27.5 °C
+      
+      // parse cmd
+      char head = data[0];
+      char instr = data[1];
+      char lvl = data[2];
+      char tail = data[8];
+      // check received cmd head and tail flag is ok, if not, drop cmd and wait next valid cmd
+      if (head != '0' || tail != '0') {
+        #ifdef DEBUG_BLUETOOTH
+        std::cerr << TAG_BLUETOOTH << "invalid cmd!" << std::endl;
+        #endif
+        continue;
+      }
+      // if (data[1] == 'g' && data[2] == 'o' && data[3] == 'o' 
+      // && data[4] == 'd' && data[5] == 'b' && data[6] == 'y' && data[7] == 'e') { exit(0); }
 
       // judge cmd type
       Bluetooth::CmdType cmdType(Bluetooth::CmdType::Unknown);
