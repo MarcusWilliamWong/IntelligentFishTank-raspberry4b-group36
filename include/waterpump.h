@@ -1,9 +1,13 @@
+/*
+ * This file is part of OurProject.
+ * See LICENSE file in the project root for full license information.
+ */
 #ifndef WATERPUMP_H_
 #define WATERPUMP_H_
 
 #define TAG_WATERPUMP "waterpump : "
 // Test only
-#define DEBUG_WATERPUMP
+// #define DEBUG_WATERPUMP
 
 #include "pwmctrl.h"
 

@@ -1,3 +1,7 @@
+/*
+ * This file is part of OurProject.
+ * See LICENSE file in the project root for full license information.
+ */
 #ifndef PWMCTRL_H_
 #define PWMCTRL_H_
 

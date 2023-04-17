@@ -1,9 +1,13 @@
+/*
+ * This file is part of OurProject.
+ * See LICENSE file in the project root for full license information.
+ */
 #ifndef THERMALMODULE_H_
 #define THERMALMODULE_H_
 
 #define TAG_THERMALMODULE "thermalModule : "
 // Test only
-#define DEBUG
+// #define DEBUG
 
 #include <tuple>
 #include <memory>

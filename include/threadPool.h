@@ -1,9 +1,13 @@
+/*
+ * This file is part of OurProject.
+ * See LICENSE file in the project root for full license information.
+ */
 #ifndef THREADPOOL_H_
 #define THREADPOOL_H_
 
 #define TAG_THREADPOOL "threadpool : "
 // Test only
-#define DEBUG_THREADPOOL
+// #define DEBUG_THREADPOOL
 
 #include <vector>
 #include <thread>

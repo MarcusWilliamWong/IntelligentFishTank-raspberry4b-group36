@@ -1,5 +1,8 @@
+/*
+ * This file is part of OurProject.
+ * See LICENSE file in the project root for full license information.
+ */
 #include <functional>
-#include <tuple>
 #include "thermalModule.h"
 #include "config.h"
 #include "threadPool.h"

@@ -1,3 +1,7 @@
+/*
+ * This file is part of OurProject.
+ * See LICENSE file in the project root for full license information.
+ */
 // opendir
 #include <dirent.h>
 #include <sys/types.h>
@@ -7,7 +11,6 @@
 #include <stdexcept>
 #include <iostream>
 #include <fstream>
-#include <thread>
 #include "config.h"
 #include "thermometer.h"
 #include "heater.h"

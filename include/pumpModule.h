@@ -1,9 +1,13 @@
+/*
+ * This file is part of OurProject.
+ * See LICENSE file in the project root for full license information.
+ */
 #ifndef PUMPMODULE_H_
 #define PUMPMODULE_H_
 
 // Test only
 #define TAG_PUMPMODULE "pumpmodule : "
-#define DEBUG_PUMPMODULE
+// #define DEBUG_PUMPMODULE
 
 #include <memory>
 #include "bluetooth.h"

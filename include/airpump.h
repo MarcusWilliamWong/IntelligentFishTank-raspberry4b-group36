@@ -1,10 +1,14 @@
+/*
+ * This file is part of OurProject.
+ * See LICENSE file in the project root for full license information.
+ */
 #ifndef AIRPUMP_H_
 #define AIRPUMP_H_
 
 #define TAG_AIRPUMP "airpump : "
 
 // Test only
-#define DEBUG_AIRPUMP
+// #define DEBUG_AIRPUMP
 
 #include "pwmctrl.h"
 
