@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/../../../../../Public/Flutter/flutter/.pub-cache/hosted/pub.flutter-io.cn/location_service_check-1.0.1/android" />
+            <option value="$PROJECT_DIR$/../../../../../Public/Flutter/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_android-10.2.0/android" />
+            <option value="$PROJECT_DIR$/../../../../../Public/Flutter/flutter/.pub-cache/hosted/pub.flutter-io.cn/reactive_ble_mobile-5.0.3/android" />
+            <option value="$PROJECT_DIR$/../../../../../Public/Flutter/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_android-2.0.17/android" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

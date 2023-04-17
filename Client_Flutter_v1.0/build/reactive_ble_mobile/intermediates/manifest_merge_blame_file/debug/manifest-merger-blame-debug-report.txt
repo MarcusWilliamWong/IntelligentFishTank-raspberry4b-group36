@@ -1,0 +1,25 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.signify.hue.flutterreactiveble" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="21"
+6-->C:\Users\Public\Flutter\flutter\.pub-cache\hosted\pub.flutter-io.cn\reactive_ble_mobile-5.0.3\android\src\main\AndroidManifest.xml
+7        android:targetSdkVersion="31" />
+7-->C:\Users\Public\Flutter\flutter\.pub-cache\hosted\pub.flutter-io.cn\reactive_ble_mobile-5.0.3\android\src\main\AndroidManifest.xml
+8
+9    <!-- required for API 18 - 30 -->
+10    <uses-permission
+10-->C:\Users\Public\Flutter\flutter\.pub-cache\hosted\pub.flutter-io.cn\reactive_ble_mobile-5.0.3\android\src\main\AndroidManifest.xml:5:5-7:38
+11        android:name="android.permission.BLUETOOTH"
+11-->C:\Users\Public\Flutter\flutter\.pub-cache\hosted\pub.flutter-io.cn\reactive_ble_mobile-5.0.3\android\src\main\AndroidManifest.xml:6:9-52
+12        android:maxSdkVersion="30" />
+12-->C:\Users\Public\Flutter\flutter\.pub-cache\hosted\pub.flutter-io.cn\reactive_ble_mobile-5.0.3\android\src\main\AndroidManifest.xml:7:9-35
+13    <uses-permission
+13-->C:\Users\Public\Flutter\flutter\.pub-cache\hosted\pub.flutter-io.cn\reactive_ble_mobile-5.0.3\android\src\main\AndroidManifest.xml:8:5-10:38
+14        android:name="android.permission.BLUETOOTH_ADMIN"
+14-->C:\Users\Public\Flutter\flutter\.pub-cache\hosted\pub.flutter-io.cn\reactive_ble_mobile-5.0.3\android\src\main\AndroidManifest.xml:9:9-58
+15        android:maxSdkVersion="30" />
+15-->C:\Users\Public\Flutter\flutter\.pub-cache\hosted\pub.flutter-io.cn\reactive_ble_mobile-5.0.3\android\src\main\AndroidManifest.xml:10:9-35
+16
+17</manifest>

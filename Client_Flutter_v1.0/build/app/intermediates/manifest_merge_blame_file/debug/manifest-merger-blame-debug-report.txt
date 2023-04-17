@@ -1,0 +1,113 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.flutter_water_tank"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="31" />
+10    <!--
+11         The INTERNET permission is required for development. Specifically,
+12         the Flutter tool needs it to communicate with the running application
+13         to allow setting breakpoints, to provide hot reload, etc.
+14    -->
+15    <uses-permission android:name="android.permission.INTERNET" />
+15-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\debug\AndroidManifest.xml:7:5-66
+15-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\debug\AndroidManifest.xml:7:22-64
+16    <uses-permission
+16-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\main\AndroidManifest.xml:34:5-120
+17        android:name="android.permission.BLUETOOTH_SCAN"
+17-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\main\AndroidManifest.xml:34:22-70
+18        android:usesPermissionFlags="neverForLocation" />
+18-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\main\AndroidManifest.xml:34:71-117
+19    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+19-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\main\AndroidManifest.xml:35:5-76
+19-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\main\AndroidManifest.xml:35:22-73
+20    <uses-permission
+20-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\main\AndroidManifest.xml:36:5-106
+21        android:name="android.permission.ACCESS_FINE_LOCATION"
+21-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\main\AndroidManifest.xml:36:22-76
+22        android:maxSdkVersion="30" />
+22-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\main\AndroidManifest.xml:36:77-103
+23    <uses-permission
+23-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\main\AndroidManifest.xml:37:5-108
+24        android:name="android.permission.ACCESS_COARSE_LOCATION"
+24-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\main\AndroidManifest.xml:37:22-78
+25        android:maxSdkVersion="30" /> <!-- required for API 18 - 30 -->
+25-->C:\Users\29145\OneDrive\Desktop\tanl\android\app\src\main\AndroidManifest.xml:37:79-105
+26    <uses-permission
+26-->[:reactive_ble_mobile] C:\Users\29145\OneDrive\Desktop\tanl\build\reactive_ble_mobile\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-12:38
+27        android:name="android.permission.BLUETOOTH"
+27-->[:reactive_ble_mobile] C:\Users\29145\OneDrive\Desktop\tanl\build\reactive_ble_mobile\intermediates\merged_manifest\debug\AndroidManifest.xml:11:9-52
+28        android:maxSdkVersion="30" />
+28-->[:reactive_ble_mobile] C:\Users\29145\OneDrive\Desktop\tanl\build\reactive_ble_mobile\intermediates\merged_manifest\debug\AndroidManifest.xml:12:9-35
+29    <uses-permission
+29-->[:reactive_ble_mobile] C:\Users\29145\OneDrive\Desktop\tanl\build\reactive_ble_mobile\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-15:38
+30        android:name="android.permission.BLUETOOTH_ADMIN"
+30-->[:reactive_ble_mobile] C:\Users\29145\OneDrive\Desktop\tanl\build\reactive_ble_mobile\intermediates\merged_manifest\debug\AndroidManifest.xml:14:9-58
+31        android:maxSdkVersion="30" /> <!-- required for API 23 - 30, no android:maxSdkVersion because of a potential breaking change -->
+31-->[:reactive_ble_mobile] C:\Users\29145\OneDrive\Desktop\tanl\build\reactive_ble_mobile\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-35
+32    <!-- TODO: add android:maxSdkVersion on 2.0.0 -->
+33    <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION" />
+33-->[com.polidea.rxandroidble2:rxandroidble:1.16.0] C:\Users\29145\.gradle\caches\transforms-3\70a3e02e80319a553b4a671349ad01d8\transformed\jetified-rxandroidble-1.16.0\AndroidManifest.xml:18:5-88
+33-->[com.polidea.rxandroidble2:rxandroidble:1.16.0] C:\Users\29145\.gradle\caches\transforms-3\70a3e02e80319a553b4a671349ad01d8\transformed\jetified-rxandroidble-1.16.0\AndroidManifest.xml:18:29-85
+34    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION" />
+34-->[com.polidea.rxandroidble2:rxandroidble:1.16.0] C:\Users\29145\.gradle\caches\transforms-3\70a3e02e80319a553b4a671349ad01d8\transformed\jetified-rxandroidble-1.16.0\AndroidManifest.xml:19:5-86
+34-->[com.polidea.rxandroidble2:rxandroidble:1.16.0] C:\Users\29145\.gradle\caches\transforms-3\70a3e02e80319a553b4a671349ad01d8\transformed\jetified-rxandroidble-1.16.0\AndroidManifest.xml:19:29-83
+35
+36    <application
+37        android:name="android.app.Application"
+38        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+38-->[androidx.core:core:1.6.0] C:\Users\29145\.gradle\caches\transforms-3\acbce933e4b464a5224ed377a62db1f5\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
+39        android:debuggable="true"
+40        android:icon="@mipmap/ic_launcher"
+41        android:label="flutter_water_tank" >
+42        <activity
+43            android:name="com.example.flutter_water_tank.MainActivity"
+44            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+45            android:exported="true"
+46            android:hardwareAccelerated="true"
+47            android:launchMode="singleTop"
+48            android:theme="@style/LaunchTheme"
+49            android:windowSoftInputMode="adjustResize" >
+50
+51            <!--
+52                 Specifies an Android theme to apply to this Activity as soon as
+53                 the Android process has started. This theme is visible to the user
+54                 while the Flutter UI initializes. After that, this theme continues
+55                 to determine the Window background behind the Flutter UI.
+56            -->
+57            <meta-data
+58                android:name="io.flutter.embedding.android.NormalTheme"
+59                android:resource="@style/NormalTheme" />
+60
+61            <intent-filter>
+62                <action android:name="android.intent.action.MAIN" />
+63
+64                <category android:name="android.intent.category.LAUNCHER" />
+65            </intent-filter>
+66        </activity>
+67        <!--
+68             Don't delete the meta-data below.
+69             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+70        -->
+71        <meta-data
+72            android:name="flutterEmbedding"
+73            android:value="2" />
+74
+75        <uses-library
+75-->[androidx.window:window:1.0.0-beta04] C:\Users\29145\.gradle\caches\transforms-3\49bc944d29f70d45aa5add8e43e3247e\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+76            android:name="androidx.window.extensions"
+76-->[androidx.window:window:1.0.0-beta04] C:\Users\29145\.gradle\caches\transforms-3\49bc944d29f70d45aa5add8e43e3247e\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+77            android:required="false" />
+77-->[androidx.window:window:1.0.0-beta04] C:\Users\29145\.gradle\caches\transforms-3\49bc944d29f70d45aa5add8e43e3247e\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+78        <uses-library
+78-->[androidx.window:window:1.0.0-beta04] C:\Users\29145\.gradle\caches\transforms-3\49bc944d29f70d45aa5add8e43e3247e\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+79            android:name="androidx.window.sidecar"
+79-->[androidx.window:window:1.0.0-beta04] C:\Users\29145\.gradle\caches\transforms-3\49bc944d29f70d45aa5add8e43e3247e\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+80            android:required="false" />
+80-->[androidx.window:window:1.0.0-beta04] C:\Users\29145\.gradle\caches\transforms-3\49bc944d29f70d45aa5add8e43e3247e\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+81    </application>
+82
+83</manifest>
