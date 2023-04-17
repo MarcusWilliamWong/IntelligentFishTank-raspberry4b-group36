@@ -34,12 +34,12 @@ Everything mentioned above does not require the user to debug the Raspberry Pi o
 
 ## 1-2 Project contributors
 
-| Name         | Student ID | Role |
-| ------------ | ---------- | ---- |
-| Haoshi Huang | 2635088H   |      |
-| Xintong LIN  | 2824115L   |      |
-| Hanwei Liang | 2669523L   |      |
-| Chaoyi Yang  | 2724184Y   |      |
+| Name         | Student ID |
+| ------------ | ---------- |
+| Haoshi Huang | 2635088H   |
+| Xintong LIN  | 2824115L   |
+| Hanwei Liang | 2669523L   |
+| Chaoyi Yang  | 2724184Y   |
 
 ## 1-3 Project planning
 > [GanttChart](.assets/GanttChart.xlsx)  
@@ -50,11 +50,13 @@ Everything mentioned above does not require the user to debug the Raspberry Pi o
 </div>
 <p align="center">GanttChart</p>  
 
-## 1-4 Test
+## 1-4 Test video
 
-## ！！在这里放最后测试视频
+<div align="center">
+<img src="assets\Test.gif" style="zoom:100%;" /> 
+</div>
 
-
+<p align="center">Test video</p>  
 
 # 2 Software and hardware information
 
@@ -62,7 +64,11 @@ Everything mentioned above does not require the user to debug the Raspberry Pi o
 
 The Raspberry Pi 4B is a miniature computer based on the ARM architecture. It uses the BCM2711 chip with integrated GPU and CPU from Broadcom, supports 4K resolution video output, up to 4GB of LPDDR4-3200 SDRAM memory, Gigabit Ethernet, dual-band WiFi, Bluetooth 5.0 and many other interfaces and protocols. It also has two Micro-HDMI ports, two USB 3.0 ports, two USB 2.0 ports, a 40-pin GPIO port, a 2-pin power connector and more.
 
+<div align="center">
+<img src="assets\RaspberryPi4B.jpg" style="zoom:50%;" /> 
+</div>
 
+<p align="center">Raspberry Pi 4B</p>  
 
 #### 2.1.1 Host side
 
@@ -97,14 +103,6 @@ Programming language related:
 - Development tools: Android Studio 2022.2.1.18 for Windows
 - Software development kit: commandlinetools-9477386 for Windows
 - Front-end framework: Flutter 3.0
-
-
-
-<div align="center">
-<img src="assets\RaspberryPi4B.jpg" style="zoom:50%;" /> 
-</div>
-
-<p align="center">Raspberry Pi 4B</p>  
 
 
 
@@ -150,8 +148,7 @@ We have set up five speed levels, including off, through PWM, so that the user c
  <div align="center">
 <img src="assets\AirPump.png" style="zoom:50%;" /> 
 </div>
-
-<p align="center">气泵</p>  
+<p align="center">Air pump</p>  
 
 ## 2.6 Water pump
 
@@ -164,8 +161,7 @@ We implement a graded speed regulation for the pump via PWM, setting five speed 
   <div align="center">
 <img src="assets\WaterPump.jpg" style="zoom:60%;" /> 
 </div>
-
-<p align="center">水泵</p>  
+<p align="center">Water pump</p>  
 
 ## 2.7 Immersion resistance heater
 
@@ -250,6 +246,12 @@ The PWM regulated electronic switch control board has an input connected to the 
 # 3 System development
 
 ## 3.1 Software architecture diagram
+
+ <div align="center">
+<img src="assets\Class diagram.jpg" style="zoom:100%;" /> 
+</div>
+
+<p align="center">Class diagram</p> 
 
 Application (App)
 
@@ -398,57 +400,48 @@ cppCopy codevoid Waterpump::set(char lvl) {
 
 `set()` 方法用于设置水泵的占空比（PWM水平）。首先调用 `setPwmLvl()` 方法设置占空比，然后调用 `gpioPWM()` 函数启动GPIO上的PWM。如果启动失败，将输出错误信息。
 
-#### 3.2.9.5 `stop()` 方法：
+
+
+## 3.3 Structure of the system
+
+- src (source) folder: this folder contains all the source code files for the project
+
+- build folder: this folder is mainly used to store intermediate files generated during the compilation process
+
+- include folder: this folder contains the project's header files (.h and .hpp files), which define the interfaces, data structures, constants, etc. for each class in the project
+
+- samples folder: This folder contains sample code that demonstrates how to use the classes and functions in the project.
 
 
 
-#### 3.2.9.6 水泵类的声明：
+## 3.4 Flutter mobile development
+
+### 3.4.1 Introduction to Flutter and the main features of the Dart language
+
+Flutter is a user interface toolkit developed by Google for building high-performance, cross-platform mobile applications. It uses the Dart programming language as its main development language.
+
+Dart is an object-oriented, class-based programming language developed by Google for building Flutter applications. dart has a modern syntax, a high-performance virtual machine and JIT (just-in-time) compiler, and built-in tools and libraries for building responsive, concurrent and asynchronous applications.
+
+Flutter allows for highly customisable user interfaces through its self-drawing engine and runs on multiple platforms such as iOS, Android, web and desktop. It offers rich UI controls, built-in Material Design and Cupertino design styles, and powerful animation and visual effects support, enabling developers to build visually appealing and highly interactive mobile applications.
+
+As the primary development language for Flutter, Dart has the following features:
+
+Static typing: Dart is a statically typed language that catches many type errors at compile time, providing better code reliability and error detection.
+
+JIT and AOT compilation: Dart supports both just-in-time (JIT) and ahead-of-time (AOT) compilation modes, allowing developers to optimise for different development and release phases.
+
+Asynchronous programming: Dart has built-in support for the asynchronous programming model, using the async and await keywords to handle asynchronous operations such as network requests, file I/O, etc., making it easier and more efficient to handle asynchronous tasks.
+
+Built-in tools and libraries: Dart provides a rich set of built-in tools and libraries, including collections, asynchronous programming, file I/O, JSON serialisation and more, making it easy for developers to perform everyday development tasks.
+
+Rich Ecosystem: Dart has a rich ecosystem with many third-party libraries and plugins that help developers speed up development and implement more features.
+
+In short, the combination of Flutter and Dart makes it easy for developers to build high-performance, cross-platform mobile apps and have a productive development experience throughout the development process.
+
+### 3.4.2 Introduction to the main code
 
 
-
-
-## 3.3 系统的结构
-
-- src (source) 文件夹：这个文件夹包含项目的所有源代码文件
-
-- build 文件夹：这个文件夹主要用于存放编译过程中生成的中间文件
-
-- include 文件夹：这个文件夹包含项目的头文件（.h 和 .hpp 文件），这些头文件定义了项目中各个类的接口、数据结构和常量等
-
-- samples 文件夹：这个文件夹包含一些示例代码，用于演示如何使用项目中的各个类和功能。
-
-## 这里来点图？
-
-
-
-## 3.4 Flutter手机端开发
-
-### 3.4.1 Flutter简介及Dart语言主要特点
-
-Flutter是一个由谷歌开发的用户界面工具包，用于构建高性能、跨平台的移动应用程序。它使用Dart编程语言作为其主要开发语言。
-
-Dart是谷歌为构建Flutter应用程序而开发的一种面向对象、基于类的编程语言。Dart有现代的语法，有高性能的虚拟机和JIT（即时）编译器，以及内置的工具和库，用于构建响应式、并发式和异步的应用程序。
-
-Flutter允许通过其自绘引擎实现高度可定制的用户界面，并可在多个平台上运行，如iOS、Android、Web和桌面。它提供丰富的UI控件，内置Material Design和Cupertino设计风格，以及强大的动画和视觉效果支持，使开发者能够构建视觉上有吸引力和高度互动的移动应用。
-
-作为Flutter的主要开发语言，Dart具有以下特点：
-
-静态类型化： Dart是一种静态类型的语言，在编译时捕获许多类型错误，提供更好的代码可靠性和错误检测。
-
-JIT和AOT编译： Dart支持即时编译（JIT）和超前编译（AOT）模式，允许开发者为不同的开发和发布阶段进行优化。
-
-异步编程： Dart内置支持异步编程模型，使用async和await关键字来处理异步操作，如网络请求、文件I/O等，使处理异步任务更加简洁和高效。
-
-内置工具和库： Dart提供了丰富的内置工具和库，包括集合、异步编程、文件I/O、JSON序列化等，方便开发者执行日常开发任务。
-
-丰富的生态系统： Dart有一个丰富的生态系统，有许多第三方库和插件，可以帮助开发者加快开发速度，实现更多的功能。
-
-总之，Flutter和Dart的结合使开发者能够轻松构建高性能、跨平台的移动应用，并在整个开发过程中拥有高效的开发体验。
-
-### 3.4.2 主要代码简介
-
-
-主页包含温度、气泵和水泵控制的功能，它包括设置和显示温度值的输入字段，确认设置的按钮，以及当前操作模式的显示。该代码还利用GetX库进行状态管理，并包括文本字段的自定义输入部件。
+The main page contains functions for temperature, air pump and water pump control. It includes input fields for setting and displaying temperature values, buttons to confirm the settings and a display of the current operating mode. The code also makes use of the GetX library for status management and includes custom input widgets for text fields.
 
 ```
  class CommonBleUtils {
@@ -466,20 +459,20 @@ JIT和AOT编译： Dart支持即时编译（JIT）和超前编译（AOT）模式
 }
 ```
 
-这段代码是在Flutter应用程序中处理蓝牙低能量（BLE）通信的实用函数的集合。它包括向BLE设备发送BLE命令，加密和解密数据，以及定义命令代码和电机号码的常数的函数。CommonBleUtils类有一个静态函数send，用于发送带可选参数和加密的BLE命令，还有一个静态函数decrypt，用于解密BLE通知数据。CmdConst类定义了BLE通信中使用的公钥、标头、命令代码和电机号码的常量。
-我们使用BLE（蓝牙低能量）协议来传输明文数据。
+This code is a collection of utility functions for handling Bluetooth Low Energy (BLE) communication in a Flutter application. It includes functions for sending BLE commands to BLE devices, encrypting and decrypting data, and defining constants for command codes and motor numbers. the CommonBleUtils class has a static function send for sending BLE commands with optional parameters and encryption, and a static function decrypt for decrypting BLE communication data. the CmdConst class defines constants for the public key, header, command code and motor number used in the BLE communication.
+We use the BLE (Bluetooth Low Energy) protocol to transmit plaintext data.
 
-### 3.4.3 关于处理字节数据
+### 3.4.3 About handling byte data
 
-emptyStringToReplace(String content)： 将字符串中的空格替换为连字符。
-calculateAdd8Bit(List<int> buffer)： 计算一个列表中的字节数据的总和，并取低8位。
-int2Bytes(int source, {Type type = Type.WORD})： 将一个整数转换为一个字节数据的列表，可选的转换类型为BYTE、WORD、DWORD或STRING。
-bytes2Int(List<int> list)： 将一个字节数据列表转换为一个整数。
-toInt16(List<int> list, {int index = 0})： 将字节数据列表中的两个字节转换为16位整数。
-toInt32(List<int> list, {int index = 0})： 将字节数据列表中的四个字节转换为32位整数。
-toInt64(List<int> list, {int index = 0})： 将字节数据列表中的8个字节转换为64位整数。
-createUint8ListFromHexString(String hex)： 从十六进制字符串创建一个字节数据的Uint8List。
-formatBytesAsHexString(Uint8List bytes)： 将一个字节数据的Uint8List格式化为十六进制字符串。
+emptyStringToReplace(String content): Replaces spaces in a string with hyphens.
+calculateAdd8Bit(List<int> buffer): Calculates the sum of the byte data in a list and takes the lower 8 bits.
+int2Bytes(int source, {Type type = Type.WORD}): converts an integer to a list of byte data, optionally of type BYTE, WORD, DWORD or STRING.
+bytes2Int(List<int> list): Converts a list of byte data to an integer.
+toInt16(List<int> list, {int index = 0}): Converts two bytes of a list of byte data to a 16-bit integer.
+toInt32(List<int> list, {int index = 0}): Converts four bytes of a list of byte data into a 32-bit integer.
+toInt64(List<int> list, {int index = 0}): Convert 8 bytes of a byte data list to a 64-bit integer.
+createUint8ListFromHexString(String hex): Creates a Uint8List of byte data from a hexadecimal string.
+formatBytesAsHexString(Uint8List bytes): formats a Uint8List of byte data into a hexadecimal string.
 
 ```
 import 'package:flutter_water_tank/utils/ble.mode.dart';
@@ -496,33 +489,49 @@ List<BleModel> bleModels = [
 ];
 ```
 
-BleModel类可能被定义在一个单独的文件中，名为ble.mode.dart，并在代码片段的开头使用导入语句导入。预计BleModel类将有以下属性：
+The BleModel class may be defined in a separate file called ble.mode.dart and imported using an import statement at the beginning of the code snippet. It is expected that the BleModel class will have the following properties:
 
-id： 一个整数，代表蓝牙模块的ID。
-modelName： 一个字符串，代表蓝牙模块的名称。
-uuidDiscover： 一个字符串，代表发现蓝牙模块的UUID。
-uuidCmd： 代表向蓝牙模块发送命令的UUID的字符串。
-uuidWrite: 代表向蓝牙模块发送命令的UUID字符串： 一个字符串，代表向蓝牙模块写入数据的UUID。
-uuidRead： 一个字符串，代表从蓝牙模块读取数据的UUID。
-在bleModels列表中，有一个定义的BleModel对象，ID为5，modelName为'FISHTANK'，uuidDiscover为 "ffe0"，uuidCmd为 "ffe0"，uuidWrite为 "ffe2 "和uuidRead为 "ffe1"。这个对象代表一个具有这些属性的注册蓝牙模块。在bleModels列表中很可能还有其他的BleModel对象，代表应用程序中的其他注册蓝牙模块。
+id: an integer representing the ID of the Bluetooth module.
+modelName: a string representing the name of the Bluetooth module.
+uuidDiscover: A string representing the UUID of the discovered Bluetooth module.
+uuidCmd: A string representing the UUID of the command sent to the Bluetooth module.
+uuidWrite: A string representing the UUID of the command sent to the Bluetooth module: A string representing the UUID of the data written to the Bluetooth module.
+uuidRead: A string representing the UUID of the data to be read from the Bluetooth module.
+In the bleModels list, there is a BleModel object defined with ID 5, modelName 'FISHTANK', uuidDiscover as 'fe0', uuidCmd as 'fe0', uuidWrite as 'fe2' and uuidRead as 'fe1'. This object represents a registered Bluetooth module with these attributes. There are likely to be other BleModel objects in the bleModels list, representing other registered Bluetooth modules in the application.
 
-### 3.4.4 调试的什么的
+### 3.4.4 Interface and commissioning
+
+ <div align="center">
+<img src="assets\flutter\Data received by the C++ backend.jpg" style="zoom:30%;" /> 
+</div>
+
+<p align="center">Data received by the C++ backend</p> 
+
+ <div align="center">
+<img src="assets\flutter\Data received by the serial debugging Assistant.jpg" style="zoom:30%;" /> 
+</div>
+
+<p align="center">Data received by the serial debugging Assistant</p> 
+
+ <div align="center">
+<img src="assets\flutter\output in flutter.jpg" style="zoom:30%;" /> 
+</div>
+
+<p align="center">output in flutter</p> 
+
+ <div align="center">
+<img src="assets\flutter\bluetooth search and connection.jpg" style="zoom:50%;" /> 
+</div>
+
+<p align="center">bluetooth search and connection</p> 
+
+ <div align="center">
+<img src="assets\flutter\UI and wrong input.jpg" style="zoom:50%;" /> 
+</div>
+
+<p align="center">UI and wrong input</p> 
 
 
-
-### 3.4.5 界面什么的
-
-
-
-# 4 单元测试
-
-## 4.1 
-
-
-
-
-
-# 5 问题与总结
 
 
 

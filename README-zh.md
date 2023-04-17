@@ -35,12 +35,12 @@ README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
 ## 1-2 项目贡献者
 
-| Name         | Student ID | Role |
-| ------------ | ---------- | ---- |
-| Haoshi Huang | 2635088H   |      |
-| Xintong LIN  | 2824115L   |      |
-| Hanwei Liang | 2669523L   |      |
-| Chaoyi Yang  | 2724184Y   |      |
+| Name         | Student ID |
+| ------------ | ---------- |
+| Haoshi Huang | 2635088H   |
+| Xintong LIN  | 2824115L   |
+| Hanwei Liang | 2669523L   |
+| Chaoyi Yang  | 2724184Y   |
 
 ## 1-3 项目规划
 > [甘特图](.assets/GanttChart.xlsx)  
@@ -52,11 +52,15 @@ README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
 <p align="center">甘特图</p>  
 
-## 1-4 测试
+## 1-4 测试视频
 
-## ！！在这里放最后测试视频
+手机通过蓝牙发送控制指令，包括开启和关断，调节速度等，系统可以迅速作出反应。
 
+<div align="center">
+<img src="assets\Test.gif" style="zoom:100%;" /> 
+</div>
 
+<p align="center">测试视频</p>  
 
 # 2 软硬件信息
 
@@ -64,7 +68,11 @@ README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
 Raspberry Pi 4B是一款基于ARM架构的微型电脑。它采用了由博通公司出品的、集成了GPU和CPU的BCM2711芯片，支持4K分辨率视频输出，最大支持4GB LPDDR4-3200 SDRAM内存，支持Gigabit以太网、双频WiFi、蓝牙5.0等多种接口和协议。它还有两个Micro-HDMI接口、两个USB3.0接口、两个USB2.0接口、一个40针GPIO接口、一个2针电源接口等。
 
+<div align="center">
+<img src="assets\RaspberryPi4B.jpg" style="zoom:50%;" /> 
+</div>
 
+<p align="center">Raspberry Pi 4B</p>  
 
 #### 2.1.1 主机端
 
@@ -96,19 +104,14 @@ Raspberry Pi 4B是一款基于ARM架构的微型电脑。它采用了由博通�
 程序语言相关：
 
 - 编程语言：Dart 2.17
+
 - 开发工具：Android Studio 2022.2.1.18 for Windows
+
 - 软件开发工具包：commandlinetools-9477386 for Windows
+
 - 前端框架：Flutter 3.0
 
-
-
-<div align="center">
-<img src="assets\RaspberryPi4B.jpg" style="zoom:50%;" /> 
-</div>
-
-<p align="center">Raspberry Pi 4B</p>  
-
-
+  
 
 ## 2.2 电源
 
@@ -261,7 +264,13 @@ PWM调节电子开关控制板的输入端连接电压转换器，输出端连�
 
 # 3 系统开发
 
-## 3.1 软件架构图
+## 3.1 软件类图
+
+ <div align="center">
+<img src="assets\Class diagram.jpg" style="zoom:100%;" /> 
+</div>
+
+<p align="center">类图</p> 
 
 应用程序（App）
 
@@ -414,12 +423,6 @@ cppCopy codevoid Waterpump::set(char lvl) {
 
 `set()` 方法用于设置水泵的占空比（PWM水平）。首先调用 `setPwmLvl()` 方法设置占空比，然后调用 `gpioPWM()` 函数启动GPIO上的PWM。如果启动失败，将输出错误信息。
 
-#### 3.2.9.5 `stop()` 方法：
-
-
-
-#### 3.2.9.6 水泵类的声明：
-
 
 
 
@@ -433,9 +436,7 @@ cppCopy codevoid Waterpump::set(char lvl) {
 
 - samples 文件夹：该文件夹包含一些示例代码，用于演示如何使用项目中的各个类和功能。
 
-## 这里来点图？
-
-
+  
 
 ## 3.4 Flutter手机端开发
 
@@ -522,23 +523,39 @@ uuidWrite: 代表向蓝牙模块发送命令的UUID字符串： 一个字符串�
 uuidRead： 一个字符串，代表从蓝牙模块读取数据的UUID。
 在bleModels列表中，有一个定义的BleModel对象，ID为5，modelName为'FISHTANK'，uuidDiscover为 "ffe0"，uuidCmd为 "ffe0"，uuidWrite为 "ffe2 "和uuidRead为 "ffe1"。这个对象代表一个具有这些属性的注册蓝牙模块。在bleModels列表中很可能还有其他的BleModel对象，代表应用程序中的其他注册蓝牙模块。
 
-### 3.4.4 调试的什么的
+### 3.4.4 界面与调试
+
+ <div align="center">
+<img src="assets\flutter\Data received by the C++ backend.jpg" style="zoom:30%;" /> 
+</div>
+
+<p align="center">C++后端接收的数据</p> 
+
+ <div align="center">
+<img src="assets\flutter\Data received by the serial debugging Assistant.jpg" style="zoom:30%;" /> 
+</div>
+
+<p align="center">串行调试助手接收的数据</p> 
+
+ <div align="center">
+<img src="assets\flutter\output in flutter.jpg" style="zoom:30%;" /> 
+</div>
+
+<p align="center">flutter输出</p> 
+
+ <div align="center">
+<img src="assets\flutter\bluetooth search and connection.jpg" style="zoom:50%;" /> 
+</div>
+
+<p align="center">蓝牙查找与连接</p> 
+
+ <div align="center">
+<img src="assets\flutter\UI and wrong input.jpg" style="zoom:50%;" /> 
+</div>
+
+<p align="center">UI和错误的输出</p> 
 
 
-
-### 3.4.5 界面什么的
-
-
-
-# 4 单元测试
-
-## 4.1 
-
-
-
-
-
-# 5 问题与总结
 
 
 
