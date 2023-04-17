@@ -32,7 +32,7 @@ Life is about movement. A calm current is not at all attractive to fish. This sy
 
 Everything mentioned above does not require the user to debug the Raspberry Pi or modify the parameters in the code, but rather use our mobile application designed on Flutter to conveniently transfer parameters by Bluetooth, set the holding range, heating power, bubble volume and water flow speed.
 
-## 1-2 Project contributors
+## 1.2 Project contributors
 
 | Name         | Student ID |
 | ------------ | ---------- |
@@ -41,7 +41,7 @@ Everything mentioned above does not require the user to debug the Raspberry Pi o
 | Hanwei Liang | 2669523L   |
 | Chaoyi Yang  | 2724184Y   |
 
-## 1-3 Project planning
+## 1.3 Project planning
 > [GanttChart](.assets/GanttChart.xlsx)  
 >[MEMORANDUM OF MEETING](.assets/meeting/) 
 
@@ -50,7 +50,7 @@ Everything mentioned above does not require the user to debug the Raspberry Pi o
 </div>
 <p align="center">GanttChart</p>  
 
-## 1-4 Test video
+## 1.4 Test video
 
 <div align="center">
 <img src="assets\Test.gif" style="zoom:100%;" /> 
@@ -89,7 +89,6 @@ Dependency libraries:
 
 - pigpio v79
 
-  
 
 ### 2.1.2 Client
 
@@ -103,8 +102,6 @@ Programming language related:
 - Development tools: Android Studio 2022.2.1.18 for Windows
 - Software development kit: commandlinetools-9477386 for Windows
 - Front-end framework: Flutter 3.0
-
-
 
 ## 2.2 Power supply
 
@@ -245,7 +242,7 @@ The PWM regulated electronic switch control board has an input connected to the 
 
 # 3 System development
 
-## 3.1 Software architecture diagram
+## 3.1 Software class diagram
 
  <div align="center">
 <img src="assets\Class diagram.jpg" style="zoom:100%;" /> 
@@ -270,139 +267,105 @@ Application (App)
 
   - Waterpump
 
-## 3.2 软件架构先不动
+## 3.2 Software class description and architecture
 
-### 3.2.1 `Airpump`类：
+### 3.2.1 The `ThreadPool` class and the `TaskQueue` template class
 
-这个类用于控制一个空气泵，它继承了`PwmController`类。`Airpump`类的主要功能是通过改变占空比（duty cycle）来控制空气泵的启动和停止。
+Create a thread pool that can handle multi-threaded tasks that will act as objects in the `App` class, using the producer-consumer design pattern. The Bluetooth command execution task is in the consumer and the Bluetooth fetch command task belongs to the producer. The task is executed asynchronously and a synchronous queue is used to store the instructions, ensuring the security of the shared data.
 
-- 构造函数：有两个构造函数，一个接受引脚编号，另一个接受引脚编号和频率。
-- 析构函数：在类对象销毁时，如果空气泵正在运行，则停止空气泵。
-- `set()`函数：设置空气泵的占空比，并启动PWM。
-- `stop()`函数：停止空气泵。
+- `ThreadPool(int numThreads)`: constructor that creates the specified number of threads.
+- `~ThreadPool()`: destructor, stops the pool of threads.
+- `start(int numThreads)`: constructor to start the specified number of threads.
+- `stop()`: stops the pool of threads.
+- `AddTask(const Task &task)`: Adds a task to the task queue.
+- `AddTask(Task &&task)`: adds the task to the task queue as a right-valued reference.
+- `RunTask()`: Runs the task in the task queue.
+- `stopThreads()`: stops all threads and clears the thread pool of objects.
 
-### 3.2.2 `App`类：
+### 3.2.2 `PwmController` class
 
-这个类用于初始化和运行整个应用程序。它包含了一个线程池（`ThreadPool`），蓝牙（`Bluetooth`），热控模块（`ThermalModule`）和泵控模块（`PumpModule`）。
+The PWM module controls the power output of devices such as the heater, water pump, and air pump in the project. The coding process for controlling the output power of the PWM signal to these devices is consistent: assigning the device interface, setting the PWM signal frequency and duty cycle control range, and finally outputting the PWM signal to the GPIO as power output based on the relative ratio of the duty cycle to the control range. By declaring the data members as protected, it is convenient for derived classes to use them.
 
-- 构造函数：初始化线程池、蓝牙、热控模块和泵控模块。
-- `run()`函数：将模块任务添加到线程池，并使主线程进入睡眠状态。
-- `isRunning()`函数：检查应用程序是否正在运行。
-- 析构函数：在类对象销毁时，停止所有设备并终止`pigpio`库。
-- `AddModuleTasks()`函数：将各个模块的任务添加到线程池。
+Data member：
 
-### 3.2.3 `Heater`类的主要功能和方法如下：
+- `kPin_`： GPIO pin number of the corresponding device
 
-- 构造函数：有两个构造函数，一个接受引脚编号，另一个接受引脚编号和频率。
+- `kRange_`：Corresponding control accuracy
 
-- 析构函数：在类对象销毁时，如果加热器正在运行，则停止加热器。
+-  `freq_`：PWM signal frequency
 
-- `setMinMaxLimit(int min, int max)`：设置加热器的最小和最大温度限制。
+-  `dutycycle_`： Current absolute duty cycle of the device
 
-- `ConditionalOnOff(const std::vector<double> &tempers)`：根据传入的温度数组计算平均温度，根据平均温度和预设的最小最大温度限制，有条件地调用`autoTurnOn`和`autoTurnOff`方法。
+-  `running_`：Device operating state
 
-- `autoTurnOn(int average)`：自动打开加热器，设置相应的PWM占空比。
+Function Member：
 
-- `autoTurnOff(int average)`：自动关闭加热器，将PWM占空比设为0。
+- Constructor: Deleted the default constructor and copy constructor. Initializes based on the passed pin or pin and frequency. Delegation constructor method is used to initialize the single-pin constructor method.
+- `set()`：Set and start the PWM signal corresponding to the relative duty ratio on the device port
+- `stop()`：Shutdown device actively
+- `isRunning() `function: Return the running status of the PWM controller
+- `setPwmLvl() `function: Set the PWM duty cycle according to the incoming level
+- Destructor: Will actively clear the PWM signal before destroying the object
 
-- `set(char lvl)`：设置加热器的PWM占空比并启动PWM。
+### 3.2.3 `Heater` class 
 
-- `stop()`：停止加热器。
+This class inherits from the `PwmController` class and is used to control a heater. The main function of the `Heater` class is to control the starting and stopping of the heater by changing the duty cycle data. This class belongs to the callback function class, which executes the opening and closing of the heater when events meet corresponding conditions. There are mainly two events: one is the temperature measurement event based on the `Thermometer` class, which belongs to automatic control; the other is the instruction acquisition event based on the `Bluetooth` class. When a message instruction is captured, if it belongs to the type of adjusting the heater, active temperature control is carried out.
 
-`Heater`类的目的是根据温度传感器的读数自动控制加热器的开启和关闭，以保持温度在设定的范围内。这种控制策略可能适用于诸如恒温器、热水器等需要维持恒定温度的设备。
+Data member：
 
-### 3.2.4 `PumpModule` 类: 
+- `minLimit_`：upper temperature limit
+- `maxLimit_`：Lower temperature limit
+- `needOn_`：Flag indicating the need to turn on the heater
+- `needOff_`：Flag indicating the need to turn off the heater
 
-`PumpModule `类是用来管理空气泵和水泵的。在`PumpModule`的构造函数中，它初始化了一个空气泵和一个水泵对象。析构函数会在销毁对象时停止这两个泵。`registerBluetooth() `函数将蓝牙对象与水泵和空气泵关联。`registerHeaterFromThermalModule() `函数将热量器对象从 `ThermalModule `中注册到蓝牙对象中。`executeCmdControl() `函数根据蓝牙命令队列来控制水泵和空气泵。`stop() `函数会停止水泵和空气泵。
+Function member：
 
-### 3.2.5 `PwmController` 类:
+- Constructor: inherited from the `PwmController` class.
 
- PwmController 类是用来控制 GPIO 的 PWM 信号的。在 `PwmController` 的构造函数中，根据传入的引脚和频率，设置了引脚模式、PWM 频率和范围。析构函数会在销毁对象时关闭 PWM。`setPwmLvl() `函数根据传入的级别设置 PWM 占空比。`isRunning() `函数返回 PWM 控制器是否正在运行。
+- Destructor: stops the heater if it's running before the object is destroyed.
 
-### 3.2.6 `ThermalModule` 类: 
+- `setMinMaxLimit(int min, int max)`：Set the minimum and maximum temperature limits for the heater.
 
-`ThermalModule` 类用于管理加热器和温度计。在 ThermalModule 的构造函数中，初始化了一个加热器和一个温度计对象，并将加热器注册到温度计中。析构函数会在销毁对象时停止相关设备。`registerBluetooth() `函数将蓝牙对象与 `ThermalModule` 关联。`executeAutoControlHeater() `函数通过温度计自动控制加热器。stop() 函数会停止所有相关设备。
+- `ConditionalOnOff(const std::vector<double> &)`：Calculate the average temperature based on the incoming temperature array, and conditionally call the `autoTurnOn` and `autoTurnOff` methods based on the average temperature and the preset minimum and maximum temperature limits.
 
-### 3.2.7 `Thermometer` 类: 
+- `autoTurnOn(int average)`：Automatically turn on the heater and set the corresponding PWM duty cycle.
 
-`Thermometer `类是用来读取 DS18B20 温度计的。在 `Thermometer `的构造函数中，调用` FindTempDevices() `函数查找并记录温度计设备文件。析构函数会在销毁对象时停止` Thermometer`。`registerHeater() `函数将加热器对象与温度计关联。`AutoControlHeater()`函数会不断读取温度数据，并根据温度数据自动控制加热器。`FindTempDevices() `函数会在设备目录中查找并记录温度计设备文件。
+- `autoTurnOff(int average)`：Automatically turn off the heater and set the PWM duty cycle to 0.
 
-### 3.2.8 `ThreadPool` 类：
+- `set(char lvl)`：Set the PWM duty cycle of the heater and start the PWM.
 
-创建一个线程池，可以处理多线程任务。
-
-- `ThreadPool(int numThreads)`：构造函数，创建指定数量的线程。
-- `~ThreadPool()`：析构函数，停止线程池。
-- `start(int numThreads)`：启动指定数量的线程。
-- `stop()`：停止线程池。
-- `AddTask(const Task &task)`：将任务添加到任务队列。
-- `AddTask(Task &&task)`：将任务以右值引用的形式添加到任务队列。
-- `RunTask()`：运行任务队列中的任务。
-- `stopThreads()`：停止所有线程并清除线程池中的对象。
-
-### 3.2.9 `Waterpump `类
-
-#### 3.2.9.1头文件引用
-
-```
-cppCopy code#include <pigpio.h>
-#include <iostream>
-#include "config.h"
-#include "waterpump.h"
-```
-
-这部分代码引入了所需的头文件，包括 `pigpio.h`（用于操作树莓派的GPIO接口），`iostream`（用于输入输出操作，如输出错误信息），`config.h`（包含项目配置信息）和 `waterpump.h`（包含 `Waterpump` 类的声明）。
-
-#### 3.2.9.2 构造函数
-
-```
-cppCopy code
-Waterpump::Waterpump(unsigned int pin) : PwmController(pin) {}
-```
-
-这是一个构造函数，接受一个无符号整数参数 `pin`，并调用基类 `PwmController` 的构造函数。这个构造函数将使用默认的频率初始化水泵。
-
-```
-cppCopy codeWaterpump::Waterpump(unsigned int pin, unsigned int freq)
-  : PwmController(pin, freq) {}
-```
-
-这是另一个构造函数，接受两个无符号整数参数 `pin` 和 `freq`，并调用基类 `PwmController` 的构造函数。这个构造函数允许指定水泵的频率。
-
-#### 3.2.9.3 析构函数：
-
-```
-cppCopy codeWaterpump::~Waterpump() {
-  if (running_) {
-		this->stop(); 
-	}
-}
-```
-
-析构函数在 `Waterpump` 类的对象被销毁时调用。如果水泵正在运行，析构函数将调用 `stop()` 方法停止水泵。
-
-#### 3.2.9.4 `set()` 方法：
-
-```
-cppCopy codevoid Waterpump::set(char lvl) {
-  // set pwm level
-  setPwmLvl(lvl);
-  // Starts PWM on the GPIO
-  int ret = gpioPWM(kPin_, dutycycle_);
-  if (ret != 0) {
-    std::cerr << TAG_WATERPUMP
-              << "failed to set dutycycle: " << dutycycle_
-              << " on gpio: " << kPin_ << " with err code: " << ret
-              << std::endl;
-  }
-}
-```
-
-`set()` 方法用于设置水泵的占空比（PWM水平）。首先调用 `setPwmLvl()` 方法设置占空比，然后调用 `gpioPWM()` 函数启动GPIO上的PWM。如果启动失败，将输出错误信息。
+- `stop()`：Stop the heater.
 
 
+The purpose of the `Heater` class is to automatically control the opening and closing of the heater based on the readings from a temperature sensor, in order to maintain the temperature within a set range. This control strategy may be suitable for devices such as thermostats, water heaters, and other equipment that requires maintaining a constant temperature.
 
-## 3.3 Structure of the system
+### 3.2.4 `Airpump` Class and  `Waterpump ` Class
+
+Both classes, Airpump and Heater, inherit from the `PwmController` class and are used to control an air pump. The main function of the `Airpump` class is to control the start and stop of the air pump by changing the duty cycle. Both classes serve as callback function classes, controlling the operation of the component based on Bluetooth command events.
+
+### 3.2.5 `Thermometer` Class
+
+The `Thermometer` class is used to read DS18B20 temperature sensors. In the constructor of `Thermometer`, the `FindTempDevices()` function is called to search for and record the temperature sensor device files. The destructor will stop the `Thermometer` when the object is destroyed. The `registerHeater()` function associates the heater object with the thermometer. The `AutoControlHeater()` function constantly reads temperature data and automatically controls the heater based on the temperature data. The `FindTempDevices()` function searches and records temperature sensor device files in the device directory.
+
+
+### 3.2.6 `ThermalModule` Class 
+
+The `ThermalModule` class is used to manage heater objects and thermometer objects. The declaration of the `ThermalModule` includes a smart pointer to a heater and a smart pointer to a thermometer, and registers the heater with the thermometer. The `registerBluetooth()` function associates the Bluetooth object with the `ThermalModule`. The `executeAutoControlHeater()` function automatically controls the heater based on the thermometer, and this task is added as a callback task in the `App` class and added to the thread pool object. The `stop()` function stops all related devices, and the destructor stops the related devices when the object is destroyed.
+
+### 3.2.7 `PumpModule` Class
+
+The `PumpModule` class is used to manage the air pump and water pump. In the constructor of `PumpModule`, it initializes an air pump and a water pump object. The destructor stops these two pumps when the object is destroyed. The `registerBluetooth()` function associates the Bluetooth object with the water pump and air pump. The `registerHeaterFromThermalModule()` function registers the heater object from the `ThermalModule` with the Bluetooth object. The `executeCmdControl()` function controls the water pump and air pump based on the Bluetooth command queue. The `stop()` function stops the water pump and air pump.
+
+### 3.2.8 `App` Class
+This class is used to initialize and run the entire application. It includes a thread pool (`ThreadPool`), Bluetooth (`Bluetooth`), thermal control module (`ThermalModule`), and pump control module (`PumpModule`).
+
+- Constructor: initializes the thread pool, Bluetooth, thermal control module, and pump control module.
+- `run()` function: adds module tasks to the thread pool and puts the main thread to sleep.
+- `isRunning()` function: checks whether the application is running.
+- Destructor: stops all devices and terminates the `pigpio` library when the class object is destroyed.
+- `AddModuleTasks()` function: adds tasks for each module to the thread pool.
+
+## 3.3 Project document structure
 
 - src (source) folder: this folder contains all the source code files for the project
 
@@ -411,8 +374,6 @@ cppCopy codevoid Waterpump::set(char lvl) {
 - include folder: this folder contains the project's header files (.h and .hpp files), which define the interfaces, data structures, constants, etc. for each class in the project
 
 - samples folder: This folder contains sample code that demonstrates how to use the classes and functions in the project.
-
-
 
 ## 3.4 Flutter mobile development
 
@@ -531,7 +492,7 @@ In the bleModels list, there is a BleModel object defined with ID 5, modelName '
 
 <p align="center">UI and wrong input</p> 
 
-
+# 4 At this point,  the Intelligent Fish Tank is complete, thank you all!
 
 
 

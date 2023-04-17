@@ -33,7 +33,7 @@ README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
 以上所提到的一切都无需用户调试树莓派或修改代码中的参数，而是使用我们基于Flutter设计的移动端应用来便捷的蓝牙传输参数，设置保温范围，加热功率，气泡量以及水流速度。
 
-## 1-2 项目贡献者
+## 1.2 项目贡献者
 
 | Name         | Student ID |
 | ------------ | ---------- |
@@ -42,7 +42,7 @@ README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 | Hanwei Liang | 2669523L   |
 | Chaoyi Yang  | 2724184Y   |
 
-## 1-3 项目规划
+## 1.3 项目规划
 > [甘特图](.assets/GanttChart.xlsx)  
 >[会议记录](.assets/meeting/) 
 
@@ -52,7 +52,7 @@ README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
 <p align="center">甘特图</p>  
 
-## 1-4 测试视频
+## 1.4 测试视频
 
 手机通过蓝牙发送控制指令，包括开启和关断，调节速度等，系统可以迅速作出反应。
 
@@ -93,7 +93,6 @@ Raspberry Pi 4B是一款基于ARM架构的微型电脑。它采用了由博通�
 
 - pigpio v79
 
-  
 
 ### 2.1.2 客户端
 
@@ -111,7 +110,6 @@ Raspberry Pi 4B是一款基于ARM架构的微型电脑。它采用了由博通�
 
 - 前端框架：Flutter 3.0
 
-  
 
 ## 2.2 电源
 
@@ -291,38 +289,64 @@ PWM调节电子开关控制板的输入端连接电压转换器，输出端连�
 
 ## 3.2 软件架构
 
-### 3.2.5 `PwmController` 类
+### 3.2.1 `ThreadPool` 类 与 `TaskQueue` 模板类
 
-因为项目中的加热器，水泵，气泵，都是由 PWM 模块控制的，在编码上 PWM 信号控制器件输出功率的执行流程是一致的：分配器件接口，设置 PWM 信号频率和占空比控制范围，最后按照占空比与占空比控制范围的相对比值作为输出功率输出 PWM 信号到 GPIO 上。所以定义一个接口基类，类内数据成员分别是：`kPin_` 对应GPIO 号， `kRange_`对应控制精度， `freq_`对应信号频率， `dutycycle_`对应占空比，外加一个表示运行状态的 `bool`变量 `running_` 该接口类定义了两个纯虚函数：`set()` 和 `stop()`。`set()` 用来控制 GPIO 的 PWM 信号的。在 `PwmController` 的构造函数中，根据传入的引脚和频率，设置了引脚模式、PWM 频率和范围。析构函数会在销毁对象时关闭 PWM。`setPwmLvl() `函数根据传入的级别设置 PWM 占空比。`isRunning() `函数返回 PWM 控制器是否正在运行。
+创建一个线程池，可以处理多线程任务，将作为`App`类中的对象，使用了生产者-消费者的设计模式。蓝牙指令执行任务处于消费者，蓝牙获取指令任务属于生产者。异步执行任务，使用了同步队列存储指令，保证了共享数据的安全。
 
-### 3.2.1 `Airpump`类
+- `ThreadPool(int numThreads)`：构造函数，创建指定数量的线程。
+- `~ThreadPool()`：析构函数，停止线程池。
+- `start(int numThreads)`：启动指定数量的线程。
+- `stop()`：停止线程池。
+- `AddTask(const Task &task)`：将任务添加到任务队列。
+- `AddTask(Task &&task)`：将任务以右值引用的形式添加到任务队列。
+- `RunTask()`：运行任务队列中的任务。
+- `stopThreads()`：停止所有线程并清除线程池中的对象。
 
-这个类用于控制一个空气泵，它继承了`PwmController`类。`Airpump`类的主要功能是通过改变占空比（duty cycle）来控制空气泵的启动和停止。
+### 3.2.2 `PwmController` 类
 
-- 构造函数：有两个构造函数，一个接受引脚编号，另一个接受引脚编号和频率。
-- 析构函数：在类对象销毁时，如果空气泵正在运行，则停止空气泵。
-- `set()`函数：设置空气泵的占空比，并启动PWM。
-- `stop()`函数：停止空气泵。 
+因为项目中的加热器，水泵，气泵，都是由 PWM 模块控制的，在编码上 PWM 信号控制器件输出功率的执行流程是一致的：分配器件接口，设置 PWM 信号频率和占空比控制范围，最后按照占空比与控制范围的相对比值作为输出功率输出 PWM 信号到 GPIO 上。将数据成员声明为受保护权限，方便派生类使用。
 
-### 3.2.2 `App`类
+数据成员：
 
-这个类用于初始化和运行整个应用程序。它包含了一个线程池（`ThreadPool`），蓝牙（`Bluetooth`），热控模块（`ThermalModule`）和泵控模块（`PumpModule`）。
+- `kPin_`： 对应器件的 GPIO 引脚号
 
-- 构造函数：初始化线程池、蓝牙、热控模块和泵控模块。
-- `run()`函数：将模块任务添加到线程池，并使主线程进入睡眠状态。
-- `isRunning()`函数：检查应用程序是否正在运行。
-- 析构函数：在类对象销毁时，停止所有设备并终止`pigpio`库。
-- `AddModuleTasks()`函数：将各个模块的任务添加到线程池。
+- `kRange_`：对应控制精度
+
+- `freq_`：表示 PWM 信号频率
+
+- `dutycycle_`： 表示器件当前的绝对占空比
+
+- `running_`：表示器件运行状态
+
+函数成员：
+
+- 构造函数：删除了默认构造函数和拷贝构造函数。根据传入的引脚或者引脚和频率来初始化。使用了委托构造函数的方法初始化单引脚构造方法
+- `set()`：设置并对器件端口启动对应相对占空比 的 PWM 信号
+- `stop()`： 用于主动关闭器件
+- `isRunning() `函数返回 PWM 控制器运行状态
+- `setPwmLvl() `函数根据传入的级别设置 PWM 占空比
+- 析构函数：会在销毁对象前主动清零 PWM 信号
 
 ### 3.2.3 `Heater`类
 
-- 构造函数：有两个构造函数，一个接受引脚编号，另一个接受引脚编号和频率。
+该类继承了`PwmController`类，用于控制一个加热器。`Heater` 类的主要功能是通过改变数据占空比来控制空气泵的启动和停止。该类属于回调函数类，当事件满足对应条件，执行加热器的开启与关闭。事件主要有两个：一是基于 `Thermometer` 类的温度测量事件，这属于自动控制；二是基于 `Bluetooth` 类获取指令事件，当有消息指令被捕获，如果是属于调整加热器的指令类型，即进行主动控温。
 
-- 析构函数：在类对象销毁时，如果加热器正在运行，则停止加热器。
+数据成员：
+
+- `minLimit_`：温度上限
+- `maxLimit_`：温度下限
+- `needOn_`：需要开启加热器的标志位
+- `needOff_`：需要关闭叫热情的标志位
+
+函数成员：
+
+- 构造函数：继承于 `PwmController` 类
+
+- 析构函数：在类对象销毁前，如果加热器正在运行，则停止加热器。
 
 - `setMinMaxLimit(int min, int max)`：设置加热器的最小和最大温度限制。
 
-- `ConditionalOnOff(const std::vector<double> &tempers)`：根据传入的温度数组计算平均温度，根据平均温度和预设的最小最大温度限制，有条件地调用`autoTurnOn`和`autoTurnOff`方法。
+- `ConditionalOnOff(const std::vector<double> &)`：根据传入的温度数组计算平均温度，根据平均温度和预设的最小最大温度限制，有条件地调用`autoTurnOn`和`autoTurnOff`方法。
 
 - `autoTurnOn(int average)`：自动打开加热器，设置相应的PWM占空比。
 
@@ -334,99 +358,34 @@ PWM调节电子开关控制板的输入端连接电压转换器，输出端连�
 
 `Heater`类的目的是根据温度传感器的读数自动控制加热器的开启和关闭，以保持温度在设定的范围内。这种控制策略可能适用于诸如恒温器、热水器等需要维持恒定温度的设备。
 
-### 3.2.4 `PumpModule` 类
+### 3.2.4 `Airpump`类 与 `Waterpump `类
 
-`PumpModule `类是用来管理空气泵和水泵的。在`PumpModule`的构造函数中，它初始化了一个空气泵和一个水泵对象。析构函数会在销毁对象时停止这两个泵。`registerBluetooth() `函数将蓝牙对象与水泵和空气泵关联。`registerHeaterFromThermalModule() `函数将热量器对象从 `ThermalModule `中注册到蓝牙对象中。`executeCmdControl() `函数根据蓝牙命令队列来控制水泵和空气泵。`stop() `函数会停止水泵和空气泵。
+均继承`PwmController`类，用于控制一个空气泵和一个水泵。主要功能是通过改变占空比来控制空气泵和水泵的启动和停止。这两类均作为回调函数类，根据蓝牙指令事件控制器件运行。
 
-### 3.2.5 `PwmController` 类
-
-这是一个 PwmController 类是用来控制 GPIO 的 PWM 信号的。在 `PwmController` 的构造函数中，根据传入的引脚和频率，设置了引脚模式、PWM 频率和范围。析构函数会在销毁对象时关闭 PWM。`setPwmLvl() `函数根据传入的级别设置 PWM 占空比。`isRunning() `函数返回 PWM 控制器是否正在运行。
-
-### 3.2.6 `ThermalModule` 类
-
-`ThermalModule` 类用于管理加热器和温度计。在 ThermalModule 的构造函数中，初始化了一个加热器和一个温度计对象，并将加热器注册到温度计中。析构函数会在销毁对象时停止相关设备。`registerBluetooth() `函数将蓝牙对象与 `ThermalModule` 关联。`executeAutoControlHeater() `函数通过温度计自动控制加热器。stop() 函数会停止所有相关设备。
-
-### 3.2.7 `Thermometer` 类
+### 3.2.5 `Thermometer` 类
 
 `Thermometer `类是用来读取 DS18B20 温度计的。在 `Thermometer `的构造函数中，调用` FindTempDevices() `函数查找并记录温度计设备文件。析构函数会在销毁对象时停止` Thermometer`。`registerHeater() `函数将加热器对象与温度计关联。`AutoControlHeater()`函数会不断读取温度数据，并根据温度数据自动控制加热器。`FindTempDevices() `函数会在设备目录中查找并记录温度计设备文件。
 
-### 3.2.8 `ThreadPool` 类
+### 3.2.6 `ThermalModule` 类
 
-创建一个线程池，可以处理多线程任务。
+`ThermalModule` 类用于管理加热器对象和温度计对象。在 `ThermalModule` 的声明中包含指向一个加热器的智能指针和一个指向温度计的智能指针，并将加热器注册到温度计中。`registerBluetooth() `函数将蓝牙对象与 `ThermalModule` 关联。`executeAutoControlHeater() `函数通过温度计自动控制加热器，该任务将在`App`类中作为回调任务，放进线程池对象中。stop() 函数会停止所有相关设备。最后析构函数会在销毁对象时停止相关设备。
 
-- `ThreadPool(int numThreads)`：构造函数，创建指定数量的线程。
-- `~ThreadPool()`：析构函数，停止线程池。
-- `start(int numThreads)`：启动指定数量的线程。
-- `stop()`：停止线程池。
-- `AddTask(const Task &task)`：将任务添加到任务队列。
-- `AddTask(Task &&task)`：将任务以右值引用的形式添加到任务队列。
-- `RunTask()`：运行任务队列中的任务。
-- `stopThreads()`：停止所有线程并清除线程池中的对象。
+### 3.2.7 `PumpModule` 类
 
-### 3.2.9 `Waterpump `类
+`PumpModule `类是用来管理空气泵和水泵的。在`PumpModule`的构造函数中，它初始化了一个空气泵和一个水泵对象。析构函数会在销毁对象时停止这两个泵。`registerBluetooth() `函数将蓝牙对象与水泵和空气泵关联。`registerHeaterFromThermalModule() `函数将热量器对象从 `ThermalModule `中注册到蓝牙对象中。`executeCmdControl() `函数根据蓝牙命令队列来控制水泵和空气泵。`stop() `函数会停止水泵和空气泵。
 
-#### 3.2.9.1 头文件引用
+### 3.2.8 `App`类
 
-```
-cppCopy code#include <pigpio.h>
-#include <iostream>
-#include "config.h"
-#include "waterpump.h"
-```
+这个类用于初始化和运行整个应用程序。它包含了一个线程池（`ThreadPool`），蓝牙（`Bluetooth`），热控模块（`ThermalModule`）和泵控模块（`PumpModule`）。
 
-这部分代码引入了所需的头文件，包括 `pigpio.h`（用于操作树莓派的GPIO接口），`iostream`（用于输入输出操作，如输出错误信息），`config.h`（包含项目配置信息）和 `waterpump.h`（包含 `Waterpump` 类的声明）。
-
-#### 3.2.9.2 构造函数
-
-```
-cppCopy code
-Waterpump::Waterpump(unsigned int pin) : PwmController(pin) {}
-```
-
-这是一个构造函数，接受一个无符号整数参数 `pin`，并调用基类 `PwmController` 的构造函数。这个构造函数将使用默认的频率初始化水泵。
-
-```
-cppCopy codeWaterpump::Waterpump(unsigned int pin, unsigned int freq)
-  : PwmController(pin, freq) {}
-```
-
-这是另一个构造函数，接受两个无符号整数参数 `pin` 和 `freq`，并调用基类 `PwmController` 的构造函数。这个构造函数允许指定水泵的频率。
-
-#### 3.2.9.3 析构函数：
-
-```
-cppCopy codeWaterpump::~Waterpump() {
-  if (running_) {
-		this->stop(); 
-	}
-}
-```
-
-析构函数在 `Waterpump` 类的对象被销毁时调用。如果水泵正在运行，析构函数将调用 `stop()` 方法停止水泵。
-
-#### 3.2.9.4 `set()` 方法：
-
-```
-cppCopy codevoid Waterpump::set(char lvl) {
-  // set pwm level
-  setPwmLvl(lvl);
-  // Starts PWM on the GPIO
-  int ret = gpioPWM(kPin_, dutycycle_);
-  if (ret != 0) {
-    std::cerr << TAG_WATERPUMP
-              << "failed to set dutycycle: " << dutycycle_
-              << " on gpio: " << kPin_ << " with err code: " << ret
-              << std::endl;
-  }
-}
-```
-
-`set()` 方法用于设置水泵的占空比（PWM水平）。首先调用 `setPwmLvl()` 方法设置占空比，然后调用 `gpioPWM()` 函数启动GPIO上的PWM。如果启动失败，将输出错误信息。
+- 构造函数：初始化线程池、蓝牙、热控模块和泵控模块。
+- `run()`函数：将模块任务添加到线程池，并使主线程进入睡眠状态。
+- `isRunning()`函数：检查应用程序是否正在运行。
+- 析构函数：在类对象销毁时，停止所有设备并终止`pigpio`库。
+- `AddModuleTasks()`函数：将各个模块的任务添加到线程池。
 
 
-
-
-## 3.3 系统的结构
+## 3.3 工程文件结构
 
 - src 文件夹：该文件夹包含项目的所有源代码文件
 
@@ -554,6 +513,8 @@ uuidRead： 一个字符串，代表从蓝牙模块读取数据的UUID。
 </div>
 
 <p align="center">UI和错误的输出</p> 
+
+# 4 至此，Intelligent Fish Tank完成，感谢大家！
 
 
 
