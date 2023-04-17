@@ -7,7 +7,7 @@
 
 README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
->[Visit Instgram account](https://instagram.com/haagendazs85?igshid=YmMyMTA2M2Y=) 
+>[Visit Instgram account](https://instagram.com/haagendazs85?igshid=YmMyMTA2M2Y=)  
 >[Visit Youtube account](https://www.youtube.com/channel/UC8SZ1dN7v9y7iaWZyjrDwrA)
 
  # 1 Project description
@@ -39,18 +39,18 @@ Everything mentioned above does not require the user to debug the Raspberry Pi o
 | Haoshi Huang | 2635088H   |      |
 | Xintong LIN  | 2824115L   |      |
 | Hanwei Liang | 2669523L   |      |
-|              |            |      |
+| Chaoyi Yang  | 2724184Y   |      |
 
 ## 1-3 Project planning
-
-> [GanttChart](.assets/GanttChart.xlsx)
+> [GanttChart](.assets/GanttChart.xlsx)  
+>[MEMORANDUM OF MEETING](.assets/meeting/) 
 
 <div align="center">
 <img src="assets\GanttChart.png" style="zoom:100%;" /> 
 </div>
 <p align="center">GanttChart</p>  
 
-## 1-4 测试视频
+## 1-4 Test
 
 ## ！！在这里放最后测试视频
 
@@ -62,7 +62,43 @@ Everything mentioned above does not require the user to debug the Raspberry Pi o
 
 The Raspberry Pi 4B is a miniature computer based on the ARM architecture. It uses the BCM2711 chip with integrated GPU and CPU from Broadcom, supports 4K resolution video output, up to 4GB of LPDDR4-3200 SDRAM memory, Gigabit Ethernet, dual-band WiFi, Bluetooth 5.0 and many other interfaces and protocols. It also has two Micro-HDMI ports, two USB 3.0 ports, two USB 2.0 ports, a 40-pin GPIO port, a 2-pin power connector and more.
 
-## ！！黄老板写点软件版本信息
+
+
+#### 2.1.1 Host side
+
+OS: Raspbian GNU/Linux 11 (bullseye-armlf)
+
+Hardware configuration: Raspberry Pi 4B (Broadcom BCM2711), Quad core Cortex-A72 (ARM v8) 64-bit
+
+Programming language related:
+
+- Development tool: Visual Studio Code 1.76.0
+- Compiler version: g++ 10.2.1 (Raspbian 10.2.1-6+rpi1) 
+- CMAKE version: cmake 3.18.4
+- Coding specification: Google C++ coding specification
+
+Dependency libraries:
+
+- C++ Standard Template Library (STL)
+
+- pigpio v79
+
+  
+
+### 2.1.2 Client
+
+Hardware configuration: Hisilicon Kirin 710F (4.0 GB)
+
+Operating system: HarmonyOs 2.0.0
+
+Programming language related:
+
+- Programming language: Dart 2.17
+- Development tools: Android Studio 2022.2.1.18 for Windows
+- Software development kit: commandlinetools-9477386 for Windows
+- Front-end framework: Flutter 3.0
+
+
 
 <div align="center">
 <img src="assets\RaspberryPi4B.jpg" style="zoom:50%;" /> 
@@ -232,7 +268,7 @@ Application (App)
 
   - Waterpump
 
-## 3.2 软件架构
+## 3.2 软件架构先不动
 
 ### 3.2.1 `Airpump`类：
 
@@ -469,6 +505,14 @@ uuidCmd： 代表向蓝牙模块发送命令的UUID的字符串。
 uuidWrite: 代表向蓝牙模块发送命令的UUID字符串： 一个字符串，代表向蓝牙模块写入数据的UUID。
 uuidRead： 一个字符串，代表从蓝牙模块读取数据的UUID。
 在bleModels列表中，有一个定义的BleModel对象，ID为5，modelName为'FISHTANK'，uuidDiscover为 "ffe0"，uuidCmd为 "ffe0"，uuidWrite为 "ffe2 "和uuidRead为 "ffe1"。这个对象代表一个具有这些属性的注册蓝牙模块。在bleModels列表中很可能还有其他的BleModel对象，代表应用程序中的其他注册蓝牙模块。
+
+### 3.4.4 调试的什么的
+
+
+
+### 3.4.5 界面什么的
+
+
 
 # 4 单元测试
 

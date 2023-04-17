@@ -1,13 +1,14 @@
 #  智能鱼缸
 
 <div align="center">
-<img src="assets\Tank.png" style="zoom:100%;" /> 
+<img src="assets\Tank.png" style="zoom:90%;" /> 
 </div>
+
 
 
 README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
->[访问Instgram账号](https://instagram.com/haagendazs85?igshid=YmMyMTA2M2Y=) 
+>[访问Instgram账号](https://instagram.com/haagendazs85?igshid=YmMyMTA2M2Y=)  
 >[访问Youtube账号](https://www.youtube.com/channel/UC8SZ1dN7v9y7iaWZyjrDwrA)
 
  # 1 项目简介
@@ -42,8 +43,8 @@ README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 | Chaoyi Yang  | 2724184Y   |      |
 
 ## 1-3 项目规划
-
-> [甘特图](.assets/GanttChart.xlsx)
+> [甘特图](.assets/GanttChart.xlsx)  
+>[会议记录](.assets/meeting/) 
 
 <div align="center">
 <img src="assets\GanttChart.png" style="zoom:100%;" /> 
@@ -51,7 +52,7 @@ README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
 <p align="center">甘特图</p>  
 
-## 1-4 测试视频
+## 1-4 测试
 
 ## ！！在这里放最后测试视频
 
@@ -64,6 +65,8 @@ README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 Raspberry Pi 4B是一款基于ARM架构的微型电脑。它采用了由博通公司出品的、集成了GPU和CPU的BCM2711芯片，支持4K分辨率视频输出，最大支持4GB LPDDR4-3200 SDRAM内存，支持Gigabit以太网、双频WiFi、蓝牙5.0等多种接口和协议。它还有两个Micro-HDMI接口、两个USB3.0接口、两个USB2.0接口、一个40针GPIO接口、一个2针电源接口等。
 
 
+
+#### 2.1.1 主机端
 
 操作系统：Raspbian GNU/Linux 11 (bullseye-armlf)
 
@@ -79,11 +82,25 @@ Raspberry Pi 4B是一款基于ARM架构的微型电脑。它采用了由博通�
 依赖库：
 
 - C++ Standard Template Library (STL)
+
 - pigpio v79
 
+  
+
+### 2.1.2 客户端
+
+硬件配置：Hisilicon Kirin 710F (4.0 GB)
+
+操作系统：HarmonyOs 2.0.0
+
+程序语言相关：
+
+- 编程语言：Dart 2.17
+- 开发工具：Android Studio 2022.2.1.18 for Windows
+- 软件开发工具包：commandlinetools-9477386 for Windows
+- 前端框架：Flutter 3.0
 
 
-## ！！黄老板写点软件版本信息
 
 <div align="center">
 <img src="assets\RaspberryPi4B.jpg" style="zoom:50%;" /> 
@@ -504,6 +521,14 @@ uuidCmd： 代表向蓝牙模块发送命令的UUID的字符串。
 uuidWrite: 代表向蓝牙模块发送命令的UUID字符串： 一个字符串，代表向蓝牙模块写入数据的UUID。
 uuidRead： 一个字符串，代表从蓝牙模块读取数据的UUID。
 在bleModels列表中，有一个定义的BleModel对象，ID为5，modelName为'FISHTANK'，uuidDiscover为 "ffe0"，uuidCmd为 "ffe0"，uuidWrite为 "ffe2 "和uuidRead为 "ffe1"。这个对象代表一个具有这些属性的注册蓝牙模块。在bleModels列表中很可能还有其他的BleModel对象，代表应用程序中的其他注册蓝牙模块。
+
+### 3.4.4 调试的什么的
+
+
+
+### 3.4.5 界面什么的
+
+
 
 # 4 单元测试
 
