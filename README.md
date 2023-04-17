@@ -4,60 +4,50 @@
 <img src="assets\OpenReportTank.jpg" style="zoom:100%;" /> 
 </div>
 
-Change README Language: [English](./README.md) ｜ [中文](./README-zh.md)
+README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
- ## ！！这里放社交媒体链接
+>[Visit Instgram account](https://instagram.com/haagendazs85?igshid=YmMyMTA2M2Y=) 
+>[Visit Youtube account](https://www.youtube.com/channel/UC8SZ1dN7v9y7iaWZyjrDwrA)
 
-```
->[点我访问Instgram账号](https://instagram.com/sleeppandapanda?igshid=ZDdkNTZiNTM=) 
-```
+ # 1 Project description
 
- # 1 Project description:
-
-我们的智能鱼缸项目是以树莓派4B为核心控制器的系统。它主要具有温度控制，含氧量维持，水流速调节等功能。用户可以在手机端查看温度并设定目标温度区间，还可以控制气泡多少和水流速度。
+Our smart fish tank project is a system with the Raspberry Pi 4B as the core controller. It mainly has functions such as temperature control, oxygen level maintenance and water flow rate adjustment. The user can check the temperature and set a target temperature range on the mobile phone, as well as control the amount of bubbles and the water flow rate. Our project is written in C++11, built using Cmake and runs on Raspbian GNU/Linux 11.
 
 ## 1.1 Project functions
 
-### 1.1.1 温度控制-可设定范围
+### 1.1.1 Temperature control - settable range
 
-不同种类的鱼需要不同的水温，本系统使用了温度传感器和加热器，两者配合工作，将水域内温度控制在设定值附近。用户可以设定目标温度范围。在系统运行过程中，首先使用Raspberry Pi读取温度传感器数据，将温度数据与设定范围比较，如果当前温度低于设定温度范围，则控制加热器进行加热，当检测到温度达到预定值时停止加热。在加热的过程中，水域内温度将始终作为反馈值参与温度调节。
+Different species of fish require different water temperatures. This system uses a temperature sensor and a heater, both of which work together to control the temperature in the water around a set value. The user can set a target temperature range. During the operation of the system, the temperature sensor data is first read using a Raspberry Pi and the temperature data is compared with the set range. If the current temperature is below the set temperature range, the heater is controlled to heat the water, and the heating stops when the temperature is detected to reach the predetermined value. During the heating process, the temperature in the waters will always participate in the temperature regulation as a feedback value.
 
-### 1.1.2 溶解氧维持-可调速气泵
+### 1.1.2 Dissolved oxygen maintenance - Adjustable speed air pump
 
-鱼的活动需要氧气，当鱼缸里有很多鱼时这非常重要，本系统使用了PWM调节电子开关控制板来控制气泵的运行功率。用户可以设定需要的工作档位。
+The system uses a PWM regulated electronic switch control board to control the operating power of the air pump. The user can set the required operating gear.
 
-### 1.1.3 自然环境模拟-可调节流速控制
+### 1.1.3 Natural Environment Simulation - Adjustable Flow Rate Control
 
-生命在于运动。平静的水流对鱼完全没有吸引力。本系统使用了PWM调节电子开关控制板来控制气泵的运行功率，用户可以设定需要的工作档位，这使得鱼的游动姿态更美观，进食更方便。
+Life is about movement. A calm current is not at all attractive to fish. This system uses a PWM regulated electronic switch control board to control the operating power of the air pump. The user can set the desired working level, which makes the fish swimming posture more beautiful and feeding more convenient.
 
-### 1.1.4 移动端控制
+### 1.1.4 Mobile control
 
-以上所提到的一切都无需用户调试树莓派或修改代码中的参数，而是使用我们基于Flutter设计的移动端应用来便捷的蓝牙传输参数，设置保温范围，加热功率，气泡量以及水流速度。
+Everything mentioned above does not require the user to debug the Raspberry Pi or modify the parameters in the code, but rather use our mobile application designed on Flutter to conveniently transfer parameters by Bluetooth, set the holding range, heating power, bubble volume and water flow speed.
 
-## 1-2 项目贡献者
+## 1-2 Project contributors
 
 | Name         | Student ID | Role |
 | ------------ | ---------- | ---- |
 | Haoshi Huang |            |      |
 | Xintong LIN  | 2824115L   |      |
+| Hanwei Liang | 2669523L   |      |
 |              |            |      |
-|              |            |      |
 
-## 1-3 项目规划
+## 1-3 Project planning
 
-Haoshi Huang
-
-
-
-Xintong LIN
-
-
+> [GanttChart](.assets/GanttChart.xlsx)
 
 <div align="center">
 <img src="assets\GanttChart.png" style="zoom:100%;" /> 
 </div>
-
-<p align="center">甘特图</p>  
+<p align="center">GanttChart</p>  
 
 ## 1-4 测试视频
 
@@ -65,11 +55,11 @@ Xintong LIN
 
 
 
-# 2 软硬件信息
+# 2 Software and hardware information
 
-## 2.1 系统与控制器
+## 2.1 Systems and Controllers
 
-Raspberry Pi 4B是一款基于ARM架构的微型电脑。它采用了由博通公司出品的、集成了GPU和CPU的BCM2711芯片，支持4K分辨率视频输出，最大支持4GB LPDDR4-3200 SDRAM内存，支持Gigabit以太网、双频WiFi、蓝牙5.0等多种接口和协议。它还有两个Micro-HDMI接口、两个USB3.0接口、两个USB2.0接口、一个40针GPIO接口、一个2针电源接口等。
+The Raspberry Pi 4B is a miniature computer based on the ARM architecture. It uses the BCM2711 chip with integrated GPU and CPU from Broadcom, supports 4K resolution video output, up to 4GB of LPDDR4-3200 SDRAM memory, Gigabit Ethernet, dual-band WiFi, Bluetooth 5.0 and many other interfaces and protocols. It also has two Micro-HDMI ports, two USB 3.0 ports, two USB 2.0 ports, a 40-pin GPIO port, a 2-pin power connector and more.
 
 ## ！！黄老板写点软件版本信息
 
@@ -81,47 +71,44 @@ Raspberry Pi 4B是一款基于ARM架构的微型电脑。它采用了由博通�
 
 
 
-## 2.2 电源
+## 2.2 Power supply
 
-在同功率下，高电压会带来较低的电流，而低电压会带来更大的电流，这会导致发热更为严重，综合考虑了安全性与系统其他部件的用电需求后，我们决定使用24V加热器进行加热。
+At the same power level, higher voltages result in lower currents, while lower voltages result in higher currents, which can lead to more serious heating, and after considering safety and the power requirements of other system components, we decided to use a 24V heater for heating.
 
-我们选用了一款名为DT-NT24V的恒压直流电源进行供电，它可以将 230V的交流电转换为24V的低压直流电。这是一款设计紧凑的电源，有蜂窝状散热设计，有半透明盖板对接线端子进行保护，可提供过压、过热、过流和短路保护，可以进行小电流输出，电压波纹小，运行噪音低。它可以提供最高6.25安培的电流，功率可以达到150瓦特。
+A constant voltage DC power supply called the DT-NT24V was chosen to supply the heater, which converts 230V AC to 24V low voltage DC. It is a compact power supply with a honeycomb heat sink design, a translucent cover to protect the terminals, overvoltage, overheat, overcurrent and short circuit protection, low current output, low voltage ripple and low noise operation. It can deliver up to 6.25 amps and can reach 150 watts of power.
 
 <div align="center">
 <img src="assets\PowerSupply.png" style="zoom:50%;" /> 
 </div> 
+<p align="center">Power supply</p>  
 
-<p align="center">电源</p>  
+## 2.3 Voltage converters
 
-## 2.3 电压转换器
-
-我们使用了一款基于LM2596S稳压器设计的DC-DC降压器，当输入电压为4.0V 至 40V时，输出电压可以通过外部分压电阻进行调整，范围为 1.23V 至 37V。同时，输出电流为2安培（正常稳定）和最大3安培，足以驱动许多电子设备。它的转换效率可以达到92%，输出纹波在30mV以下，开关频率150KHz，工作温度-45至85摄氏度。为了提高系统的稳定性，我们为每一个系统都配备了独立的电源。
+We use a DC-DC buck based on the LM2596S regulator design, where the output voltage can be adjusted via an external divider resistor over a range of 1.23V to 37V when the input voltage is 4.0V to 40V. At the same time, the output current is 2 Amps (normally stable) and a maximum of 3 Amps, which is sufficient to drive many electronic devices. It can achieve a conversion efficiency of 92% with an output ripple of less than 30mV, a switching frequency of 150KHz and an operating temperature of -45 to 85 degrees Celsius. To improve the stability of the system, we equip each system with a separate power supply.
 
 <div align="center">
 <img src="assets\VoltageConvertor.png" style="zoom:70%;" /> 
 </div>
+<p align="center">LM2596S Voltage converters</p>  
 
-<p align="center">LM2596S 电压转换器</p>  
+## 2.4 PWM regulation electronic switch control board
 
-## 2.4 PWM调节电子开关控制板
+PWM (Pulse Width Modulation) is a technology that is widely used in electronics and communications. It adjusts the RMS value of a signal or power supply by controlling the width of the pulse waveform (i.e. the duration of the pulse). In a PWM signal, the ratio of the pulse width (duty cycle) is proportional to the analogue signal or output voltage being represented. The duty cycle is the ratio of the time occupied by the high state to the entire cycle time during a complete PWM cycle. The duty cycle typically ranges from 0% (all low) to 100% (all high). We use PWM technology to achieve control of heaters, air pumps and water pumps. By adjusting the duty cycle of the PWM signal, we can precisely control the speed and torque of the motor.
 
-PWM（Pulse Width Modulation）是一种广泛应用于电子和通信领域的技术。它通过控制脉冲波形的宽度（即脉冲的持续时间）来调整信号或电源的有效值。在PWM信号中，脉冲宽度的比例（占空比，duty cycle）与所表示的模拟信号或输出电压成正比。占空比是指在一个完整的PWM周期内，高电平状态所占的时间与整个周期时间的比例。占空比的范围通常在0%（全低电平）到100%（全高电平）之间。我们利用PWM技术，实现了对加热器，气泵与水泵的控制，通过调整PWM信号的占空比，可以精确控制电机的速度和扭矩。
-
-我们使用的这款PWM调节电子开关控制板可以对5V-36V的直流电进行调控，使用3.3V-20V之间的直流电进行触发，在散热良好的情况下连续电流最高可达15A，功率可达400W。这款PWM调节电子开关控制板采用双MOS并联有源输出，具有低内阻，高功率的特点，支持频率在0--20KHZ之间的PWM信号。
+We use this PWM regulated electronic switch control board to regulate 5V-36V DC, using DC between 3.3V-20V for triggering, continuous current up to 15A and power up to 400W with good heat dissipation. this PWM regulated electronic switch control board uses double MOS parallel active output, with low internal resistance and high power, supporting PWM signals with frequencies between 0 - 20KHZ.
 
 <div align="center">
 <img src="assets\MotorControl.png" style="zoom:100%;" /> 
 </div>
+<p align="center">PWM regulation electronic switch control board</p>  
 
-<p align="center">PWM调节电子开关控制板</p>  
+## 2.5 Air pump
 
-## 2.5 气泵
+Air pumps play an important role in fish tanks by producing air bubbles that transport oxygen from the air to the tank water. When the bubbles burst, oxygen is released into the water, thus providing sufficient oxygen for the fish. Adequate oxygen is vital for the growth, metabolism and survival of fish. The air bubbles produced by the air pump circulate the water as they rise. The circulation of water helps to distribute nutrients, waste and oxygen in the water evenly throughout the tank, making it a more pleasant environment for fish. The oxygen provided by the air pump helps the growth of beneficial bacteria. These bacteria break down toxic substances such as ammonia and nitrites in fish excreta and convert them into harmless nitrates. This helps to maintain stable water quality in the tank and provides a healthy living environment for the fish.
 
-气泵在鱼缸中扮演着重要的角色，气泵通过产生气泡，将空气中的氧气输送到鱼缸水中。当气泡破裂时，氧气释放到水中，从而为鱼类提供充足的氧气。足够的氧气对于鱼类的生长、新陈代谢和生存至关重要。气泵产生的气泡在上升过程中，可以带动水流产生循环。水流的循环有助于水中的营养物质、废物和氧气在鱼缸内均匀分布，使鱼类生活环境更加舒适。气泵提供的氧气有助于有益细菌的生长。这些细菌可以分解鱼类排泄物中的氨、亚硝酸盐等有毒物质，将其转化为无害的硝酸盐。这有助于维持鱼缸水质的稳定，为鱼类提供一个健康的生活环境。
+This air pump weighs about 150g, uses a booster electric ceramic motor, is powered by a 5V power supply, consumes about 1W and has a maximum flow rate of 210L/H. It has a stable oxygen supply, low heat generation and low noise.
 
-这款气泵重约150g，采用增压电陶瓷电机，使用5V电源进行供电，功耗约为1W，最大流量为210L/H。具有供氧稳定，发热低，噪音低的特点。
-
-我们通过PWM对气泵实现分级调速，设置了包含关闭在内的五个速度级别，用户可以在移动端选择需要的速度级别。
+We have set up five speed levels, including off, through PWM, so that the user can select the desired speed level on the mobile.
 
  <div align="center">
 <img src="assets\AirPump.png" style="zoom:50%;" /> 
@@ -129,13 +116,13 @@ PWM（Pulse Width Modulation）是一种广泛应用于电子和通信领域的�
 
 <p align="center">气泵</p>  
 
-## 2.6 水泵
+## 2.6 Water pump
 
-水泵可以推动水流循环，这有助于水中的氧气、营养物质和废物在鱼缸内均匀分布，从而为鱼类提供一个舒适的生活环境。水泵可以将水中的废物输送到过滤器，提高过滤器的工作效率，帮助维持水质。水泵产生的水流可以帮助模拟自然环境中的水流，使鱼缸形成一个良好的生态平衡。这对于鱼类的生长、繁殖以及整个鱼缸生态系统的稳定非常重要。水泵产生的水流可以带动鱼缸中的装饰物，如仿真水草、喷泉等，为鱼缸增添动感和美观效果。
+The water pump circulates the water, which helps the oxygen, nutrients and waste in the water to be evenly distributed within the tank, thus providing a comfortable living environment for the fish. The water pump transports waste from the water to the filter, increasing the efficiency of the filter and helping to maintain water quality. The water flow generated by the pump helps to simulate the water flow in a natural environment, creating a good ecological balance in the fish tank. This is important for the growth and reproduction of fish and the stability of the entire fish tank ecosystem. The water flow generated by the pump can drive decorative objects in the tank, such as simulated water plants and fountains, adding a dynamic and aesthetic effect to the tank.
 
-这款水泵长38毫米，宽38毫米，高29毫米，重约125g，使用4.5V~12V的直流电进行驱动，水流量可以达到100~350L/H，功率可达0.5~5W。它可以在40db以下的声级下安静地工作，通过吸盘吸附在鱼缸表面上。
+The pump is 38mm long, 38mm wide, 29mm high, weighs about 125g and is driven by DC power from 4.5V~12V. The water flow can reach 100~350L/H and the power can reach 0.5~5W. It can work quietly at a sound level below 40db and is attached to the surface of the fish tank by suction cups.
 
-我们通过PWM对水泵实现分级调速，设置了包含关闭在内的五个速度级别，用户可以在移动端选择需要的速度级别。
+We implement a graded speed regulation for the pump via PWM, setting five speed levels including off, and the user can select the desired speed level on the mobile.
 
   <div align="center">
 <img src="assets\WaterPump.jpg" style="zoom:60%;" /> 
@@ -143,98 +130,110 @@ PWM（Pulse Width Modulation）是一种广泛应用于电子和通信领域的�
 
 <p align="center">水泵</p>  
 
-## 2.7 浸入式电阻式加热器
+## 2.7 Immersion resistance heater
 
-浸入式电阻式加热器是一种利用电阻发热的原理来加热水的设备。它主要由电阻发热元件、外壳、温度控制器和绝缘材料等部分组成。在加热器中，电阻发热元件是核心部件，它将电能转化为热能，从而实现对水的加热，同时，电阻发热元件直接与水接触，热量传递效率较高，因此加热速度较快。当电流通过电阻发热元件时，由于电阻元件的电阻作用，电流会产生焦耳热。这种热量会被传递到水中，使水温升高。通过调整PWM信号的占空比，可以控制加热元件产生的热量，从而实现对水温的控制。
+The immersion resistance heater is a device that uses the principle of resistance heating to heat water. It is mainly composed of resistance heating elements, housing, temperature controller and insulating material and other parts. In the heater, the resistance heating element is the core component, which converts electrical energy into heat energy, thus realising the heating of the water. At the same time, the resistance heating element is in direct contact with the water, and the heat transfer efficiency is high, so the heating speed is faster. When the current passes through the resistance heating element, the current generates Joule heat due to the resistance of the resistance element. This heat is transferred to the water, causing the water temperature to rise. By adjusting the duty cycle of the PWM signal, the amount of heat generated by the heating element can be controlled and thus the water temperature can be controlled.
 
-我们采用的加热器可以工作在24V的电压下，并且最大功率可以达到140瓦特。
+The heaters we use can operate at 24 V and can reach a maximum power of 140 Watts.
 
   <div align="center">
 <img src="assets\Heater.png" style="zoom:50%;" /> 
 </div>
+<p align="center">Immersion resistance heater</p>  
 
-<p align="center">浸入式电阻式加热器</p>  
+## 2.8 temperature sensor
 
-## 2.8 温度传感器
-
-DS18B20 是一款能够在 -55°C 至 +125°C 的范围内测量温度的数字温度传感器。当温度在 -10°C 至 +85°C 范围内时，DS18B20 的测量精度可达到 ±0.5°C。它可以将测量到的温度值转换为数字信号，便于微控制器等数字设备读取和处理。输出数据为 9 位至 12 位可编程分辨率的数字信号。DS18B20 使用一根数据线（1-Wire 协议）与微控制器进行通信，可以简化接线和减少硬件成本。
+The DS18B20 is a digital temperature sensor capable of measuring temperatures in the range -55°C to +125°C. The DS18B20 is capable of measuring temperatures in the range -10°C to +85°C with an accuracy of ±0.5°C. It converts the measured temperature value into a digital signal for digital applications such as microcontrollers. It converts the measured temperature value into a digital signal that can be read and processed by digital devices such as microcontrollers. The DS18B20 communicates with the microcontroller using a single data line (1-Wire protocol), simplifying wiring and reducing hardware costs.
 
   <div align="center">
 <img src="assets\TemperatureSensor.png" style="zoom:30%;" /> 
 </div>
+<p align="center">DS18B20 Temperature sensor</p>  
 
-<p align="center">DS18B20温度传感器</p>  
-
-同时，由于DS18B20采用单总线数据传输，为了确保数据线上的电平稳定和可靠地进行数据传输，需要在数据线上连接一个上拉电阻。上拉电阻将数据线连接到正电源上，以确保数据线处于高电平状态。当要发送低电平信号时，数据线上的电平将被拉低，并且由于上拉电阻的存在，数据线上的电流将非常小，从而实现了低电平信号的发送。此外，上拉电阻还可以防止数据线上的电磁干扰和电气噪声，提高数据传输的可靠性。
+Also, as the DS18B20 uses a single bus for data transmission, a pull-up resistor needs to be connected to the data line in order to ensure a stable and reliable level on the data line for data transmission. The pull-up resistor connects the data line to a positive power supply to ensure that the data line is at a high level. When a low level signal is to be sent, the level on the data line will be pulled down and, due to the pull-up resistor, the current on the data line will be very low, thus enabling a low level signal to be sent. In addition, pull-up resistors prevent electromagnetic interference and electrical noise on the data line, improving the reliability of data transmission.
 
   <div align="center">
 <img src="assets\WiringDiagram-temperaturesensor.jpg" style="zoom:30%;" /> 
 </div>
+<p align="center">DS18B20 Temperature sensor wiring diagram</p>  
 
-<p align="center">DS18B20温度传感器接线</p>  
+## 2.9 Connector
 
-## 2.9 连接件
-
-在连接性方面，为了方便测试，我们使用了2针的JST 插头，这是一种广泛应用于各种电子设备和电气应用的连接器，具有小巧轻便、插拔方便和稳定性好的优点，同时设计有锁扣与单向插槽，因此该插头不容易意外松脱，同时不会出现电源接反的情况。在线材上，我们主要使用了规格为22AWG的线材，最大电流可以通过5-7安培。考虑到加热元件的功率与运行电压，并且为了降低发热以及提高稳定性，因此我们在加热元件的连接上使用了两根此规格的线材。
+In terms of connectivity, for testing purposes we used a 2-pin JST plug, a connector widely used in a variety of electronic devices and electrical applications, which is small, lightweight, easy to plug and unplug and stable. It is also designed with locking clips and unidirectional slots so that the plug is not prone to accidental loosening and at the same time there is no reverse power connection. For the wire, we have used mainly 22AWG gauge wire, which can pass a maximum current of 5-7 amps. Two wires of this size are used for the connection of the heating element, taking into account the power and operating voltage of the heating element and in order to reduce heat and improve stability.
 
   <div align="center">
 <img src="assets\JST .jpg" style="zoom:30%;" /> 
 </div>
+<p align="center">JST Connector</p>  
 
-<p align="center">JST 插头</p>  
-
-## 2.10 端口分配
+## 2.10 Port allocation
 
    <div align="center">
 <img src="assets\WiringDiagram-Raspberry4bPinOut.png" style="zoom:50%;" /> 
 </div>
-
-<p align="center">Raspberry Pi 4B接口</p>  
+<p align="center">Raspberry Pi 4B Pin out</p>  
 
    <div align="center">
 <img src="assets\InterfaceAssignment-zh.png" style="zoom:50%;" /> 
 </div>
-<p align="center">Raspberry Pi 4B端口分配</p>  
+<p align="center">Raspberry Pi 4B Port allocation</p>  
 
-使用串行通讯的蓝牙模块需要使用TX和RX端口，同时使用W1总线进行通讯的DS18B20需要使用GPIO4端口（默认W1端口）进行通讯。
+Bluetooth modules using serial communication require the TX and RX ports, while DS18B20s using the W1 bus for communication require the GPIO4 port (default W1 port) for communication.
 
-> **备注：**
-> GPIO4通常是默认的W1端口，而树莓派的其他端口也可以通过配置为W1端口而用于连接1-Wire设备。
->如果要将其他端口配置为W1端口，可以进行以下操作：
->1. 使用文本编辑器打开/boot/config.txt文件
->2. 在文档最后添加：dtoverlay=w1-gpio,gpiopin=<W1引脚号>
->3. 保存并关闭文件，重新启动树莓派
->需要注意的是在“dtoverlay=w1-gpio,gpiopin=<W1引脚号>”中，“,”不应有空格，不然配置会无效
+> **Remarks:**
+> GPIO4 is normally the default W1 port and other ports on the Raspberry Pi can be used to connect 1-Wire devices by configuring them as W1 ports.
+> To configure other ports as W1 ports, you can do the following:
+>
+> 1. Open the /boot/config.txt file using a text editor
+> 2. Add at the end of the document: dtoverlay=w1-gpio,gpiopin=<W1 pin number>
+> 3. Save and close the file and reboot the Raspberry Pi
+>    Note that in "dtoverlay=w1-gpio,gpiopin=<W1 pin number>", there should be no spaces in the ",", otherwise the configuration will be invalid
 
-## 2.11 原理图与实物图
+## 2.11 Schematic and physical drawings
 
-电源连接230V交流电，输出24V直流电，在经过第二次电压转换后获得需要的5V或3.3V电压。
+The power supply is connected to 230V AC and outputs 24V DC, after a second voltage conversion to obtain the required 5V or 3.3V.
 
-PWM调节电子开关控制板的输入端连接电压转换器，输出端连接负载，控制端的PWM端口连接树莓派的GPIO端口，GND与树莓派的GND相连。
+The PWM regulated electronic switch control board has an input connected to the voltage converter and an output connected to the load. The PWM port on the console is connected to the GPIO port of the Raspberry Pi and GND is connected to the GND of the Raspberry Pi.
 
    <div align="center">
 <img src="assets\WiringDiagram1.png" style="zoom:80%;" /> 
 </div>
-
-<p align="center">原理图</p> 
+<p align="center">Schematic</p> 
 
    <div align="center">
 <img src="assets\WiringDiagram2.png" style="zoom:80%;" /> 
 </div>
-
-<p align="center">模拟接线图</p> 
+<p align="center">Sample wiring diagram</p> 
 
  <div align="center">
 <img src="assets\WiringDiagram3.jpg" style="zoom:80%;" /> 
 </div>
+<p align="center">Physical wiring diagram</p> 
 
-<p align="center">实物接线图</p> 
+# 3 System development
 
-# 3 系统开发
+## 3.1 Software architecture diagram
 
-## 3.1 软件架构
+Application (App)
 
-### 3.1.1 `Airpump`类：
+- ThreadPool
+
+- Bluetooth
+
+- ThermalModule
+
+  - Heater
+  - Thermometer
+
+- Pump Module
+
+  - Air pump
+
+  - Waterpump
+
+## 3.2 软件架构
+
+### 3.2.1 `Airpump`类：
 
 这个类用于控制一个空气泵，它继承了`PwmController`类。`Airpump`类的主要功能是通过改变占空比（duty cycle）来控制空气泵的启动和停止。
 
@@ -243,7 +242,7 @@ PWM调节电子开关控制板的输入端连接电压转换器，输出端连�
 - `set()`函数：设置空气泵的占空比，并启动PWM。
 - `stop()`函数：停止空气泵。
 
-### 3.1.2 `App`类：
+### 3.2.2 `App`类：
 
 这个类用于初始化和运行整个应用程序。它包含了一个线程池（`ThreadPool`），蓝牙（`Bluetooth`），热控模块（`ThermalModule`）和泵控模块（`PumpModule`）。
 
@@ -253,7 +252,7 @@ PWM调节电子开关控制板的输入端连接电压转换器，输出端连�
 - 析构函数：在类对象销毁时，停止所有设备并终止`pigpio`库。
 - `AddModuleTasks()`函数：将各个模块的任务添加到线程池。
 
-### 3.1.3 `Heater`类的主要功能和方法如下：
+### 3.2.3 `Heater`类的主要功能和方法如下：
 
 - 构造函数：有两个构造函数，一个接受引脚编号，另一个接受引脚编号和频率。
 
@@ -273,23 +272,23 @@ PWM调节电子开关控制板的输入端连接电压转换器，输出端连�
 
 `Heater`类的目的是根据温度传感器的读数自动控制加热器的开启和关闭，以保持温度在设定的范围内。这种控制策略可能适用于诸如恒温器、热水器等需要维持恒定温度的设备。
 
-### 3.1.4 `PumpModule` 类: 
+### 3.2.4 `PumpModule` 类: 
 
 `PumpModule `类是用来管理空气泵和水泵的。在`PumpModule`的构造函数中，它初始化了一个空气泵和一个水泵对象。析构函数会在销毁对象时停止这两个泵。`registerBluetooth() `函数将蓝牙对象与水泵和空气泵关联。`registerHeaterFromThermalModule() `函数将热量器对象从 `ThermalModule `中注册到蓝牙对象中。`executeCmdControl() `函数根据蓝牙命令队列来控制水泵和空气泵。`stop() `函数会停止水泵和空气泵。
 
-### 3.1.5 `PwmController` 类:
+### 3.2.5 `PwmController` 类:
 
  PwmController 类是用来控制 GPIO 的 PWM 信号的。在 `PwmController` 的构造函数中，根据传入的引脚和频率，设置了引脚模式、PWM 频率和范围。析构函数会在销毁对象时关闭 PWM。`setPwmLvl() `函数根据传入的级别设置 PWM 占空比。`isRunning() `函数返回 PWM 控制器是否正在运行。
 
-### 3.1.6 `ThermalModule` 类: 
+### 3.2.6 `ThermalModule` 类: 
 
 `ThermalModule` 类用于管理加热器和温度计。在 ThermalModule 的构造函数中，初始化了一个加热器和一个温度计对象，并将加热器注册到温度计中。析构函数会在销毁对象时停止相关设备。`registerBluetooth() `函数将蓝牙对象与 `ThermalModule` 关联。`executeAutoControlHeater() `函数通过温度计自动控制加热器。stop() 函数会停止所有相关设备。
 
-### 3.1.7 `Thermometer` 类: 
+### 3.2.7 `Thermometer` 类: 
 
 `Thermometer `类是用来读取 DS18B20 温度计的。在 `Thermometer `的构造函数中，调用` FindTempDevices() `函数查找并记录温度计设备文件。析构函数会在销毁对象时停止` Thermometer`。`registerHeater() `函数将加热器对象与温度计关联。`AutoControlHeater()`函数会不断读取温度数据，并根据温度数据自动控制加热器。`FindTempDevices() `函数会在设备目录中查找并记录温度计设备文件。
 
-### 3.1.8 `ThreadPool` 类：
+### 3.2.8 `ThreadPool` 类：
 
 创建一个线程池，可以处理多线程任务。
 
@@ -302,9 +301,9 @@ PWM调节电子开关控制板的输入端连接电压转换器，输出端连�
 - `RunTask()`：运行任务队列中的任务。
 - `stopThreads()`：停止所有线程并清除线程池中的对象。
 
-### 3.1.9 `Waterpump `类
+### 3.2.9 `Waterpump `类
 
-#### 3.1.9.1头文件引用
+#### 3.2.9.1头文件引用
 
 ```
 cppCopy code#include <pigpio.h>
@@ -315,7 +314,7 @@ cppCopy code#include <pigpio.h>
 
 这部分代码引入了所需的头文件，包括 `pigpio.h`（用于操作树莓派的GPIO接口），`iostream`（用于输入输出操作，如输出错误信息），`config.h`（包含项目配置信息）和 `waterpump.h`（包含 `Waterpump` 类的声明）。
 
-#### 3.1.9.2 构造函数
+#### 3.2.9.2 构造函数
 
 ```
 cppCopy code
@@ -331,7 +330,7 @@ cppCopy codeWaterpump::Waterpump(unsigned int pin, unsigned int freq)
 
 这是另一个构造函数，接受两个无符号整数参数 `pin` 和 `freq`，并调用基类 `PwmController` 的构造函数。这个构造函数允许指定水泵的频率。
 
-#### 3.1.9.3 析构函数：
+#### 3.2.9.3 析构函数：
 
 ```
 cppCopy codeWaterpump::~Waterpump() {
@@ -343,7 +342,7 @@ cppCopy codeWaterpump::~Waterpump() {
 
 析构函数在 `Waterpump` 类的对象被销毁时调用。如果水泵正在运行，析构函数将调用 `stop()` 方法停止水泵。
 
-#### 3.1.9.4 `set()` 方法：
+#### 3.2.9.4 `set()` 方法：
 
 ```
 cppCopy codevoid Waterpump::set(char lvl) {
@@ -362,32 +361,13 @@ cppCopy codevoid Waterpump::set(char lvl) {
 
 `set()` 方法用于设置水泵的占空比（PWM水平）。首先调用 `setPwmLvl()` 方法设置占空比，然后调用 `gpioPWM()` 函数启动GPIO上的PWM。如果启动失败，将输出错误信息。
 
-#### 3.1.9.5 `stop()` 方法：
+#### 3.2.9.5 `stop()` 方法：
 
 
 
-#### 3.1.9.6 水泵类的声明：
+#### 3.2.9.6 水泵类的声明：
 
 
-
-## 3.2 软件架构图
-
-应用程序（App）
-
-- 线程池（ThreadPool）
-
-- 蓝牙（Bluetooth）
-
-- 热控模块（ThermalModule）
-
-  - 加热器（Heater）
-  - 温度计（Thermometer）
-
-- 泵控模块（PumpModule）
-
-  - 空气泵（Airpump）
-
-  - 水泵（Waterpump）
 
 
 ## 3.3 系统的结构

@@ -4,14 +4,14 @@
 <img src="assets\OpenReportTank.jpg" style="zoom:100%;" /> 
 </div>
 
-Change README Language: [English](./README.md) ｜ [中文](./README-zh.md)
+README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
 >[访问Instgram账号](https://instagram.com/haagendazs85?igshid=YmMyMTA2M2Y=) 
 >[访问Youtube账号](https://www.youtube.com/channel/UC8SZ1dN7v9y7iaWZyjrDwrA)
 
- # 1 项目简介：
+ # 1 项目简介
 
-我们的智能鱼缸项目是以树莓派4B为核心控制器的系统。它主要具有温度控制，含氧量维持，水流速调节等功能。用户可以在手机端查看温度并设定目标温度区间，还可以控制气泡多少和水流速度。
+我们的智能鱼缸项目是以树莓派4B为核心控制器的系统。它主要具有温度控制，含氧量维持，水流速调节等功能。用户可以在手机端查看温度并设定目标温度区间，还可以控制气泡多少和水流速度。我们的项目主要使用C++11进行编写，使用Cmake构建项目，运行在Raspbian GNU/Linux 11系统上。
 
 ## 1.1 项目功能
 
@@ -35,20 +35,14 @@ Change README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
 | Name         | Student ID | Role |
 | ------------ | ---------- | ---- |
-| Haoshi Huang |            |      |
+| Haoshi Huang | 2635088H   |      |
 | Xintong LIN  | 2824115L   |      |
-|              |            |      |
-|              |            |      |
+| Hanwei Liang | 2669523L   |      |
+| Chaoyi Yang  |            |      |
 
 ## 1-3 项目规划
 
-Haoshi Huang
-
-
-
-Xintong LIN
-
-
+> [甘特图](.assets/GanttChart.xlsx)
 
 <div align="center">
 <img src="assets\GanttChart.png" style="zoom:100%;" /> 
