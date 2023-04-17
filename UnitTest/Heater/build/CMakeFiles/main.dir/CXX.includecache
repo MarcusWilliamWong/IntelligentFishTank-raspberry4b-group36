@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/group36/Project/UnitTest/UnitTest/Heater/heater.cpp
+vector
+-
+algorithm
+-
+numeric
+-
+tuple
+-
+mutex
+-
+pigpio.h
+-
+heater.h
+/home/group36/Project/UnitTest/UnitTest/Heater/heater.h
+iostream
+-
+unistd.h
+-
+
+/home/group36/Project/UnitTest/UnitTest/Heater/heater.h
+tuple
+-
+mutex
+-
+vector
+-
+pwmctrl.h
+/home/group36/Project/UnitTest/UnitTest/Heater/pwmctrl.h
+
+/home/group36/Project/UnitTest/UnitTest/Heater/pwmctrl.h
+atomic
+-
+

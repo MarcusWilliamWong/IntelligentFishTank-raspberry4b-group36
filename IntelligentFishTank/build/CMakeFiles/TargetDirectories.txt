@@ -1,3 +1,0 @@
-/home/group36/Project/Haoshi/build/CMakeFiles/rebuild_cache.dir
-/home/group36/Project/Haoshi/build/CMakeFiles/edit_cache.dir
-/home/group36/Project/Haoshi/build/CMakeFiles/main.dir
