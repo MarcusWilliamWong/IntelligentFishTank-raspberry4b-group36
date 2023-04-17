@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/main.dir/app.cpp.o CMakeFiles/main.dir/threadPool.cpp.o CMakeFiles/main.dir/pwmctrl.cpp.o CMakeFiles/main.dir/heater.cpp.o CMakeFiles/main.dir/myds18b20.cpp.o CMakeFiles/main.dir/thermalModule.cpp.o CMakeFiles/main.dir/Test_thermalModule.cpp.o -o main  -lpthread -lpigpio 

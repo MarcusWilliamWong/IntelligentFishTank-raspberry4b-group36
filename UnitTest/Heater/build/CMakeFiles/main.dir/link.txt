@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/main.dir/Test_heater.cpp.o CMakeFiles/main.dir/heater.cpp.o CMakeFiles/main.dir/pwmctrl.cpp.o -o main  -lpthread -lpigpio 

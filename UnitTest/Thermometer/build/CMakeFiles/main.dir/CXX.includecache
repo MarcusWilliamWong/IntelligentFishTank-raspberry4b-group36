@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/group36/Project/UnitTest/UnitTest/Thermometer/Test_DS18B20.cpp
+pigpio.h
+-
+myds18b20.h
+/home/group36/Project/UnitTest/UnitTest/Thermometer/myds18b20.h
+unistd.h
+-
+iostream
+-
+
+/home/group36/Project/UnitTest/UnitTest/Thermometer/myds18b20.cpp
+myds18b20.h
+/home/group36/Project/UnitTest/UnitTest/Thermometer/myds18b20.h
+dirent.h
+-
+sys/types.h
+-
+regex
+-
+iostream
+-
+fstream
+-
+thread
+-
+
+/home/group36/Project/UnitTest/UnitTest/Thermometer/myds18b20.h
+vector
+-
+memory
+-
+
