@@ -1,8 +1,9 @@
 #  Intelligent Fish Tank
 
 <div align="center">
-<img src="assets\OpenReportTank.jpg" style="zoom:100%;" /> 
+<img src="assets\Tank.png" style="zoom:100%;" /> 
 </div>
+
 
 README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
@@ -35,7 +36,7 @@ Everything mentioned above does not require the user to debug the Raspberry Pi o
 
 | Name         | Student ID | Role |
 | ------------ | ---------- | ---- |
-| Haoshi Huang |            |      |
+| Haoshi Huang | 2635088H   |      |
 | Xintong LIN  | 2824115L   |      |
 | Hanwei Liang | 2669523L   |      |
 |              |            |      |
@@ -174,7 +175,7 @@ In terms of connectivity, for testing purposes we used a 2-pin JST plug, a conne
 <p align="center">Raspberry Pi 4B Pin out</p>  
 
    <div align="center">
-<img src="assets\InterfaceAssignment-zh.png" style="zoom:50%;" /> 
+<img src="assets\InterfaceAssignment.png" style="zoom:50%;" /> 
 </div>
 <p align="center">Raspberry Pi 4B Port allocation</p>  
 

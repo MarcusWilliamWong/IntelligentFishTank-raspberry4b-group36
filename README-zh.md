@@ -1,8 +1,9 @@
 #  智能鱼缸
 
 <div align="center">
-<img src="assets\OpenReportTank.jpg" style="zoom:100%;" /> 
+<img src="assets\Tank.png" style="zoom:100%;" /> 
 </div>
+
 
 README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 
@@ -38,7 +39,7 @@ README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 | Haoshi Huang | 2635088H   |      |
 | Xintong LIN  | 2824115L   |      |
 | Hanwei Liang | 2669523L   |      |
-| Chaoyi Yang  |            |      |
+| Chaoyi Yang  | 2724184Y   |      |
 
 ## 1-3 项目规划
 
@@ -61,6 +62,26 @@ README Language: [English](./README.md) ｜ [中文](./README-zh.md)
 ## 2.1 系统与控制器
 
 Raspberry Pi 4B是一款基于ARM架构的微型电脑。它采用了由博通公司出品的、集成了GPU和CPU的BCM2711芯片，支持4K分辨率视频输出，最大支持4GB LPDDR4-3200 SDRAM内存，支持Gigabit以太网、双频WiFi、蓝牙5.0等多种接口和协议。它还有两个Micro-HDMI接口、两个USB3.0接口、两个USB2.0接口、一个40针GPIO接口、一个2针电源接口等。
+
+
+
+操作系统：Raspbian GNU/Linux 11 (bullseye-armlf)
+
+硬件配置：Raspberry Pi 4B(Broadcom BCM2711), Quad core Cortex-A72 (ARM v8) 64-bit
+
+程序语言相关：
+
+- 开发工具：Visual Studio Code 1.76.0
+- 编译器版本：g++ 10.2.1 (Raspbian 10.2.1-6+rpi1) 
+- CMAKE 版本：cmake 3.18.4
+- 编码规范：Google C++编码规范
+
+依赖库：
+
+- C++ Standard Template Library (STL)
+- pigpio v79
+
+
 
 ## ！！黄老板写点软件版本信息
 
@@ -244,16 +265,20 @@ PWM调节电子开关控制板的输入端连接电压转换器，输出端连�
 
 ## 3.2 软件架构
 
-### 3.2.1 `Airpump`类：
+### 3.2.5 `PwmController` 类
+
+因为项目中的加热器，水泵，气泵，都是由 PWM 模块控制的，在编码上 PWM 信号控制器件输出功率的执行流程是一致的：分配器件接口，设置 PWM 信号频率和占空比控制范围，最后按照占空比与占空比控制范围的相对比值作为输出功率输出 PWM 信号到 GPIO 上。所以定义一个接口基类，类内数据成员分别是：`kPin_` 对应GPIO 号， `kRange_`对应控制精度， `freq_`对应信号频率， `dutycycle_`对应占空比，外加一个表示运行状态的 `bool`变量 `running_` 该接口类定义了两个纯虚函数：`set()` 和 `stop()`。`set()` 用来控制 GPIO 的 PWM 信号的。在 `PwmController` 的构造函数中，根据传入的引脚和频率，设置了引脚模式、PWM 频率和范围。析构函数会在销毁对象时关闭 PWM。`setPwmLvl() `函数根据传入的级别设置 PWM 占空比。`isRunning() `函数返回 PWM 控制器是否正在运行。
+
+### 3.2.1 `Airpump`类
 
 这个类用于控制一个空气泵，它继承了`PwmController`类。`Airpump`类的主要功能是通过改变占空比（duty cycle）来控制空气泵的启动和停止。
 
 - 构造函数：有两个构造函数，一个接受引脚编号，另一个接受引脚编号和频率。
 - 析构函数：在类对象销毁时，如果空气泵正在运行，则停止空气泵。
 - `set()`函数：设置空气泵的占空比，并启动PWM。
-- `stop()`函数：停止空气泵。
+- `stop()`函数：停止空气泵。 
 
-### 3.2.2 `App`类：
+### 3.2.2 `App`类
 
 这个类用于初始化和运行整个应用程序。它包含了一个线程池（`ThreadPool`），蓝牙（`Bluetooth`），热控模块（`ThermalModule`）和泵控模块（`PumpModule`）。
 
@@ -263,7 +288,7 @@ PWM调节电子开关控制板的输入端连接电压转换器，输出端连�
 - 析构函数：在类对象销毁时，停止所有设备并终止`pigpio`库。
 - `AddModuleTasks()`函数：将各个模块的任务添加到线程池。
 
-### 3.2.3 `Heater`类的主要功能和方法如下：
+### 3.2.3 `Heater`类
 
 - 构造函数：有两个构造函数，一个接受引脚编号，另一个接受引脚编号和频率。
 
@@ -283,23 +308,23 @@ PWM调节电子开关控制板的输入端连接电压转换器，输出端连�
 
 `Heater`类的目的是根据温度传感器的读数自动控制加热器的开启和关闭，以保持温度在设定的范围内。这种控制策略可能适用于诸如恒温器、热水器等需要维持恒定温度的设备。
 
-### 3.2.4 `PumpModule` 类: 
+### 3.2.4 `PumpModule` 类
 
 `PumpModule `类是用来管理空气泵和水泵的。在`PumpModule`的构造函数中，它初始化了一个空气泵和一个水泵对象。析构函数会在销毁对象时停止这两个泵。`registerBluetooth() `函数将蓝牙对象与水泵和空气泵关联。`registerHeaterFromThermalModule() `函数将热量器对象从 `ThermalModule `中注册到蓝牙对象中。`executeCmdControl() `函数根据蓝牙命令队列来控制水泵和空气泵。`stop() `函数会停止水泵和空气泵。
 
-### 3.2.5 `PwmController` 类:
+### 3.2.5 `PwmController` 类
 
- PwmController 类是用来控制 GPIO 的 PWM 信号的。在 `PwmController` 的构造函数中，根据传入的引脚和频率，设置了引脚模式、PWM 频率和范围。析构函数会在销毁对象时关闭 PWM。`setPwmLvl() `函数根据传入的级别设置 PWM 占空比。`isRunning() `函数返回 PWM 控制器是否正在运行。
+这是一个 PwmController 类是用来控制 GPIO 的 PWM 信号的。在 `PwmController` 的构造函数中，根据传入的引脚和频率，设置了引脚模式、PWM 频率和范围。析构函数会在销毁对象时关闭 PWM。`setPwmLvl() `函数根据传入的级别设置 PWM 占空比。`isRunning() `函数返回 PWM 控制器是否正在运行。
 
-### 3.2.6 `ThermalModule` 类: 
+### 3.2.6 `ThermalModule` 类
 
 `ThermalModule` 类用于管理加热器和温度计。在 ThermalModule 的构造函数中，初始化了一个加热器和一个温度计对象，并将加热器注册到温度计中。析构函数会在销毁对象时停止相关设备。`registerBluetooth() `函数将蓝牙对象与 `ThermalModule` 关联。`executeAutoControlHeater() `函数通过温度计自动控制加热器。stop() 函数会停止所有相关设备。
 
-### 3.2.7 `Thermometer` 类: 
+### 3.2.7 `Thermometer` 类
 
 `Thermometer `类是用来读取 DS18B20 温度计的。在 `Thermometer `的构造函数中，调用` FindTempDevices() `函数查找并记录温度计设备文件。析构函数会在销毁对象时停止` Thermometer`。`registerHeater() `函数将加热器对象与温度计关联。`AutoControlHeater()`函数会不断读取温度数据，并根据温度数据自动控制加热器。`FindTempDevices() `函数会在设备目录中查找并记录温度计设备文件。
 
-### 3.2.8 `ThreadPool` 类：
+### 3.2.8 `ThreadPool` 类
 
 创建一个线程池，可以处理多线程任务。
 
@@ -314,7 +339,7 @@ PWM调节电子开关控制板的输入端连接电压转换器，输出端连�
 
 ### 3.2.9 `Waterpump `类
 
-#### 3.2.9.1头文件引用
+#### 3.2.9.1 头文件引用
 
 ```
 cppCopy code#include <pigpio.h>
@@ -383,13 +408,13 @@ cppCopy codevoid Waterpump::set(char lvl) {
 
 ## 3.3 系统的结构
 
-- src (source) 文件夹：这个文件夹包含项目的所有源代码文件
+- src 文件夹：该文件夹包含项目的所有源代码文件
 
-- build 文件夹：这个文件夹主要用于存放编译过程中生成的中间文件
+- build 文件夹：该文件夹主要用于存放编译过程中生成的中间文件
 
-- include 文件夹：这个文件夹包含项目的头文件（.h 和 .hpp 文件），这些头文件定义了项目中各个类的接口、数据结构和常量等
+- include 文件夹：该文件夹包含项目的头文件（.h 和 .hpp 文件），这些头文件定义了项目中各个类的接口、数据结构和常量等
 
-- samples 文件夹：这个文件夹包含一些示例代码，用于演示如何使用项目中的各个类和功能。
+- samples 文件夹：该文件夹包含一些示例代码，用于演示如何使用项目中的各个类和功能。
 
 ## 这里来点图？
 
