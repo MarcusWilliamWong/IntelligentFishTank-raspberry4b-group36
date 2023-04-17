@@ -25,7 +25,7 @@ protected:
   const unsigned int kRange_; // control precision of dutycycle
   unsigned int freq_; // default device freq needs 50Hz = 20ms a period
   // because Raspberry 4B is a 64bis machine, we use u_int64_t type
-  std::atomic<u_int64_t> dutycycle_; // default pwm level is ZeroLevel(0u)
+  unsigned int dutycycle_; // default pwm level is ZeroLevel(0u)
   std::atomic_bool running_;  // equipment running status
 
   // just set dutycycle value, but not start PWM on the GPIO

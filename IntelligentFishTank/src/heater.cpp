@@ -5,11 +5,11 @@
 #include <iostream>
 #include <chrono>
 #include <pigpio.h>
+#include "config.h"
 #include "heater.h"
 
 // Test only
 // #define DEBUG_THREADTASK
-
 
 Heater::Heater(unsigned int pin) : PwmController(pin){}
 
@@ -18,8 +18,15 @@ Heater::Heater(unsigned int pin, unsigned int freq)
 
 Heater::~Heater() {
 	if (running_) {
-		this->stop(); 
+		this->stop();
 	}
+}
+// Bottom callback task, Bluetooth cmd set heater setMinMaxLimit
+void Heater::setMinMaxLimit(int min, int max) {
+	minLimit_ = static_cast<double>(min) / 10.0;
+	maxLimit_ = static_cast<double>(max) / 10.0;
+	std::cout << TAG_HEATER << " new temper range [" << minLimit_ << ", "
+						<< maxLimit_ << "]" << std::endl;
 }
 
 // bottom task, compute the average temperature, and conditionally call turnOn and turnOff
@@ -37,16 +44,16 @@ void Heater::ConditionalOnOff(const std::vector<double> &tempers) {
 						<< average << std::endl;
 	// if average is 0.0, return and wait for thermometer initialise
 	if (!average) return;
-	// average T lower than min threshold
-	if (average < std::get<0>(tempRange_)) {
+	// average T lower than min limit
+	if (average < minLimit_) {
 		// heat until higher than max range
 		if (needOn_) {
 			needOn_ = false;
 			needOff_ = true;
 			autoTurnOn(average);
 		}
-	} else if (average > std::get<1>(tempRange_)) {
-		// wait temper cool until lower than mmin range
+	} else if (average > maxLimit_) {
+		// wait temper cool until lower than mmin limit
 		if (needOff_) {
 			needOff_ = false;
 			needOn_ = true;
@@ -64,7 +71,7 @@ void Heater::autoTurnOn(int average) {
 	std::cout << TAG_HEATER << "auto start Heater" << std::endl;
 	// start configed PWM level on GPIO, if configured as lvl0, automatically set lvl3
 	if (!dutycycle_) {
-		setPwmLvl('3');
+		set('3');
 	} else {
 		// if dutycycle not lvl0, keep original dutycycle
 		gpioPWM(kPin_, dutycycle_);

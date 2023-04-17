@@ -55,7 +55,9 @@ mutex
 -
 vector
 -
-condition_variable
+atomic
+-
+string
 -
 pwmctrl.h
 ../include/pwmctrl.h
@@ -191,6 +193,8 @@ chrono
 -
 pigpio.h
 -
+config.h
+/home/group36/Project/Haoshi/IntelligentFishTank/src/config.h
 heater.h
 /home/group36/Project/Haoshi/IntelligentFishTank/src/heater.h
 

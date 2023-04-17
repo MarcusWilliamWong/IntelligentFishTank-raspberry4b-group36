@@ -12,7 +12,7 @@ public:
   Waterpump(unsigned int pin);
   Waterpump(unsigned int pin, unsigned int freq);
   ~Waterpump();
-  // set gpiopwm, cmd control pwm level, call setPwmLvl()
+  // bottom callback task, set and start new PWM on GPIO 
   void set(char lvl) override;
   void stop() override;
 };

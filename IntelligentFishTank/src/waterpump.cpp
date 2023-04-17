@@ -1,5 +1,6 @@
 #include <pigpio.h>
 #include <iostream>
+#include "config.h"
 #include "waterpump.h"
 
 Waterpump::Waterpump(unsigned int pin) : PwmController(pin) {}

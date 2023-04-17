@@ -46,10 +46,9 @@ App::~App() {
 void App::AddModuleTasks() {
   // task from 
   pool_ptr_->AddTask([this]{ this->bluetooth_ptr_->executeRecvCmd(); });
-  // task from thermalModule
-  pool_ptr_->AddTask([this]{ this->thermalModule_ptr_->executeAutoControlHeater(); });
   // task from pumpModule
   pool_ptr_->AddTask([this]{ this->pumpModule_ptr_->executeCmdControl(); });
-  
+  // task from thermalModule
+  pool_ptr_->AddTask([this]{ this->thermalModule_ptr_->executeAutoControlHeater(); });
 }
 

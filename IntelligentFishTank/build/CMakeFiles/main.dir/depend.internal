@@ -44,6 +44,7 @@ CMakeFiles/main.dir/src/bluetooth.cpp.o
  ../include/waterpump.h
  /home/group36/Project/Haoshi/IntelligentFishTank/src/bluetooth.cpp
 CMakeFiles/main.dir/src/heater.cpp.o
+ ../include/config.h
  ../include/heater.h
  ../include/pwmctrl.h
  /home/group36/Project/Haoshi/IntelligentFishTank/src/heater.cpp
@@ -91,6 +92,7 @@ CMakeFiles/main.dir/src/threadPool.cpp.o
  ../include/threadPool.h
  /home/group36/Project/Haoshi/IntelligentFishTank/src/threadPool.cpp
 CMakeFiles/main.dir/src/waterpump.cpp.o
+ ../include/config.h
  ../include/pwmctrl.h
  ../include/waterpump.h
  /home/group36/Project/Haoshi/IntelligentFishTank/src/waterpump.cpp

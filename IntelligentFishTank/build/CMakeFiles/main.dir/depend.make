@@ -43,6 +43,7 @@ CMakeFiles/main.dir/src/bluetooth.cpp.o: ../include/taskQueue.hpp
 CMakeFiles/main.dir/src/bluetooth.cpp.o: ../include/waterpump.h
 CMakeFiles/main.dir/src/bluetooth.cpp.o: ../src/bluetooth.cpp
 
+CMakeFiles/main.dir/src/heater.cpp.o: ../include/config.h
 CMakeFiles/main.dir/src/heater.cpp.o: ../include/heater.h
 CMakeFiles/main.dir/src/heater.cpp.o: ../include/pwmctrl.h
 CMakeFiles/main.dir/src/heater.cpp.o: ../src/heater.cpp
@@ -90,6 +91,7 @@ CMakeFiles/main.dir/src/threadPool.cpp.o: ../include/taskQueue.hpp
 CMakeFiles/main.dir/src/threadPool.cpp.o: ../include/threadPool.h
 CMakeFiles/main.dir/src/threadPool.cpp.o: ../src/threadPool.cpp
 
+CMakeFiles/main.dir/src/waterpump.cpp.o: ../include/config.h
 CMakeFiles/main.dir/src/waterpump.cpp.o: ../include/pwmctrl.h
 CMakeFiles/main.dir/src/waterpump.cpp.o: ../include/waterpump.h
 CMakeFiles/main.dir/src/waterpump.cpp.o: ../src/waterpump.cpp

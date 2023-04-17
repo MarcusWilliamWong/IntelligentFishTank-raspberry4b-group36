@@ -19,7 +19,7 @@ public:
   ~Thermometer();
   // register Heater
   void registerHeater(std::shared_ptr<Heater> &heater_ptr);
-  // bottom task, automatically conditionally control heater via thermometer
+  // bottom callback task, automatically conditionally control heater via thermometer
   void AutoControlHeater();
   void stop();
 

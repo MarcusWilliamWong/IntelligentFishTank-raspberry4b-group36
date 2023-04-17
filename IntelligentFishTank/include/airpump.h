@@ -13,7 +13,8 @@ public:
   Airpump(unsigned int pin);
   Airpump(unsigned int pin, unsigned int freq);
   ~Airpump();
-  // set gpiopwm, cmd control pwm level, call setPwmLvl()
+
+  // bottom callback task, set and start new PWM on GPIO 
   void set(char lvl) override;
   void stop() override;
 };

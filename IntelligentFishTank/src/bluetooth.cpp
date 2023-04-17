@@ -122,9 +122,15 @@ void Bluetooth::executeCmdQueue() {
  * the 1st parameter is declared as `char*`, but not a smart ptr
 */
 int Bluetooth::recvData(char *data, unsigned int len) const {
-  int ret;
+  int ret = 0 ;
+  while (serDataAvailable(handle_) < len);
+  ret = serRead(handle_, data, len);
+  return ret;
+
+  #ifdef DEBUG_OLD
+  /*
   // after many test we think here need a milliseconds dely for transporting a complete cmd
-  std::this_thread::sleep_for(std::chrono::milliseconds(30));
+  std::this_thread::sleep_for(std::chrono::milliseconds(25));
   // just wait for avaliable data
   // while (!serDataAvailable(handle_)) {}
   if ((ret = serDataAvailable(handle_)) < len) {
@@ -164,8 +170,9 @@ int Bluetooth::recvData(char *data, unsigned int len) const {
     // // getchar();
     // #endif
   }
-  
+  */
   return ret;
+  #endif
 }
 
 // send equipments running status to mobile 
@@ -205,6 +212,17 @@ void Bluetooth::executeRecvCmd() {
         #endif
         continue;
       }
+      // CMD format: single CMD includes 9 ASCII char
+      // you can personalised your private Bluetooth CMD
+      // head bit[0] & tail bit[8] are check bits
+      // instruction bit [1] -> 
+      // when [1] = '1', means set Heater PWM as (0-4 level);
+      // when [1] = '2', means set Airpump PWM as (0-4 level);
+      // when [1] = '3', means set Waterpump PWM as (0-4 level);
+      // when [1] = {1, 2, 3}
+      // when []
+
+
 
       // judge cmd type
       Bluetooth::CmdType cmdType(Bluetooth::CmdType::Unknown);
@@ -281,6 +299,14 @@ void Bluetooth::executeRecvCmd() {
               break;
           }
         } break;
+        case '4': {
+          // char to int
+          auto char2Int = [](char c)->int{ return (c - '0'); };
+          int min = char2Int(data[2]) * 100 + char2Int(data[3]) * 10 + char2Int(data[4]);
+          int max = char2Int(data[5]) * 100 + char2Int(data[6]) * 10 + char2Int(data[7]);
+          // call heater setMinMaxLimit
+          heater_ptr_->setMinMaxLimit(min, max);
+        } break;
         default: {
           std::cerr << TAG_BLUETOOTH << "unknown instr: " << instr << std::endl;
         } break;
@@ -292,8 +318,6 @@ void Bluetooth::executeRecvCmd() {
                   << static_cast<unsigned int>(cmdType) << "u" << std::endl;
         std::cout << TAG_BLUETOOTH << "current cmd number is " << cmd_queue_.size()
                   << std::endl;
-        // after many test we think here need a milliseconds dely for stable transport cmd
-        std::this_thread::sleep_for(std::chrono::milliseconds(20));
       }
     } else {
       #ifdef DEBUG_BLUETOOTH
