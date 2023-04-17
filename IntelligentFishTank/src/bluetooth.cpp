@@ -3,6 +3,7 @@
 #include <cstring>
 #include <chrono>
 #include <thread>
+#include "heater.h"
 #include "taskQueue.hpp"
 #include "bluetooth.h"
 #include "config.h"
@@ -30,6 +31,11 @@ void Bluetooth::stop() {
   serClose(handle_);
 }
 
+//register heater
+void Bluetooth::registerHeater(std::shared_ptr<Heater> &heater_ptr) {
+  heater_ptr_ = heater_ptr;
+}
+
 // register airpump
 void Bluetooth::registerAirpump(std::shared_ptr<Airpump> &airpump_ptr) {
   airpump_ptr_ = airpump_ptr;
@@ -55,19 +61,19 @@ void Bluetooth::executeCmdQueue() {
     switch (cmd) {
       // cmd to control heater
       case Bluetooth::CmdType::SetHeaterPwmLvl0:
-        waterpump_ptr_->set('0');
+        heater_ptr_->set('0');
         break;
       case Bluetooth::CmdType::SetHeaterPwmLvl1:
-        waterpump_ptr_->set('1');
+        heater_ptr_->set('1');
         break;
       case Bluetooth::CmdType::SetHeaterPwmLvl2:
-        waterpump_ptr_->set('2');
+        heater_ptr_->set('2');
         break;
       case Bluetooth::CmdType::SetHeaterPwmLvl3:
-        waterpump_ptr_->set('3');
+        heater_ptr_->set('3');
         break;
       case Bluetooth::CmdType::SetHeaterPwmLvl4:
-        waterpump_ptr_->set('4');
+        heater_ptr_->set('4');
         break;
       // cmd to control airpump
       case Bluetooth::CmdType::SetAirpumpPwmLvl0:

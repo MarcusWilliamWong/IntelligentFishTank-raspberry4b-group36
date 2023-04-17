@@ -3,17 +3,15 @@
 #include <numeric>
 #include <tuple>
 #include <iostream>
-#include <mutex>
-#include <thread>
 #include <chrono>
 #include <pigpio.h>
 #include "heater.h"
 
 // Test only
-#define DEBUG_THREADTASK
+// #define DEBUG_THREADTASK
 
 
-Heater::Heater(unsigned int pin) : PwmController(pin), average_(new double{0.0}) {}
+Heater::Heater(unsigned int pin) : PwmController(pin){}
 
 Heater::Heater(unsigned int pin, unsigned int freq) 
 	: PwmController(pin, freq) {}
@@ -24,99 +22,61 @@ Heater::~Heater() {
 	}
 }
 
-// bottom task, compute 4 temperatures return tuple including the average, minimum, maximum
-void Heater::ProcessTempers(const std::vector<double> &tempers) {
-	std::cout << "ProcessTempers() " << TAG_HEATER << " Average T(°C): " 
-						<< *average_ << std::endl;
-	
+// bottom task, compute the average temperature, and conditionally call turnOn and turnOff
+void Heater::ConditionalOnOff(const std::vector<double> &tempers) {
+	// compute the average temperature
 	double sum = 0.0;
 	for (auto t : tempers) {
 		sum += t;
 	}
-	{
-		std::lock_guard<std::mutex> lock(mtx_);
-		if (!tempers.empty()) {
-			*(average_.get()) = sum / tempers.size();
-		}
+	double average = 0.0;
+	if (auto len = tempers.size()) {
+		average = sum / len;
 	}
-	std::cout << "new average " << *average_ << std::endl;
-
-	#ifdef DEBUG_THREADTASK
-	std::cout << TAG_HEATER << "ProcessTempers here" << std::endl;
-	#endif
-}
-
-// bottom task, automatically control heater on and off
-void Heater::AutoControlHeater() {
-	std::cout << "AutoControlHeater() " << TAG_HEATER
-						<< "average(°C) = " << *average_
-						<< std::endl;
-
-	while (running_) {
-		std::cout << "In AutoControlHeater while" << std::endl;
-
-		// if tempsInfo is still not write by `ProcessTemps`
-		// just sleep and wait for thermometer catch the first temperature
-		if (!average_) {
-			#ifdef DEBUG_THREADTASK
-			std::cout << TAG_HEATER << "wait for thermo init" << std::endl;
-			#endif
-			continue;
+	std::cout << TAG_HEATER << "Average T(°C): " 
+						<< average << std::endl;
+	// if average is 0.0, return and wait for thermometer initialise
+	if (!average) return;
+	// average T lower than min threshold
+	if (average < std::get<0>(tempRange_)) {
+		// heat until higher than max range
+		if (needOn_) {
+			needOn_ = false;
+			needOff_ = true;
+			autoTurnOn(average);
 		}
-		// if current average temp lower than min threshold
-		if (*average_ < std::get<0>(tempRange_)) {
-			turnOn();
-			std::cout << TAG_HEATER << " lower than min " << std::get<0>(tempRange_) 
-								<< " open heater" << std::endl;
-		} else if (*average_ > std::get<1>(tempRange_)) {
-			turnOff();
-			std::cout << " higher than max " << std::get<1>(tempRange_)
-								<< " close heater" << std::endl;
-		} else {
-			#ifdef DEBUG_HEATER
-			std::cout << "is between the range" << std::endl;
-			#endif
+	} else if (average > std::get<1>(tempRange_)) {
+		// wait temper cool until lower than mmin range
+		if (needOff_) {
+			needOff_ = false;
+			needOn_ = true;
+			// average T higher than max threshold
+			autoTurnOff(average);
 		}
+	} else {
+		#ifdef DEBUG_HEATER
+		std::cout << TAG_HEATER << "suitable temperature" << std::endl;
+		#endif
 	}
 }
 
-// automatically turnOn
-void Heater::turnOn() {
-	#ifdef DEBUG_HEATER
-	// setPwmLvl('3');
-	#endif
-	// start configed PWM level on GPIO, if configured as lvl0, automatically set lvl2
-	if (0u == dutycycle_) {
+void Heater::autoTurnOn(int average) {
+	std::cout << TAG_HEATER << "auto start Heater" << std::endl;
+	// start configed PWM level on GPIO, if configured as lvl0, automatically set lvl3
+	if (!dutycycle_) {
 		setPwmLvl('3');
-	}
-  gpioPWM(kPin_, dutycycle_);
-	// heat until higher than max range
-	while (*average_ < std::get<1>(tempRange_)) {
-		if (!dutycycle_) {
-			set('3');
-		}
-		#ifdef DEBUG_HEATER
-		std::cout << TAG_HEATER << "Average T(°C): " << *average_
-							<< " need heat to max threshold" << std::endl;
-		#endif
+	} else {
+		// if dutycycle not lvl0, keep original dutycycle
+		gpioPWM(kPin_, dutycycle_);
 	}
 }
 
-// automatically turnOff
-void Heater::turnOff() {
+void Heater::autoTurnOff(int average) {
+	std::cout << TAG_HEATER << "auto stop Heater" << std::endl;
   gpioPWM(kPin_, 0);
-	// wait temper cool until lower than mmin range
-	while (*average_ > std::get<1>(tempRange_)) {
-		if (dutycycle_) {
-			gpioPWM(kPin_, 0);
-		}
-		#ifdef DEBUG_HEATER
-		std::cout << TAG_HEATER << "Average T(°C): " << *average_
-							<< " need cool to than min threshold" << std::endl;
-		#endif
-	}
 }
 
+// set and start other PWM level
 void Heater::set(char lvl) {
   // set pwm level
   setPwmLvl(lvl);

@@ -10,6 +10,8 @@
 #include "waterpump.h"
 #include "airpump.h"
 
+class ThermalModule;
+
 // has bluetooth, waterpump and airpump objects, control pumps via bluetooth
 class PumpModule : public Module {
 public:
@@ -19,6 +21,9 @@ public:
 	void stop() override; // stop module tasks
   // register bluetooth
   void registerBluetooth(std::shared_ptr<Bluetooth> &bluetooth_ptr);
+  // register heater from ThermalModule
+  // as friend memeber function of ThermalModule
+  void registerHeaterFromThermalModule(std::shared_ptr<ThermalModule> &thermalModule_ptr);
   // Callback function
   // accoring to cmd from bluetooth cmd queue to control pump/heater PWM
   void executeCmdControl();

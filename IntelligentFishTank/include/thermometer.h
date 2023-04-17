@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <memory>
+#include <mutex>
 #include "heater.h"
 
 // we use four thermometers connecting with GPIO 5, 6, 13, 19 using wire-1
@@ -18,7 +19,8 @@ public:
   ~Thermometer();
   // register Heater
   void registerHeater(std::shared_ptr<Heater> &heater_ptr);
-  void start();
+  // bottom task, automatically conditionally control heater via thermometer
+  void AutoControlHeater();
   void stop();
 
 	// Test use
@@ -36,9 +38,6 @@ private:
   // save temperatures
   std::vector<double> tempers_;
 
-
-  // bottom task, execute read temperature task
-  void ReadAllTemperature();
 	// find and record thermometer files
   void FindTempDevices();
 };

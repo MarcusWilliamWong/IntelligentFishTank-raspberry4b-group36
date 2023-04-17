@@ -8,7 +8,9 @@
 #include <tuple>
 #include <mutex>
 #include <vector>
+#include <condition_variable>
 #include "pwmctrl.h"
+
 
 // we use GPIO 26 to connect heater pwm
 class Heater : public PwmController {
@@ -16,21 +18,18 @@ public:
 	Heater(unsigned int pin);
 	Heater(unsigned int pin, unsigned int freq);
 	~Heater();
-	// bottom task, automatically control heater on and off
-	void AutoControlHeater();
-	// bottom task, compute the average, minimum, maximum for 4 temperatures 
-	void ProcessTempers(const std::vector<double> &tempers);
-	// set gpiopwm, cmd control pwm level, call setPwmLvl()
+	// bottom task, compute the average temperature, and automatically control heater on and off
+	void ConditionalOnOff(const std::vector<double> &tempers);
+	// set and start PWM level on GPIO
   void set(char lvl) override;
   void stop() override;
 
 private:
-	std::mutex mtx_;
-	std::unique_ptr<double> average_;
-	std::tuple<double, double> tempRange_ = std::make_tuple<double, double>(26.0, 26.5);
-
-	void turnOn(); // automatically turnOn
-	void turnOff(); // automatically turnOff
+	std::tuple<double, double> tempRange_ = std::make_tuple<double, double>(31.0, 32.0);
+	bool needOn_ = true;  // flag for need to call `turnOn`
+	bool needOff_ = true; // flag for need to call `turnOff`
+	void autoTurnOn(int average); // automatically turnOn
+	void autoTurnOff(int average); // automatically turnOff
 };
 
 #endif

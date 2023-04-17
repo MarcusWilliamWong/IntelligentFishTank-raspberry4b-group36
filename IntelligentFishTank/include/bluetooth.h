@@ -11,6 +11,7 @@
 #include "airpump.h"
 #include "waterpump.h"
 #include "taskQueue.hpp"
+#include "heater.h"
 
 // use gpio 14(TXD), 15(RXD), 5v, GND
 // device file path is "/dev/ttyS0"
@@ -18,6 +19,8 @@ class Bluetooth {
 public:
   Bluetooth(std::string tty);
   ~Bluetooth();
+  // register heater
+  void registerHeater(std::shared_ptr<Heater> &heater_ptr);
   // register airpump
   void registerAirpump(std::shared_ptr<Airpump> &airpump_ptr);
   // register waterpump
@@ -64,6 +67,7 @@ private:
   // open device file
   int handle_ = -1;
   TaskQueue<CmdType> cmd_queue_;
+  std::shared_ptr<Heater> heater_ptr_;
   std::shared_ptr<Airpump> airpump_ptr_;
   std::shared_ptr<Waterpump> waterpump_ptr_;
 };

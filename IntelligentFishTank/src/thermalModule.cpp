@@ -21,20 +21,12 @@ void ThermalModule::registerBluetooth(std::shared_ptr<Bluetooth> &bluetooth_ptr)
 	bluetooth_ptr_ = bluetooth_ptr;
 }
 
-// Callback function, thermometer read temperatures
-void ThermalModule::executeReadAllTemperature() {
-	std::cout << TAG_THERMOMETER << "running `ReadAllTemperature` task..."
-						<< std::endl;
-
-	thermometer_ptr_->start();
-}
-
 // Callback function, automatically control heater via thermometer
 void ThermalModule::executeAutoControlHeater() {
 	std::cout << TAG_THERMOMETER << "running `AutoControlHeater` task..."
 						<< std::endl;
 
-	heater_ptr_->AutoControlHeater();
+	thermometer_ptr_->AutoControlHeater();
 }
 
 // stop all related equipments

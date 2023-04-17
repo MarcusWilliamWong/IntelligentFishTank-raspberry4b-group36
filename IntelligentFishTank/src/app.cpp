@@ -12,8 +12,8 @@ App::App() : pool_ptr_(new ThreadPool()) {
   bluetooth_ptr_.reset(new Bluetooth(app_config::BLUETOOTH_DEV_PATH));
   thermalModule_ptr_.reset(new ThermalModule());
   pumpModule_ptr_.reset(new PumpModule());
-
   pumpModule_ptr_->registerBluetooth(bluetooth_ptr_);
+  pumpModule_ptr_->registerHeaterFromThermalModule(thermalModule_ptr_);
 }
 
 void App::run() {
@@ -46,16 +46,10 @@ App::~App() {
 void App::AddModuleTasks() {
   // task from 
   pool_ptr_->AddTask([this]{ this->bluetooth_ptr_->executeRecvCmd(); });
-
   // task from thermalModule
-  pool_ptr_->AddTask([this]{ this->thermalModule_ptr_->executeReadAllTemperature(); });
-
-  // std::this_thread::sleep_for(std::chrono::seconds(1));
-
-  // task from thermalModule
-  // pool_ptr_->AddTask([this]{ this->thermalModule_ptr_->executeAutoControlHeater(); });
-
+  pool_ptr_->AddTask([this]{ this->thermalModule_ptr_->executeAutoControlHeater(); });
   // task from pumpModule
   pool_ptr_->AddTask([this]{ this->pumpModule_ptr_->executeCmdControl(); });
+  
 }
 

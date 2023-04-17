@@ -24,7 +24,7 @@ public:
 private:
 	std::unique_ptr<ThreadPool> pool_ptr_;
 	std::shared_ptr<Bluetooth> bluetooth_ptr_;
-	std::unique_ptr<ThermalModule> thermalModule_ptr_;
+	std::shared_ptr<ThermalModule> thermalModule_ptr_;
 	std::unique_ptr<PumpModule> pumpModule_ptr_;
 	// modules produce tasks and add them into thread pool;
 	// for lambda expression catch `App` private members

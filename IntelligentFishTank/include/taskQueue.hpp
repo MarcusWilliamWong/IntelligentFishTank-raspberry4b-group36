@@ -5,7 +5,6 @@
 
 // Test only
 // #define DEBUG
-#define DEBUG_TASKQUEUE
 
 #include <list>
 #include <thread>
@@ -54,9 +53,6 @@ void TaskQueue<T>::EnTask(const T &task) {
 
 template <typename T>
 void TaskQueue<T>::EnTask(T &&task) {
-  #ifdef DEBUG_TASKQUEUE
-  std::cout << TAG_TASKQUEUE << "EnTask here" << std::endl;
-  #endif
   add(std::forward<T>(task)); //universal ref
 }
 

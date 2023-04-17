@@ -47,10 +47,10 @@ add_executable(${PROJECT_NAME}
               ${PROJECT_SOURCE_DIR}/src/heater.cpp
               ${PROJECT_SOURCE_DIR}/src/airpump.cpp
               ${PROJECT_SOURCE_DIR}/src/waterpump.cpp
+              ${PROJECT_SOURCE_DIR}/src/pumpModule.cpp
               ${PROJECT_SOURCE_DIR}/src/thermometer.cpp
               ${PROJECT_SOURCE_DIR}/src/module.cpp
               ${PROJECT_SOURCE_DIR}/src/thermalModule.cpp
-              ${PROJECT_SOURCE_DIR}/src/pumpModule.cpp
               )
 
 # Test_threadPool

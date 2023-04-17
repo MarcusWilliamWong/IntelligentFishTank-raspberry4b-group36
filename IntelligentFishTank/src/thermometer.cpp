@@ -26,17 +26,12 @@ void Thermometer::registerHeater(std::shared_ptr<Heater> &heater_ptr) {
 	heater_ptr_ = heater_ptr;
 }
 
-void Thermometer::start() {
-	running_ = true;
-	ReadAllTemperature();
-}
-
 void Thermometer::stop() {
 	device_files_.clear();
 	running_ = false;
 }
 
-void Thermometer::ReadAllTemperature() {
+void Thermometer::AutoControlHeater() {
 	if (device_files_.empty()) {
 		throw std::runtime_error("fail to find any DS18B20 device directory!");
 	}
@@ -54,20 +49,17 @@ void Thermometer::ReadAllTemperature() {
 			if (getline(finput, tmp_temp)) {
 				// cast type from string to double
 				double t = std::stod(tmp_temp) * 1.0 / 1000;
-				if (!t) {
-					// if read t = 0, especially when initialises programe, read again
-					break;
-				}
-				// std::cout << "ReadAllTempers() " << TAG_THERMOMETER 
-				// 					<< "T(°C): " << t << std::endl;
+				// if read t = 0, means thermometer not finish initialise
+				if (!t) { break; }
 				#ifdef DEBUG_THERMOMETER
 				std::cout << "temps current size : " << tempers_.size() << std::endl;
 				std::cout << "temperatur files size : " << device_files_.size() << std::endl;
 				#endif
 				if (tempers_.size() == device_files_.size()) {
 					tempers_[index] = t;
-					// callback function from Class Heater
-					heater_ptr_->ProcessTempers(tempers_);
+					// callback function from `Class Heater`
+					// conditiaonally turnOn&Off
+					heater_ptr_->ConditionalOnOff(tempers_);
 				} else {
 					tempers_.push_back(t);
 				}
@@ -90,6 +82,7 @@ void Thermometer::FindTempDevices() {
 		throw std::runtime_error("failed to opendir!");
 	}
 	// search valid files in dev directory
+	// for using function `readdir`, need a raw ptr
 	dirent* subpath = nullptr;
 	//tmp variable to save device file name
   std::string filename;
@@ -109,6 +102,7 @@ void Thermometer::FindTempDevices() {
 	}
 	closedir(dir);
 }
+
 
 // Test only
 #ifdef DEBUG_THERMOMETER
